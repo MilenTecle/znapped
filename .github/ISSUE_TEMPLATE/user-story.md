@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-As a **user** I can **text here** so that **text here**
+As a **user**, I can **text here** so that **text here**
 
 ### Tasks
 
