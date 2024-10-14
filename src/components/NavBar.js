@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/znapped-logo.png";
 import styles from "../styles/NavBar.module.css"
 import { NavLink } from "react-router-dom";
+import { CurrentUserContext } from "../App";
 
 const NavBar = () => {
+  const currentUser = useContext(CurrentUserContext)
+
   return (
     <Navbar className={styles.NavBar} expand="md" fixed="top">
       <Container>
