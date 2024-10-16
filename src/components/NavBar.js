@@ -15,7 +15,6 @@ const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
-  console.log('CURRENT USER: ', currentUser)
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
   const handleSignOut = async () => {
@@ -33,11 +32,21 @@ const NavBar = () => {
       activeClassName={styles.Active}
       to="/posts/create"
     >
-      <i className="far fa-plus-square"></i>Add post
+      <i className="far fa-plus-square"></i>Create post
     </NavLink>
   );
   const loggedInIcons = (
     <>
+    {currentUser && (
+       <NavLink
+       exact
+       className={styles.NavLink}
+       activeClassName={styles.Active}
+       to="/"
+     >
+       <i className="fas fa-home"></i>Home
+     </NavLink>
+    )}
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
@@ -103,15 +112,6 @@ const NavBar = () => {
         />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
-            <NavLink
-              exact
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-              to="/"
-            >
-              <i className="fas fa-home"></i>Home
-            </NavLink>
-
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>
