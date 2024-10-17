@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import Carousel from "react-bootstrap/Carousel";
 
 import {
   Form,
@@ -52,10 +53,29 @@ const SignUpForm = () => {
         md={6}
         className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
       >
-        <Image
-          className={`${appStyles.FillerImage}`}
-          src={"https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero2.jpg"}
-        />
+         <Carousel interval={3000}>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"
+              alt="First slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"
+              alt="Second slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"
+              alt="Third slide"
+            />
+          </Carousel.Item>
+        </Carousel>
       </Col>
       <Col className="my-auto py-2 p-md-2" md={6}>
         <Container className={`${appStyles.Content} p-4 `}>
