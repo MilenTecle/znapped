@@ -11,17 +11,17 @@ import Post from "./Post";
 
 function PostPage() {
   const { id } = useParams();
-  const [post, setPost] = useState({results: [] });
+  const [post, setPost] = useState({ results: [] });
 
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const [{data: post}] = await Promise.all([
+        const [{ data: post }] = await Promise.all([
           axiosReq.get(`/posts/${id}`)
         ])
-        setPost({results: [post]})
+        setPost({ results: [post] })
         console.log(post)
-      } catch(err){
+      } catch (err) {
         console.log(err)
       }
     }

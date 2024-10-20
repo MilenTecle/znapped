@@ -28,16 +28,16 @@ const Post = (props) => {
 
     const handleLike = async () => {
         try {
-            const {data} = await axiosRes.post('/likes/', {post:id});
+            const { data } = await axiosRes.post('/likes/', { post: id });
             setPosts((prevPosts) => ({
                 ...prevPosts,
                 results: prevPosts.results.map((post) => {
                     return post.id === id
-                    ? {...post, likes_count: post.likes_count + 1, like_id: data.id}
-                    : post;
+                        ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
+                        : post;
                 }),
             }));
-        } catch(err){
+        } catch (err) {
             console.log(err);
         }
     };
@@ -49,11 +49,11 @@ const Post = (props) => {
                 ...prevPosts,
                 results: prevPosts.results.map((post) => {
                     return post.id === id
-                    ? {...post, likes_count: post.likes_count - 1, like_id: null}
-                    : post;
+                        ? { ...post, likes_count: post.likes_count - 1, like_id: null }
+                        : post;
                 }),
             }));
-        } catch(err){
+        } catch (err) {
             console.log(err);
         }
     };
@@ -62,7 +62,7 @@ const Post = (props) => {
         <Card.Body>
             <Media className="align-items-center justify-content-between">
                 <Link to={`/profiles/${profile_id}`}>
-                 <Avatar src={profile_image} height={55} />
+                    <Avatar src={profile_image} height={55} />
                     {owner}
                 </Link>
                 <div className="d-flex align-items-center">
@@ -71,7 +71,7 @@ const Post = (props) => {
                 </div>
             </Media>
         </Card.Body>
-        <Link to ={`/posts/${id}`}>
+        <Link to={`/posts/${id}`}>
             <Card.Img src={image} alt={title} />
         </Link>
         <Card.Body>
@@ -82,8 +82,8 @@ const Post = (props) => {
                     <OverlayTrigger
                         placement="top"
                         overlay={<Tooltip>You can't like your own post!</Tooltip>}
-                        >
-                            <i className="far fa-heart" />
+                    >
+                        <i className="far fa-heart" />
                     </OverlayTrigger>
                 ) : like_id ? (
                     <span onClick={handleUnLike}>
@@ -97,8 +97,8 @@ const Post = (props) => {
                     <OverlayTrigger
                         placement="top"
                         overlay={<Tooltip>Log in to like posts!</Tooltip>}
-                        >
-                            <i className="far fa-heart" />
+                    >
+                        <i className="far fa-heart" />
                     </OverlayTrigger>
                 )}
                 {likes_count}

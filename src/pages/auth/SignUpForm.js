@@ -49,11 +49,11 @@ const SignUpForm = () => {
 
   return (
     <Row className={styles.Row}>
-       <Col
+      <Col
         md={6}
         className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
       >
-         <Carousel interval={3000}>
+        <Carousel interval={3000}>
           <Carousel.Item>
             <img
               className="d-block w-100"

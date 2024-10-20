@@ -49,7 +49,7 @@ function SignInForm() {
 
   return (
     <Row className={styles.Row}>
-       <Col
+      <Col
         md={6}
         className={`my-auto d-none d-md-block p-2 ${styles.SignInCol}`}
       >
