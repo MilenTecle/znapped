@@ -12,9 +12,14 @@ import { useCurrentUser } from './contexts/CurrentUserContext';
 import PostEditForm from './pages/posts/PostEditForm';
 
 
+
 function App() {
   const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id || "";
+
+  if (!currentUser) {
+    return <SignInForm />;
+  }
 
   return (
     <div className={styles.App}>
