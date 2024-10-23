@@ -37,16 +37,14 @@ const NavBar = () => {
   );
   const loggedInIcons = (
     <>
-      {currentUser && (
-        <NavLink
-          exact
-          className={styles.NavLink}
-          activeClassName={styles.Active}
-          to="/"
-        >
-          <i className="fas fa-home"></i>Home
-        </NavLink>
-      )}
+      <NavLink
+        exact
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/"
+      >
+        <i className="fas fa-home"></i>Home
+      </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}

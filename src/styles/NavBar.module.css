@@ -3,7 +3,10 @@
     border: 1px solid #dadadf;
 }
 
-.CreatePost {
-    margin-top: 10px;
-    text-align: center;
+.NavLink {
+  padding: 5px;
+}
+
+.Active i {
+  color: #a2c4c9;
 }

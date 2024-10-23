@@ -17,22 +17,22 @@ function App() {
   const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id || "";
 
-  if (!currentUser) {
-    return <SignInForm />;
-  }
-
   return (
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <PostsPage message="No results found. Adjust the search keyword."/>
-            )}
-          />
+          {!currentUser ? (
+             <Route exact path="/" render={() =><SignInForm/>} />
+          ) : (
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <PostsPage message="No results found. Adjust the search keyword."/>
+              )}
+            />
+         )}
           <Route
             exact
             path="/feed"
