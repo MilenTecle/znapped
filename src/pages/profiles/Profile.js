@@ -3,7 +3,7 @@ import styles from '../../styles/Profile.module.css';
 import btnStyles from '../../styles/Button.module.css';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import Avatar from "../../components/Avatar";
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 

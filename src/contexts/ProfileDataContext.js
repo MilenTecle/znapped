@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { axiosReq } from "../api/axiosDefaults";
-import { useCurrentUser } from "./CurrentUserContext";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 const ProfileDataContext = createContext();
 const SetProfileDataContext = createContext();
@@ -24,7 +24,7 @@ export const ProfileDataProvider = ({ children }) => {
         );
         setProfileData((prevState) => ({
           ...prevState,
-          PopularProfiles: data,
+          popularProfiles: data,
         }));
       } catch(err) {
         console.log(err);
