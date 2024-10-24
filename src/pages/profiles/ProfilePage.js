@@ -31,7 +31,7 @@ function ProfilePage() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
 
-  const setProfileData = useSetProfileData();
+  const {setProfileData, handleFollow} = useSetProfileData();
   const { pageProfile } = useProfileData();
 
   const [profile] = pageProfile.results;
@@ -42,8 +42,8 @@ function ProfilePage() {
       try {
         const [{data: pageProfile}, { data: profilePosts }] =
           await Promise.all([
-            axiosReq.get(`/profiles/${id}`),
-            axiosReq.get(`/posts/?owner__profile?${id}`),
+            axiosReq.get(`/profiles/${id}/`),
+            axiosReq.get(`/posts/?owner__profile=${id}`),
           ]);
         setProfileData((prevState) => ({
           ...prevState,
@@ -98,7 +98,7 @@ function ProfilePage() {
           ) : (
             <Button
               className={`${btnStyles.Button} ${btnStyles.Black}`}
-              onClick={() => {}}
+              onClick={() => handleFollow(profile)}
             >
               follow
             </Button>
@@ -126,7 +126,7 @@ function ProfilePage() {
          />
       ) : (
         <Asset
-          scr={NoResults}
+          src={NoResults}
           message={`No results found, ${profile?.owner} hasn't posted yet`}
           />
       )}
