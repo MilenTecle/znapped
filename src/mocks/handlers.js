@@ -1,3 +1,5 @@
+import { rest } from "msw";
+
 const baseURL = "https://znapped-drfapi-8eee30ca5ab2.herokuapp.com/"
 
 export const handlers = [
