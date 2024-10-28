@@ -74,7 +74,7 @@ export const ProfileDataProvider = ({ children }) => {
           popularProfiles: data,
         }));
       } catch(err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 
