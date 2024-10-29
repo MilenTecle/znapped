@@ -35,11 +35,11 @@ const Post = (props) => {
   const [currentReaction, setCurrentReaction] = useState(reaction_type);
 
   const reactions = [
-    {name: "heart", icon: "fa-solid fa-heart"},
-    {name:"thumbs_up", icon: "fa-solid fa-thumbs-up"},
-    {name: "laugh", icon: "fa-solid fa-face-laugh"},
-    {name: "sad", icon: "fa-solid fa-face-sad-tear"},
-    {name: "angry", icon: "fa-solid fa-face-angry"},
+    { name: "heart", icon: "fas fa-heart" },
+    { name: "thumbs_up", icon: "fas fa-thumbs-up" },
+    { name: "laugh", icon: "fas fa-laugh" },
+    { name: "sad", icon: "fas fa-sad-tear" },
+    { name: "angry", icon: "fas fa-angry" },
   ];
 
   const handleEdit = () => {
@@ -72,13 +72,13 @@ const Post = (props) => {
             ...prevPosts,
             results: prevPosts.results.map((post) => {
               return post.id === id
-              ? {
-                ...post,
-                likes_count: post.likes_count + 1,
-                like_id: data.id,
-                reaction_type: reactionType
+                ? {
+                  ...post,
+                  likes_count: post.likes_count + 1,
+                  like_id: data.id,
+                  reaction_type: reactionType
                 }
-              : post;
+                : post;
             }),
           }));
         }
@@ -97,7 +97,12 @@ const Post = (props) => {
         ...prevPosts,
         results: prevPosts.results.map((post) => {
           return post.id === id
-            ? { ...post, likes_count: post.likes_count - 1, like_id: null, reaction_type: null }
+            ? {
+              ...post,
+              likes_count: post.likes_count - 1,
+              like_id: null,
+              reaction_type: null
+            }
             : post;
         }),
       }));
@@ -139,31 +144,48 @@ const Post = (props) => {
             >
               <i className="far fa-heart" />
             </OverlayTrigger>
-          ) :  (
+          ) : (
             <div className={styles.Reactions}>
+              <OverlayTrigger
+                placement="top"
+                overlay={<Tooltip>heart</Tooltip>}
+              >
+                <span
+                  onClick={() =>
+                    currentReaction === "heart" ? handleUnlike() : handleLike("heart")
+                  }
+                  className={`${styles.Heart} ${
+                    currentReaction === "heart" ? styles.ActiveReaction : ""
+                    }`}
+                >
+                  <i className="fas fa-heart" />
+                </span>
+              </OverlayTrigger>
               {reactions.map((reaction) => (
+                reaction.name !== "heart" && (
                   <OverlayTrigger
                     key={reaction.name}
                     placement="top"
                     overlay={<Tooltip>{reaction.name}</Tooltip>}
-                >
-                  <span onClick={() =>
-                    currentReaction === reaction.name
-                    ? handleUnlike()
-                    : handleLike(reaction.name)
-                  }
-                  className={
-                    currentReaction === reaction.name
-                    ? styles.ActiveReaction
-                    : ""
-                  }
-                >
-                  <i className={reaction.icon} />
-              </span>
-            </OverlayTrigger>
-          ))}
-          <span>{likes_count}</span>
-          </div>
+                  >
+                    <span onClick={() =>
+                      currentReaction === reaction.name
+                        ? handleUnlike()
+                        : handleLike(reaction.name)
+                    }
+                      className={`${styles.Reaction} ${
+                        currentReaction === reaction.name
+                        ? styles.ActiveReaction
+                        : ""
+                        }`}
+                    >
+                      <i className={reaction.icon} />
+                    </span>
+                  </OverlayTrigger>
+                )
+              ))}
+              <span>{likes_count}</span>
+            </div>
           )}
           <Link to={`/posts/${id}`}>
             <i className="far fa-comments" />
