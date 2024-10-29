@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Card from "react-bootstrap/Card";
@@ -25,11 +25,22 @@ const Post = (props) => {
     updated_at,
     postPage,
     setPosts,
+    reaction_type,
   } = props;
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
+
+  const [currentReaction, setCurrentReaction] = useState(reaction_type);
+
+  const reactions = [
+    {name: "heart", icon: "fa-solid fa-heart"},
+    {name:"thumbs_up", icon: "fa-solid fa-thumbs-up"},
+    {name: "laugh", icon: "fa-solid fa-face-laugh"},
+    {name: "sad", icon: "fa-solid fa-face-sad-tear"},
+    {name: "angry", icon: "fa-solid fa-face-angry"},
+  ];
 
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
@@ -44,30 +55,49 @@ const Post = (props) => {
     }
   };
 
-  const handleLike = async () => {
+  const handleLike = async (reactionType) => {
+    console.log("Reaction Type:", reactionType);
+    console.log("Post ID", id);
     try {
-      const { data } = await axiosRes.post("/likes/", { post: id });
-      setPosts((prevPosts) => ({
-        ...prevPosts,
-        results: prevPosts.results.map((post) => {
-          return post.id === id
-            ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
-            : post;
-        }),
-      }));
-    } catch (err) {
-      // console.log(err);
+      if (currentReaction === reactionType) {
+        await handleUnlike();
+      } else {
+        if (!like_id) {
+          const { data } = await axiosRes.post("/likes/", {
+            post: id,
+            reaction_type: reactionType
+          });
+          setCurrentReaction(reactionType);
+          setPosts((prevPosts) => ({
+            ...prevPosts,
+            results: prevPosts.results.map((post) => {
+              return post.id === id
+              ? {
+                ...post,
+                likes_count: post.likes_count + 1,
+                like_id: data.id,
+                reaction_type: reactionType
+                }
+              : post;
+            }),
+          }));
+        }
+      }
+    } catch (error) {
+      console.log("Error posting like:", error.response ? error.response.data : error.message);
     }
   };
+
 
   const handleUnlike = async () => {
     try {
       await axiosRes.delete(`/likes/${like_id}/`);
+      setCurrentReaction(null);
       setPosts((prevPosts) => ({
         ...prevPosts,
         results: prevPosts.results.map((post) => {
           return post.id === id
-            ? { ...post, likes_count: post.likes_count - 1, like_id: null }
+            ? { ...post, likes_count: post.likes_count - 1, like_id: null, reaction_type: null }
             : post;
         }),
       }));
@@ -109,23 +139,32 @@ const Post = (props) => {
             >
               <i className="far fa-heart" />
             </OverlayTrigger>
-          ) : like_id ? (
-            <span onClick={handleUnlike}>
-              <i className={`fas fa-heart ${styles.Heart}`} />
-            </span>
-          ) : currentUser ? (
-            <span onClick={handleLike}>
-              <i className={`far fa-heart ${styles.HeartOutline}`} />
-            </span>
-          ) : (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>Log in to like posts!</Tooltip>}
-            >
-              <i className="far fa-heart" />
+          ) :  (
+            <div className={styles.Reactions}>
+              {reactions.map((reaction) => (
+                  <OverlayTrigger
+                    key={reaction.name}
+                    placement="top"
+                    overlay={<Tooltip>{reaction.name}</Tooltip>}
+                >
+                  <span onClick={() =>
+                    currentReaction === reaction.name
+                    ? handleUnlike()
+                    : handleLike(reaction.name)
+                  }
+                  className={
+                    currentReaction === reaction.name
+                    ? styles.ActiveReaction
+                    : ""
+                  }
+                >
+                  <i className={reaction.icon} />
+              </span>
             </OverlayTrigger>
+          ))}
+          <span>{likes_count}</span>
+          </div>
           )}
-          {likes_count}
           <Link to={`/posts/${id}`}>
             <i className="far fa-comments" />
           </Link>
