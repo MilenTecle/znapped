@@ -17,7 +17,6 @@
 
   .Heart {
     color:#f85032;
-    opacity: 1;
   }
 
   .Heart:hover {
@@ -29,8 +28,4 @@
     gap: 10px;
     justify-content: center;
     align-items: center;
-  }
-
- .ActiveReaction  {
-    color: #f85032;
   }
