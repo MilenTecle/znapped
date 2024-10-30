@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Card from "react-bootstrap/Card";
@@ -32,8 +31,6 @@ const Post = (props) => {
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
 
-  const [currentReaction, setCurrentReaction] = useState(reaction_type);
-
   const reactions = [
     { name: "heart", icon: "fas fa-heart" },
     { name: "thumbs_up", icon: "fas fa-thumbs-up" },
@@ -59,29 +56,26 @@ const Post = (props) => {
     console.log("Reaction Type:", reactionType);
     console.log("Post ID", id);
     try {
-      if (currentReaction === reactionType) {
+      if (reaction_type === reactionType) {
         await handleUnlike();
       } else {
-        if (!like_id) {
-          const { data } = await axiosRes.post("/likes/", {
-            post: id,
-            reaction_type: reactionType
-          });
-          setCurrentReaction(reactionType);
-          setPosts((prevPosts) => ({
-            ...prevPosts,
-            results: prevPosts.results.map((post) => {
-              return post.id === id
-                ? {
-                  ...post,
-                  likes_count: post.likes_count + 1,
-                  like_id: data.id,
-                  reaction_type: reactionType
-                }
-                : post;
-            }),
-          }));
-        }
+        const { data } = await axiosRes.post("/likes/", {
+          post: id,
+          reaction_type: reactionType
+        });
+        setPosts((prevPosts) => ({
+          ...prevPosts,
+          results: prevPosts.results.map((post) =>
+            post.id === id
+              ? {
+                ...post,
+                likes_count: post.likes_count + 1,
+                like_id: data.id,
+                reaction_type: reactionType
+              }
+              : post
+          ),
+        }));
       }
     } catch (error) {
       console.log("Error posting like:", error.response ? error.response.data : error.message);
@@ -92,19 +86,18 @@ const Post = (props) => {
   const handleUnlike = async () => {
     try {
       await axiosRes.delete(`/likes/${like_id}/`);
-      setCurrentReaction(null);
       setPosts((prevPosts) => ({
         ...prevPosts,
-        results: prevPosts.results.map((post) => {
-          return post.id === id
+        results: prevPosts.results.map((post) =>
+          post.id === id
             ? {
               ...post,
               likes_count: post.likes_count - 1,
               like_id: null,
               reaction_type: null
             }
-            : post;
-        }),
+            : post
+        ),
       }));
     } catch (err) {
       // console.log(err);
@@ -146,43 +139,26 @@ const Post = (props) => {
             </OverlayTrigger>
           ) : (
             <div className={styles.Reactions}>
-              <OverlayTrigger
-                placement="top"
-                overlay={<Tooltip>heart</Tooltip>}
-              >
-                <span
-                  onClick={() =>
-                    currentReaction === "heart" ? handleUnlike() : handleLike("heart")
-                  }
-                  className={`${styles.Heart} ${
-                    currentReaction === "heart" ? styles.ActiveReaction : ""
-                    }`}
-                >
-                  <i className="fas fa-heart" />
-                </span>
-              </OverlayTrigger>
               {reactions.map((reaction) => (
-                reaction.name !== "heart" && (
-                  <OverlayTrigger
-                    key={reaction.name}
-                    placement="top"
-                    overlay={<Tooltip>{reaction.name}</Tooltip>}
+                <OverlayTrigger
+                  key={reaction.name}
+                  placement="top"
+                  overlay={<Tooltip>{reaction.name}</Tooltip>}
+                >
+                  <span onClick={() =>
+                    reaction_type=== reaction.name
+                      ? handleUnlike()
+                      : handleLike(reaction.name)
+                  }
+                    className={`${styles.Reaction} ${reaction_type === reaction.name
+                      ? styles.ActiveReaction
+                      : ""
+                      }`}
                   >
-                    <span onClick={() =>
-                      currentReaction === reaction.name
-                        ? handleUnlike()
-                        : handleLike(reaction.name)
-                    }
-                      className={`${styles.Reaction} ${
-                        currentReaction === reaction.name
-                        ? styles.ActiveReaction
-                        : ""
-                        }`}
-                    >
-                      <i className={reaction.icon} />
-                    </span>
-                  </OverlayTrigger>
-                )
+                    <i className={reaction.icon} />
+                  </span>
+                </OverlayTrigger>
+
               ))}
               <span>{likes_count}</span>
             </div>
