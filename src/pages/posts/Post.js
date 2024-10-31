@@ -8,7 +8,7 @@ import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
-import { useState } from "react";
+
 
 const Post = (props) => {
   const {
@@ -31,8 +31,6 @@ const Post = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
-
-  const [currentReaction, setCurrentReaction] = useState(reaction_type)
 
   const reactions = [
     { name: "heart", icon: "fas fa-heart", color: "#f85032" },
@@ -59,21 +57,20 @@ const Post = (props) => {
     console.log("Reaction Type:", reactionType);
     console.log("Post ID", id);
     try {
-      if (currentReaction === reactionType) {
+      if (reaction_type === reactionType) {
         await handleUnlike();
       } else {
         const { data } = await axiosRes.post("/likes/", {
           post: id,
           reaction_type: reactionType
         });
-        setCurrentReaction(reactionType);
         setPosts((prevPosts) => ({
           ...prevPosts,
           results: prevPosts.results.map((post) =>
             post.id === id
               ? {
                 ...post,
-                likes_count: post.likes_count + 1,
+                likes_count: post.likes_count + (like_id ? 0 : 1),
                 like_id: data.id,
                 reaction_type: reactionType
               }
@@ -90,7 +87,6 @@ const Post = (props) => {
   const handleUnlike = async () => {
     try {
       await axiosRes.delete(`/likes/${like_id}/`);
-      setCurrentReaction(null)
       setPosts((prevPosts) => ({
         ...prevPosts,
         results: prevPosts.results.map((post) =>
@@ -151,18 +147,22 @@ const Post = (props) => {
                   overlay={<Tooltip>{reaction.name}</Tooltip>}
                 >
                   <span onClick={() =>
-                    currentReaction === reaction.name
+                    reaction_type === reaction.name
                       ? handleUnlike()
                       : handleLike(reaction.name)
                   }
-                    className={`${styles.Reaction} ${currentReaction === reaction.name
+                    className={`${styles.Reaction} ${
+                      reaction_type === reaction.name
                       ? styles.ActiveReaction
                       : ""
                       }`}
                   >
                     <i
                       className={reaction.icon}
-                      style={{ color: reaction_type === reaction.name ? reaction.color: "#cfced3"}}
+                      style={{
+                        color:
+                          reaction_type === reaction.name
+                           ? reaction.color: "#cfced3"}}
                     />
                   </span>
                 </OverlayTrigger>
