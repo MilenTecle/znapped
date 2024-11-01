@@ -28,10 +28,12 @@ function PostCreateForm() {
     title: "",
     content: "",
     image: "",
+    video: "",
   });
-  const { title, content, image } = postData;
+  const { title, content, image, video } = postData;
 
   const imageInput = useRef(null);
+  const videoInput = useRef(null)
   const history = useHistory();
 
   const handleChange = (event) => {
@@ -51,13 +53,30 @@ function PostCreateForm() {
     }
   };
 
+  const handleChangeVideo = (event) => {
+    if (event.target.files.length) {
+      URL.revokeObjectURL(video);
+      setPostData({
+        ...postData,
+        video: URL.createObjectURL(event.target.files[0]),
+      });
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
 
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("image", imageInput.current.files[0]);
+
+    if (imageInput?.current?.files[0]) {
+      formData.append("image", imageInput.current.files[0]);
+    }
+
+    if (videoInput?.current?.files[0]) {
+      formData.append("video", videoInput.current.files[0]);
+    }
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
@@ -144,7 +163,7 @@ function PostCreateForm() {
                 >
                   <Asset
                     src={Upload}
-                    message="Click or tap to upload an image"
+                    message="Click or tap to upload an image or a video"
                   />
                 </Form.Label>
               )}
@@ -155,13 +174,31 @@ function PostCreateForm() {
                 onChange={handleChangeImage}
                 ref={imageInput}
               />
+              {errors?.image?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
+              <div>
+                <Form.Label
+                  className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                  htmlFor="video-upload"
+                >
+                  Upload
+                </Form.Label>
+              </div>
+              <Form.File
+                id="video-upload"
+                accept="video/*"
+                onChange={handleChangeVideo}
+                ref={videoInput}
+              />
+              {errors?.video?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
             </Form.Group>
-            {errors?.image?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
-
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
@@ -169,7 +206,7 @@ function PostCreateForm() {
           <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>
-    </Form>
+    </Form >
   );
 }
 

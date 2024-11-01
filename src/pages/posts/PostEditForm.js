@@ -14,7 +14,7 @@ import btnStyles from "../../styles/Button.module.css";
 
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router";
 
 function PostEditForm() {
   const [errors, setErrors] = useState({});
@@ -23,10 +23,12 @@ function PostEditForm() {
     title: "",
     content: "",
     image: "",
+    video: "",
   });
-  const { title, content, image } = postData;
+  const { title, content, image, video } = postData;
 
   const imageInput = useRef(null);
+  const videoInput = useRef(null);
   const history = useHistory();
   const { id } = useParams();
 
@@ -34,9 +36,9 @@ function PostEditForm() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/${id}`)
-        const { title, content, image, is_owner } = data;
+        const { title, content, image, video, is_owner } = data;
 
-        is_owner ? setPostData({ title, content, image }) : history.push("/");
+        is_owner ? setPostData({ title, content, image, video }) : history.push("/");
       } catch (err) {
         // console.log(err);
       }
@@ -62,6 +64,16 @@ function PostEditForm() {
     }
   };
 
+  const handleChangeVideo = (event) => {
+    if (event.target.files.length) {
+      URL.revokeObjectURL(video);
+      setPostData({
+        ...postData,
+        video: URL.createObjectURL(event.target.files[0]),
+      });
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -71,6 +83,10 @@ function PostEditForm() {
 
     if (imageInput?.current?.files[0]) {
       formData.append("image", imageInput.current.files[0]);
+    }
+
+    if (videoInput?.current?.files[0]) {
+      formData.append("video", videoInput.current.files[0]);
     }
 
     try {
@@ -154,13 +170,31 @@ function PostEditForm() {
                 onChange={handleChangeImage}
                 ref={imageInput}
               />
+              {errors?.image?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
+              <div>
+                <Form.Label
+                  className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                  htmlFor="video-upload"
+                >
+                  Change the video
+                </Form.Label>
+              </div>
+              <Form.File
+                id="video-upload"
+                accept="video/*"
+                onChange={handleChangeVideo}
+                ref={videoInput}
+              />
+              {errors?.video?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
             </Form.Group>
-            {errors?.image?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
-
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
