@@ -60,6 +60,9 @@ const Post = (props) => {
       if (reaction_type === reactionType) {
         await handleUnlike();
       } else {
+        if (like_id) {
+          await handleUnlike();
+        }
         const { data } = await axiosRes.post("/likes/", {
           post: id,
           reaction_type: reactionType
@@ -70,7 +73,7 @@ const Post = (props) => {
             post.id === id
               ? {
                 ...post,
-                likes_count: post.likes_count + (like_id ? 0 : 1),
+                likes_count: post.likes_count + 1,
                 like_id: data.id,
                 reaction_type: reactionType
               }
