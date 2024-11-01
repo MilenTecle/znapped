@@ -33,11 +33,11 @@ const Post = (props) => {
   const history = useHistory();
 
   const reactions = [
-    { name: "heart", icon: "fas fa-heart", color: "#f85032" },
-    { name: "thumbs_up", icon: "fas fa-thumbs-up", color:"#ffd700" },
-    { name: "laugh", icon: "fas fa-laugh", color:"#ffd700"  },
-    { name: "sad", icon: "fas fa-sad-tear", color:"#ffd700"  },
-    { name: "angry", icon: "fas fa-angry", color: "#ff6347" },
+    { name: "heart", icon: "fas fa-heart"},
+    { name: "thumbs_up", icon: "fas fa-thumbs-up"},
+    { name: "laugh", icon: "fas fa-laugh"},
+    { name: "sad", icon: "fas fa-sad-tear"},
+    { name: "angry", icon: "fas fa-angry"},
   ];
 
   const handleEdit = () => {
@@ -158,14 +158,10 @@ const Post = (props) => {
                       reaction_type === reaction.name
                       ? styles.ActiveReaction
                       : ""
-                      }`}
+                      } ${styles[reaction.name]}`}
                   >
                     <i
                       className={reaction.icon}
-                      style={{
-                        color:
-                          reaction_type === reaction.name
-                           ? reaction.color: "#cfced3"}}
                     />
                   </span>
                 </OverlayTrigger>

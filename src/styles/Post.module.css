@@ -29,3 +29,49 @@
     justify-content: center;
     align-items: center;
   }
+
+  .Reaction {
+    color: #cfced3;
+    transition: color 0.2s ease;
+  }
+
+  .Reaction.heart:hover i {
+    color: #f85032;
+  }
+
+  .Reaction.thumbs_up:hover i {
+    color: #ffd700;
+  }
+
+  .Reaction.laugh:hover i {
+    color: #ffd700;
+  }
+
+  .Reaction.sad:hover i {
+    color: #5137fc;
+  }
+
+  .Reaction.angry:hover i {
+    color: #eb2929;
+  }
+
+  .ActiveReaction.heart i {
+    color: #f85032;
+  }
+
+  .ActiveReaction.thumbs_up i {
+    color: #ffd700;
+  }
+
+  .ActiveReaction.laugh i {
+    color: #ffd700;
+  }
+
+  .ActiveReaction.sad i {
+    color: #5137fc;
+  }
+
+  .ActiveReaction.angry i {
+    color: #eb2929;
+  }
+
