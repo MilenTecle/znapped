@@ -63,6 +63,7 @@ function PostCreateForm() {
     }
   };
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -142,7 +143,29 @@ function PostCreateForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-              {image ? (
+              {!image && (
+                <Form.Label
+                  className="d-flex justify-content-center"
+                  htmlFor="image-upload"
+                >
+                  <Asset
+                    src={Upload}
+                    message="Click or tap to upload an image"
+                  />
+                </Form.Label>
+              )}
+              {!video && (
+                <Form.Label
+                  className="d-flex justify-content-center"
+                  htmlFor="video-upload"
+                >
+                  <Asset
+                    src={Upload}
+                    message="Click or tap to upload a video"
+                  />
+                </Form.Label>
+              )}
+              {image && (
                 <>
                   <figure>
                     <Image className={appStyles.Image} src={image} rounded />
@@ -156,18 +179,7 @@ function PostCreateForm() {
                     </Form.Label>
                   </div>
                 </>
-              ) : (
-                <Form.Label
-                  className="d-flex justify-content-center"
-                  htmlFor="image-upload"
-                >
-                  <Asset
-                    src={Upload}
-                    message="Click or tap to upload an image or a video"
-                  />
-                </Form.Label>
               )}
-
               <Form.File
                 id="image-upload"
                 accept="image/*"
@@ -179,14 +191,17 @@ function PostCreateForm() {
                   {message}
                 </Alert>
               ))}
-              <div>
-                <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                  htmlFor="video-upload"
-                >
-                  Upload
-                </Form.Label>
-              </div>
+              {video && (
+                <div>
+                  <video controls src={video} />
+                  <Form.Label
+                    className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                    htmlFor="video-upload"
+                  >
+                    Change the video
+                  </Form.Label>
+                </div>
+              )}
               <Form.File
                 id="video-upload"
                 accept="video/*"
