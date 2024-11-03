@@ -49,6 +49,7 @@ function PostCreateForm() {
       setPostData({
         ...postData,
         image: URL.createObjectURL(event.target.files[0]),
+        video: "",
       });
     }
   };
@@ -59,6 +60,7 @@ function PostCreateForm() {
       setPostData({
         ...postData,
         video: URL.createObjectURL(event.target.files[0]),
+        image: "",
       });
     }
   };
@@ -71,11 +73,9 @@ function PostCreateForm() {
     formData.append("title", title);
     formData.append("content", content);
 
-    if (imageInput?.current?.files[0]) {
+    if (imageInput.current && imageInput.current.files[0]) {
       formData.append("image", imageInput.current.files[0]);
-    }
-
-    if (videoInput?.current?.files[0]) {
+    } else if (videoInput.current && videoInput.current.files[0]) {
       formData.append("video", videoInput.current.files[0]);
     }
 
@@ -165,35 +165,13 @@ function PostCreateForm() {
                   />
                 </Form.Label>
               )}
-              {image && (
-                <>
-                  <figure>
-                    <Image className={appStyles.Image} src={image} rounded />
-                  </figure>
-                  <div>
-                    <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                      htmlFor="image-upload"
-                    >
-                      Change the image
-                    </Form.Label>
-                  </div>
-                </>
-              )}
-              <Form.File
-                id="image-upload"
-                accept="image/*"
-                onChange={handleChangeImage}
-                ref={imageInput}
-              />
-              {errors?.image?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
-              {video && (
+              {video ? (
                 <div>
-                  <video controls src={video} />
+                  <video
+                    controls
+                    src={video}
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
                   <Form.Label
                     className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
                     htmlFor="video-upload"
@@ -201,12 +179,39 @@ function PostCreateForm() {
                     Change the video
                   </Form.Label>
                 </div>
-              )}
+              ) : image ? (
+                <div>
+                  <figure>
+                    <Image className={appStyles.Image} src={image} rounded />
+                  </figure>
+                  <Form.Label
+                    className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                    htmlFor="image-upload"
+                  >
+                    Change the image
+                  </Form.Label>
+                </div>
+              ) : null}
+
+              <Form.File
+                id="image-upload"
+                accept="image/*"
+                onChange={handleChangeImage}
+                ref={imageInput}
+                style={{ display: 'none' }}
+              />
+              {errors?.image?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
+
               <Form.File
                 id="video-upload"
                 accept="video/*"
                 onChange={handleChangeVideo}
                 ref={videoInput}
+                style={{ display: 'none' }}
               />
               {errors?.video?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
