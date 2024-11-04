@@ -22,7 +22,9 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
+  const hashtag = new URLSearchParams(location.search).get("hashtag");
 
   const [query, setQuery] = useState("");
 
@@ -31,7 +33,9 @@ function PostsPage({ message, filter = "" }) {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await axiosReq.get(`/posts/?${filter}search=${query}`);
+        const queryParam = query ? `search=${query}&` : "";
+        const hashtagParam = hashtag ? `hashtags__name=${hashtag}&` : "";
+        const { data } = await axiosReq.get(`/posts/?${filter}${queryParam}${hashtagParam}`);
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
@@ -47,12 +51,13 @@ function PostsPage({ message, filter = "" }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, query, pathname, currentUser]);
+  }, [filter, query, pathname, currentUser, hashtag]);
 
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <PopularProfiles mobile />
+        <h1>{hashtag ? `Posts tagged with #${hashtag}` : "All Posts"}</h1>
         <i className={`fas fa-search ${styles.SearchIcon}`} />
         <Form
           className={styles.SearchBar}

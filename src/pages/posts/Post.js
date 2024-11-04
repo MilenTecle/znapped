@@ -26,7 +26,7 @@ const Post = (props) => {
     postPage,
     setPosts,
     reaction_type,
-    hashtags,
+    hashtags = [],
   } = props;
 
   const currentUser = useCurrentUser();

@@ -129,7 +129,7 @@ function PostCreateForm() {
       <Form.Group>
         <Form.Label>Hashtags</Form.Label>
         <Form.Control
-          as="text"
+          type="text"
           name="hashtagNames"
           value={hashtagNames}
           onChange={handleChange}
