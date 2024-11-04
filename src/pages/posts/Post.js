@@ -26,6 +26,7 @@ const Post = (props) => {
     postPage,
     setPosts,
     reaction_type,
+    hashtags,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -134,6 +135,14 @@ const Post = (props) => {
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
         <div className={styles.PostBar}>
+          {hashtags.map((hashtag) => (
+            <Link
+            to={`/?hashtag=${hashtag.name}`}
+            key={hashtag.id}
+          >
+            #{hashtag.name}
+          </Link>
+          ))}
           {is_owner ? (
             <OverlayTrigger
               placement="top"

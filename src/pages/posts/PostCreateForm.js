@@ -29,8 +29,9 @@ function PostCreateForm() {
     content: "",
     image: "",
     video: "",
+    hashtagNames: "",
   });
-  const { title, content, image, video } = postData;
+  const { title, content, image, video, hashtagNames } = postData;
 
   const imageInput = useRef(null);
   const videoInput = useRef(null)
@@ -79,6 +80,8 @@ function PostCreateForm() {
       formData.append("video", videoInput.current.files[0]);
     }
 
+    formData.append("hashtag_names", hashtagNames.split(" ").map(name => name.trim()).filter(name => name))
+
     try {
       const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
@@ -118,6 +121,22 @@ function PostCreateForm() {
         />
       </Form.Group>
       {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>Hashtags</Form.Label>
+        <Form.Control
+          as="text"
+          name="hashtagNames"
+          value={hashtagNames}
+          onChange={handleChange}
+          placeholder="e.g., travel, food"
+        />
+      </Form.Group>
+      {errors?.hashtagNames?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
