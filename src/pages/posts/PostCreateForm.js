@@ -80,7 +80,7 @@ function PostCreateForm() {
       formData.append("video", videoInput.current.files[0]);
     }
 
-    formData.append("hashtag_names", hashtagNames.split(" ").map(name => name.trim()).filter(name => name))
+    formData.append("hashtag_names", hashtagNames.split(" ").map(name => name.trim()).filter(name => name));
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);

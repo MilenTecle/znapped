@@ -29,6 +29,8 @@ const Post = (props) => {
     hashtags = [],
   } = props;
 
+  console.log("Post hashtags:", hashtags)
+
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
