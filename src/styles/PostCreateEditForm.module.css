@@ -1,3 +1,14 @@
 .Container {
     min-height: 343px;
   }
+
+.Hashtags {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.HashtagDisplay {
+  color: #333;
+  text-align: left;
+  font-size: 1em;
+}

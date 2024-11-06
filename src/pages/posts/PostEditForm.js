@@ -43,7 +43,7 @@ function PostEditForm() {
         const { data } = await axiosReq.get(`/posts/${id}`)
         const { title, content, image, video, is_owner, hashtagNames } = data;
 
-        is_owner ? setPostData({ title, content, image, video }) : history.push("/");
+        is_owner ? setPostData({ title, content, image, video, hashtagNames }) : history.push("/");
       } catch (err) {
         // console.log(err);
       }
@@ -95,7 +95,9 @@ function PostEditForm() {
       formData.append("video", videoInput.current.files[0]);
     }
 
-    formData.append("hashtag_names", hashtagNames.split(" ").map(name => name.trim()).filter(name => name))
+    formData.append(
+      "hashtag_names",
+      hashtagNames.split(" ").map(name => name.trim()).filter(name => name));
 
 
     try {
@@ -107,6 +109,22 @@ function PostEditForm() {
         setErrors(err.response?.data);
       }
     }
+  };
+
+  const displayHashtags = () => {
+    const words = hashtagNames.split(" ");
+
+    return words.map((word, index) => {
+      if (word.startsWith('#') && word.length > 1) {
+        return (
+          <span key={index} className={styles.Hashtags}>
+            {word}{" "}
+          </span>
+        );
+      } else {
+        return word + " ";
+      }
+    });
   };
 
   const textFields = (
@@ -142,15 +160,16 @@ function PostEditForm() {
         </Alert>
       ))}
 
-      <Form.Group>
+<Form.Group>
         <Form.Label>Hashtags</Form.Label>
         <Form.Control
-          as="text"
+          type="text"
           name="hashtagNames"
           value={hashtagNames}
           onChange={handleChange}
-          placeholder="e.g., travel, food"
+          placeholder="e.g., #travel, #food"
         />
+        <div className={styles.HashtagDisplay}>{displayHashtags}</div>
       </Form.Group>
       {errors?.hashtagNames?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
