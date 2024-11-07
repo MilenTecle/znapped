@@ -2,16 +2,19 @@
     min-height: 343px;
   }
 
+.MentionsInput {
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
 .HighlightedHashtag {
   color: #00796b;
   font-weight: bold;
   background-color: #e0f7fa;
   border-radius: 3px;
   padding: 2px 4px;
-}
-
-.HashtagDisplay {
-  color: #333;
-  text-align: left;
-  font-size: 1em;
+  margin-right: 4px;
+  display: inline-block;
 }

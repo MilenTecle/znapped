@@ -19,6 +19,7 @@ import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
+import { Mention, MentionsInput } from "react-mentions";
 
 function PostCreateForm() {
   useRedirect('loggedOut');
@@ -41,6 +42,13 @@ function PostCreateForm() {
     setPostData({
       ...postData,
       [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleHashtagChange = (event) => {
+    setPostData({
+      ...postData,
+      hashtagNames: event.target.value,
     });
   };
 
@@ -95,22 +103,6 @@ function PostCreateForm() {
     }
   };
 
-  const displayHashtags = () => {
-    const words = hashtagNames.split(" ");
-
-    return words.map((word, index) => {
-      if (word.startsWith('#') && word.length > 1) {
-        return (
-          <span key={index} className={styles.HighlightedHashtag}>
-            {word}{" "}
-          </span>
-        );
-      } else {
-        return word + " ";
-      }
-    });
-  };
-
   const textFields = (
     <div className="text-center">
       <Form.Group>
@@ -146,14 +138,18 @@ function PostCreateForm() {
 
       <Form.Group>
         <Form.Label>Hashtags</Form.Label>
-        <Form.Control
-          type="text"
-          name="hashtagNames"
+        <MentionsInput
+          className={styles.MentionsInput}
           value={hashtagNames}
-          onChange={handleChange}
+          onChange={handleHashtagChange}
           placeholder="e.g., #travel, #food"
-        />
-        <div className={styles.HashtagDisplay}>{displayHashtags()}</div>
+        >
+          <Mention
+            trigger="#"
+            data={hashtagNames.split(" ").map((name) => ({ id: name, display: name}))}
+            className={styles.HighlightedHashtag}
+          />
+        </MentionsInput>
       </Form.Group>
       {errors?.hashtagNames?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
