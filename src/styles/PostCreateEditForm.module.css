@@ -8,45 +8,16 @@
   border: 1px solid grey;
   border-radius: 4px;
   position: relative;
-  color: transparent;
-  background-color: transparent;
   box-sizing: border-box;
+  color: #00796b;
 }
 
 .HighlightedHashtag {
-  color: #00796b;
   font-weight: bold;
   background-color: #e0f7fa;
-  border-radius: 3px;
-  padding: 2px 4px;
-  margin-right: 4px;
-  display: inline-block;
 }
 
-.MentionsInput__highlighter {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 8px;
-  color: #000;
-  pointer-events: none;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-}
-
-.MentionsInput__Input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 8px;
-  color: transparent;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
+[class*="__suggestions__list"] {
+  width: fit-content;
+  transform: translateX(15px);
 }
