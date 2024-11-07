@@ -163,7 +163,7 @@ function PostEditForm() {
         >
           <Mention
             trigger="#"
-            data={[]}
+            data={hashtagNames.split(" ").map((name) => ({ id: name, display: name }))}
             className={styles.HighlightedHashtag}
           />
         </MentionsInput>
