@@ -136,12 +136,11 @@ const Post = (props) => {
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
-        <div className={styles.PostBar}>
+        <div className={styles.HighlightedHashtag}>
           {hashtags.map((hashtag) => (
             <Link
             to={`/?hashtag=${hashtag.name}`}
             key={hashtag.id}
-            className={styles.Hashtags}
           >
             {hashtag.name}{" "}
           </Link>

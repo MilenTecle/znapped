@@ -101,7 +101,7 @@ function PostCreateForm() {
     return words.map((word, index) => {
       if (word.startsWith('#') && word.length > 1) {
         return (
-          <span key={index} className={styles.Hashtags}>
+          <span key={index} className={styles.HighlightedHashtag}>
             {word}{" "}
           </span>
         );
@@ -153,7 +153,7 @@ function PostCreateForm() {
           onChange={handleChange}
           placeholder="e.g., #travel, #food"
         />
-        <div className={styles.HashtagDisplay}>{displayHashtags}</div>
+        <div className={styles.HashtagDisplay}>{displayHashtags()}</div>
       </Form.Group>
       {errors?.hashtagNames?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
