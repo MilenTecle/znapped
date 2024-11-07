@@ -146,7 +146,7 @@ function PostCreateForm() {
         >
           <Mention
             trigger="#"
-            data={hashtagNames.split(" ").map((name) => ({ id: name, display: name}))}
+            data={[]}
             className={styles.HighlightedHashtag}
           />
         </MentionsInput>
