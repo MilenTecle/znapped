@@ -2,22 +2,34 @@
     min-height: 343px;
   }
 
-.MentionsInput {
+ .MentionsInput {
   font-size: 16px;
   padding: 8px;
-  border: 1px solid grey;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  position: relative;
-  box-sizing: border-box;
-  color: #00796b;
-}
-
-.HighlightedHashtag {
-  font-weight: bold;
-  background-color: #e0f7fa;
+  color: blue;
 }
 
 [class*="__suggestions__list"] {
   width: fit-content;
   transform: translateX(15px);
+  color: blue;
+}
+
+[class*="__suggestions__item--focused"] {
+  background-color: #ffebc2;
+}
+
+[class*="__input"] {
+  padding: 8px;
+  color: inherit;
+  resize: none;
+}
+
+[class*="__highlighter"] strong {
+  padding: 2p 4px;
+  color: #007bff;
+  background-color: #e0f7fa;
+  border-radius: 4px;
+  font-weight: bold;
 }

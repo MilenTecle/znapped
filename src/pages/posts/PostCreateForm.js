@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -34,6 +34,33 @@ function PostCreateForm() {
     hashtagNames: "",
   });
   const { title, content, image, video, hashtagNames } = postData;
+  const [users, setUsers] = useState([]);
+  const [hashtags, setHashtags] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: userData } = await axiosReq.get("/profiles/");
+        setUsers(
+          userData.results.map((user) => ({
+            id: (user.id),
+            display: `@${user.owner}`}))
+        );
+
+        const { data: hashtagData } = await axiosReq.get("/hashtags/");
+        setHashtags(
+          hashtagData.results.map((tag) => ({
+            id: tag.id,
+            display: `#${tag.name}`}))
+          );
+
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const imageInput = useRef(null);
   const videoInput = useRef(null)
@@ -75,6 +102,12 @@ function PostCreateForm() {
     }
   };
 
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSubmit(event);
+    };
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -143,12 +176,18 @@ function PostCreateForm() {
           className={styles.MentionsInput}
           value={hashtagNames}
           onChange={handleHashtagChange}
-          placeholder="e.g., #travel, #food"
+          onKeyDown={handleKeyDown}
+          placeholder="Type # for hashtags, @ for mentions"
         >
           <Mention
             trigger="#"
-            data={hashtagNames.split(" ").map((name) => ({ id: name, display: name }))}
-            className={styles.HighlightedHashtag}
+            data={hashtags}
+            className={styles.hashtag}
+          />
+          <Mention
+            trigger="@"
+            data={users}
+            className={styles.mention}
           />
         </MentionsInput>
       </Form.Group>

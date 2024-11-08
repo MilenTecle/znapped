@@ -38,6 +38,8 @@ function PostEditForm() {
   const videoInput = useRef(null);
   const history = useHistory();
   const { id } = useParams();
+  const [users, setUsers] = useState([]);
+  const [hashtags, setHashtags] = useState([]);
 
   useEffect(() => {
     const handleMount = async () => {
@@ -53,6 +55,34 @@ function PostEditForm() {
 
     handleMount();
   }, [history, id]);
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: userData } = await axiosReq.get("/profiles/");
+        console.log("Fetched user data:",userData)
+        setUsers(
+          userData.results.map((user) => ({
+            id: (user.id),
+            display: user.owner}))
+        );
+
+        const { data: hashtagData } = await axiosReq.get("/hashtags/");
+        setHashtags(
+          hashtagData.results.map((tag) => ({
+            id: tag.id,
+            display: `#${tag.name}`}))
+          );
+
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (event) => {
     setPostData({
@@ -90,6 +120,12 @@ function PostEditForm() {
     }
   };
 
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSubmit(event);
+    };
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -160,11 +196,17 @@ function PostEditForm() {
           className={styles.MentionsInput}
           value={hashtagNames}
           onChange={handleHashtagChange}
+          onKeyDown={handleKeyDown}
           placeholder="e.g., #travel, #food"
         >
           <Mention
             trigger="#"
-            data={hashtagNames.split(" ").map((name) => ({ id: name, display: name }))}
+            data={hashtags}
+            className={styles.HighlightedHashtag}
+          />
+          <Mention
+            trigger="@"
+            data={users}
             className={styles.HighlightedHashtag}
           />
         </MentionsInput>
