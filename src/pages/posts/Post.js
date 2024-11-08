@@ -27,20 +27,22 @@ const Post = (props) => {
     setPosts,
     reaction_type,
     hashtags = [],
+    mentions = [],
   } = props;
 
   console.log("Post hashtags:", hashtags)
+  console.log("Post mentions", mentions)
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
 
   const reactions = [
-    { name: "heart", icon: "fas fa-heart"},
-    { name: "thumbs_up", icon: "fas fa-thumbs-up"},
-    { name: "laugh", icon: "fas fa-laugh"},
-    { name: "sad", icon: "fas fa-sad-tear"},
-    { name: "angry", icon: "fas fa-angry"},
+    { name: "heart", icon: "fas fa-heart" },
+    { name: "thumbs_up", icon: "fas fa-thumbs-up" },
+    { name: "laugh", icon: "fas fa-laugh" },
+    { name: "sad", icon: "fas fa-sad-tear" },
+    { name: "angry", icon: "fas fa-angry" },
   ];
 
   const handleEdit = () => {
@@ -139,12 +141,22 @@ const Post = (props) => {
         <div className={styles.HighlightedHashtag}>
           {hashtags.map((hashtag) => (
             <Link
-            to={`/?hashtag=${hashtag.name}`}
-            key={hashtag.id}
-          >
-            {hashtag.name}{" "}
-          </Link>
+              to={`/?hashtag=${hashtag.name}`}
+              key={hashtag.id}
+            >
+              #{hashtag.name}{" "}
+            </Link>
           ))}
+
+          {mentions.map((mention) => (
+            <Link
+              to={`/profiles/${mention.id}`}
+              key={mention.id}
+            >
+              @{mention.username}{" "}
+            </Link>
+          ))}
+
           {is_owner ? (
             <OverlayTrigger
               placement="top"
@@ -165,10 +177,9 @@ const Post = (props) => {
                       ? handleUnlike()
                       : handleLike(reaction.name)
                   }
-                    className={`${styles.Reaction} ${
-                      reaction_type === reaction.name
-                      ? styles.ActiveReaction
-                      : ""
+                    className={`${styles.Reaction} ${reaction_type === reaction.name
+                        ? styles.ActiveReaction
+                        : ""
                       } ${styles[reaction.name]}`}
                   >
                     <i

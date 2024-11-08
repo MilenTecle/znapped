@@ -10,6 +10,11 @@
   color: blue;
 }
 
+[class*="__input"] {
+  padding: 8px;
+  color: inherit;
+}
+
 [class*="__suggestions__list"] {
   width: fit-content;
   transform: translateX(15px);
@@ -18,12 +23,6 @@
 
 [class*="__suggestions__item--focused"] {
   background-color: #ffebc2;
-}
-
-[class*="__input"] {
-  padding: 8px;
-  color: inherit;
-  resize: none;
 }
 
 [class*="__highlighter"] strong {

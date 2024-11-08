@@ -62,19 +62,21 @@ function PostEditForm() {
     const fetchData = async () => {
       try {
         const { data: userData } = await axiosReq.get("/profiles/");
-        console.log("Fetched user data:",userData)
+        console.log("Fetched user data:", userData)
         setUsers(
           userData.results.map((user) => ({
-            id: (user.id),
-            display: user.owner}))
+            id: user.id,
+            display: user.owner
+          }))
         );
 
         const { data: hashtagData } = await axiosReq.get("/hashtags/");
         setHashtags(
           hashtagData.results.map((tag) => ({
             id: tag.id,
-            display: `#${tag.name}`}))
-          );
+            display: tag.name
+          }))
+        );
 
       } catch (err) {
         console.log(err);
@@ -191,7 +193,7 @@ function PostEditForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>Hashtags</Form.Label>
+        <Form.Label>Tags</Form.Label>
         <MentionsInput
           className={styles.MentionsInput}
           value={hashtagNames}
