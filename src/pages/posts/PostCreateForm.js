@@ -38,6 +38,7 @@ function PostCreateForm() {
   const { title, content, image, video, hashtagNames, mentionUsernames } = postData;
   const [users, setUsers] = useState([]);
   const [hashtags, setHashtags] = useState([]);
+  const [inputText, setInputText] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,23 +79,19 @@ function PostCreateForm() {
   };
 
 
-  const handleMentionChange = (event, newValue) => {
-    const inputText = event?.target?.value || newValue;
+  const handleMentionChange = (text) => {
+    setInputText(text);
 
-    const hashtags = inputText
-    .split(" ")
-    .filter((word) => word.startsWith("#"))
-    .join(", ");
+    const hashtagRegex = /#(\w+)/g;
+    const mentionRegex = /@(\w+)/g;
 
-    const mentions = inputText
-    .split(" ")
-    .filter((word) => word.startsWith("@"))
-    .join(", ");
+    const hashtags = [...text.matchAll(hashtagRegex)].map((match) => match[0]);
+    const mentions = [...text.matchAll(mentionRegex)].map((match) => match[0]);
 
     setPostData({
       ...postData,
-      hashtagNames: hashtags,
-      mentionUsernames: mentions,
+      hashtagNames: hashtags.join(" "),
+      mentionUsernames: mentions.join(" "),
     });
   };
 
@@ -142,11 +139,11 @@ function PostCreateForm() {
 
     formData.append(
       "hashtag_names",
-      hashtagNames.split(",").map((name) => name.trim()).filter((name) => name));
+      hashtagNames.split(" ").map((name) => name.trim()).filter((name) => name));
 
     formData.append(
       "mention_usernames",
-      mentionUsernames.split(",").map((name) => name.trim()).filter((name) => name));
+      mentionUsernames.split(" ").map((name) => name.trim()).filter((name) => name));
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
@@ -196,8 +193,8 @@ function PostCreateForm() {
         <Form.Label>Tags</Form.Label>
         <MentionsInput
           className={styles.MentionsInput}
-          value={`${hashtagNames} ${mentionUsernames}`}
-          onChange={(event) => handleMentionChange(event)}
+          value={inputText}
+          onChange={(e) => handleMentionChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Type # for hashtags, @ for mentions"
         >
@@ -213,7 +210,7 @@ function PostCreateForm() {
             data={users}
             className={styles.mention}
             onChange={handleMentionChange}
-             markup="@{{__display__}}"
+            markup="@{{__display__}}"
             displayTransform={(display) => `@${display}`}
           />
         </MentionsInput>
