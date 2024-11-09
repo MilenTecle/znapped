@@ -32,9 +32,10 @@ function PostCreateForm() {
     image: "",
     video: "",
     hashtagNames: "",
+    mentionUsernames: "",
   });
-  
-  const { title, content, image, video, hashtagNames } = postData;
+
+  const { title, content, image, video, hashtagNames, mentionUsernames } = postData;
   const [users, setUsers] = useState([]);
   const [hashtags, setHashtags] = useState([]);
 
@@ -76,10 +77,24 @@ function PostCreateForm() {
     });
   };
 
-  const handleHashtagChange = (event) => {
+
+  const handleMentionChange = (event, newValue) => {
+    const inputText = event?.target?.value || newValue;
+
+    const hashtags = inputText
+    .split(" ")
+    .filter((word) => word.startsWith("#"))
+    .join(", ");
+
+    const mentions = inputText
+    .split(" ")
+    .filter((word) => word.startsWith("@"))
+    .join(", ");
+
     setPostData({
       ...postData,
-      hashtagNames: event.target.value,
+      hashtagNames: hashtags,
+      mentionUsernames: mentions,
     });
   };
 
@@ -127,7 +142,11 @@ function PostCreateForm() {
 
     formData.append(
       "hashtag_names",
-      hashtagNames.split(" ").map(name => name.trim()).filter(name => name));
+      hashtagNames.split(",").map((name) => name.trim()).filter((name) => name));
+
+    formData.append(
+      "mention_usernames",
+      mentionUsernames.split(",").map((name) => name.trim()).filter((name) => name));
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
@@ -177,8 +196,8 @@ function PostCreateForm() {
         <Form.Label>Tags</Form.Label>
         <MentionsInput
           className={styles.MentionsInput}
-          value={hashtagNames}
-          onChange={handleHashtagChange}
+          value={`${hashtagNames} ${mentionUsernames}`}
+          onChange={(event) => handleMentionChange(event)}
           onKeyDown={handleKeyDown}
           placeholder="Type # for hashtags, @ for mentions"
         >
@@ -186,15 +205,26 @@ function PostCreateForm() {
             trigger="#"
             data={hashtags}
             className={styles.hashtag}
+            markup="#{{__display__}}"
+            displayTransform={(display) => `#${display}`}
           />
           <Mention
             trigger="@"
             data={users}
             className={styles.mention}
+            onChange={handleMentionChange}
+             markup="@{{__display__}}"
+            displayTransform={(display) => `@${display}`}
           />
         </MentionsInput>
       </Form.Group>
       {errors?.hashtagNames?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      {errors?.mentionUsernames?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
