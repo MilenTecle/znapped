@@ -77,18 +77,24 @@ function PostCreateForm() {
     });
   };
 
-  const handleHashtagChange = (event) => {
+ /* const handleHashtagChange = (event) => {
     setPostData({
       ...postData,
       hashtagNames: event.target.value,
     });
-  };
+  };*/
 
-  const handleMentionChange = (newValue) => {
-    const mentions = newValue.map((mention) => mention.display).join(", ");
+  const handleMentionChange = (text) => {
+
+    const inputText = String(text)
+
+    const hashtags = inputText.match(/@(\w+)/g) || [];
+    const mentions = inputText.match(/@(\w+)/g) || [];
+
     setPostData({
       ...postData,
-      mentionUsernames: mentions,
+      hashtagNames: hashtags.join(" "),
+      mentionUsernames: mentions.join(" "),
     });
   };
 
@@ -191,7 +197,7 @@ function PostCreateForm() {
         <MentionsInput
           className={styles.MentionsInput}
           value={hashtagNames}
-          onChange={handleHashtagChange}
+          onChange={(event) => handleMentionChange(event.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Type # for hashtags, @ for mentions"
         >
@@ -199,14 +205,14 @@ function PostCreateForm() {
             trigger="#"
             data={hashtags}
             className={styles.hashtag}
-            markup="#{{__display__}}"
+            markup="__display__"
             displayTransform={(display) => `#${display}`}
           />
           <Mention
             trigger="@"
             data={users}
             className={styles.mention}
-            markup="@{{__display__}}"
+            markup="__display__"
             displayTransform={(display) => `@${display}`}
           />
         </MentionsInput>

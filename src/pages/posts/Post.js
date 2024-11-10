@@ -30,8 +30,6 @@ const Post = (props) => {
     mentions = [],
   } = props;
 
-  console.log("Post hashtags:", hashtags)
-  console.log("Post mentions", mentions)
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
@@ -148,6 +146,7 @@ const Post = (props) => {
             </Link>
           ))}
 
+
           {mentions.map((mention) => (
             <Link
               to={`/profiles/${mention.id}`}
@@ -178,8 +177,8 @@ const Post = (props) => {
                       : handleLike(reaction.name)
                   }
                     className={`${styles.Reaction} ${reaction_type === reaction.name
-                        ? styles.ActiveReaction
-                        : ""
+                      ? styles.ActiveReaction
+                      : ""
                       } ${styles[reaction.name]}`}
                   >
                     <i
