@@ -41,6 +41,7 @@ function PostCreateForm() {
     const fetchData = async () => {
       try {
         const { data: hashtagData } = await axiosReq.get("/hashtags/");
+        console.log("Fetched data:", hashtagData)
         setHashtags(
           hashtagData.results.map((hashtag) => ({
             id: hashtag.id,
@@ -68,6 +69,7 @@ function PostCreateForm() {
   };
 
   const handleHashtagChange = (event) => {
+    console.log("Input:", event.target.value)
     setPostData({
       ...postData,
       hashtagNames: event.target.value,
@@ -165,7 +167,7 @@ function PostCreateForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>Tags</Form.Label>
+        <Form.Label>Hashtags</Form.Label>
         <MentionsInput
           className={styles.MentionsInput}
           value={hashtagNames}
@@ -177,7 +179,7 @@ function PostCreateForm() {
             trigger="#"
             data={hashtags}
             className={styles.hashtag}
-            markup="__display__"
+            markup="#__display__"
             displayTransform={(display) => `#${display}`}
           />
         </MentionsInput>

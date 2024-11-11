@@ -18,3 +18,25 @@
   background-color: aliceblue;
   color: #242a3d;
 }
+
+.CommentMentionsInput {
+  font-size: 16px;
+  border-radius: 4px;
+  width: 100%;
+  padding: 0.5 rem;
+  color: #495057;
+  border: none;
+  border-bottom: 2px #00d1ff solid;
+  box-sizing: border-box;
+  min-height: 60px;
+}
+
+.CommentMention {
+  color: #007bff;
+  font-weight: bold;
+}
+
+[class*="__input"] {
+  border: none;
+}
+

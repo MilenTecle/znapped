@@ -85,32 +85,25 @@ function CommentCreateForm(props) {
   return (
     <Form className="mt-2" onSubmit={handleSubmit}>
       <Form.Group>
-        <MentionsInput
-          className={styles.MentionsInput}
-          value={content}
-          onChange={handleContentChange}
-          onKeyDown={handleKeyDown}
-          placeholder="Type @ for mentions"
-        >
-          <Mention
-            trigger="@"
-            data={users}
-            markup="__display__"
-            displayTransform={(display) => `@${display}`}
-          />
-        </MentionsInput>
         <InputGroup>
           <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profileImage} />
           </Link>
-          <Form.Control
-            className={styles.Form}
-            placeholder="my comment..."
-            as="textarea"
+          <MentionsInput
+            className={`${styles.CommentMentionsInput} ${styles.Form}`}
             value={content}
-            onChange={handleChange}
+            onChange={handleContentChange}
+            placeholder="Type @ for mentions"
             rows={2}
-          />
+          >
+            <Mention
+              trigger="@"
+              data={users}
+              markup="@{{__display__}}"
+              displayTransform={(id, display) => `@${display}`}
+              className={styles.CommentMention}
+            />
+          </MentionsInput>
         </InputGroup>
       </Form.Group>
       <button
