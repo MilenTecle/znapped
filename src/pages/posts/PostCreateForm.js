@@ -32,29 +32,19 @@ function PostCreateForm() {
     image: "",
     video: "",
     hashtagNames: "",
-    mentionUsernames: "",
   });
 
-  const { title, content, image, video, hashtagNames, mentionUsernames } = postData;
-  const [users, setUsers] = useState([]);
+  const { title, content, image, video, hashtagNames } = postData;
   const [hashtags, setHashtags] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: userData } = await axiosReq.get("/profiles/");
-        setUsers(
-          userData.results.map((user) => ({
-            id: user.id,
-            display: user.owner,
-          }))
-        );
-
         const { data: hashtagData } = await axiosReq.get("/hashtags/");
         setHashtags(
-          hashtagData.results.map((tag) => ({
-            id: tag.id,
-            display: tag.name,
+          hashtagData.results.map((hashtag) => ({
+            id: hashtag.id,
+            display: hashtag.name,
           }))
         );
 
@@ -77,24 +67,10 @@ function PostCreateForm() {
     });
   };
 
- /* const handleHashtagChange = (event) => {
+  const handleHashtagChange = (event) => {
     setPostData({
       ...postData,
       hashtagNames: event.target.value,
-    });
-  };*/
-
-  const handleMentionChange = (text) => {
-
-    const inputText = String(text)
-
-    const hashtags = inputText.match(/@(\w+)/g) || [];
-    const mentions = inputText.match(/@(\w+)/g) || [];
-
-    setPostData({
-      ...postData,
-      hashtagNames: hashtags.join(" "),
-      mentionUsernames: mentions.join(" "),
     });
   };
 
@@ -143,10 +119,6 @@ function PostCreateForm() {
     formData.append(
       "hashtag_names",
       hashtagNames.split(" ").map((name) => name.trim()).filter((name) => name));
-
-    formData.append(
-      "mention_usernames",
-      mentionUsernames.split(" ").map((name) => name.trim()).filter((name) => name));
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
@@ -197,9 +169,9 @@ function PostCreateForm() {
         <MentionsInput
           className={styles.MentionsInput}
           value={hashtagNames}
-          onChange={(event) => handleMentionChange(event.target.value)}
+          onChange={handleHashtagChange}
           onKeyDown={handleKeyDown}
-          placeholder="Type # for hashtags, @ for mentions"
+          placeholder="Type # for hashtags"
         >
           <Mention
             trigger="#"
@@ -208,22 +180,9 @@ function PostCreateForm() {
             markup="__display__"
             displayTransform={(display) => `#${display}`}
           />
-          <Mention
-            trigger="@"
-            data={users}
-            className={styles.mention}
-            markup="__display__"
-            displayTransform={(display) => `@${display}`}
-          />
         </MentionsInput>
       </Form.Group>
       {errors?.hashtagNames?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-
-      {errors?.mentionUsernames?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>

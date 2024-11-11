@@ -27,7 +27,6 @@ const Post = (props) => {
     setPosts,
     reaction_type,
     hashtags = [],
-    mentions = [],
   } = props;
 
 
@@ -145,17 +144,6 @@ const Post = (props) => {
               {hashtag.name}{" "}
             </Link>
           ))}
-
-
-          {mentions.map((mention) => (
-            <Link
-              to={`/profiles/${mention.id}`}
-              key={mention.id}
-            >
-              @{mention.username}{" "}
-            </Link>
-          ))}
-
           {is_owner ? (
             <OverlayTrigger
               placement="top"

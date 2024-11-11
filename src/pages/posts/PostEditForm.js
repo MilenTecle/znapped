@@ -32,13 +32,13 @@ function PostEditForm() {
     video: "",
     hashtagNames: "",
   });
+
   const { title, content, image, video, hashtagNames } = postData;
 
   const imageInput = useRef(null);
   const videoInput = useRef(null);
   const history = useHistory();
   const { id } = useParams();
-  const [users, setUsers] = useState([]);
   const [hashtags, setHashtags] = useState([]);
 
   useEffect(() => {
@@ -61,20 +61,11 @@ function PostEditForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: userData } = await axiosReq.get("/profiles/");
-        console.log("Fetched user data:", userData)
-        setUsers(
-          userData.results.map((user) => ({
-            id: user.id,
-            display: user.owner
-          }))
-        );
-
         const { data: hashtagData } = await axiosReq.get("/hashtags/");
         setHashtags(
-          hashtagData.results.map((tag) => ({
-            id: tag.id,
-            display: tag.name
+          hashtagData.results.map((hashtag) => ({
+            id: hashtag.id,
+            display: hashtag.name
           }))
         );
 
@@ -193,7 +184,7 @@ function PostEditForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>Tags</Form.Label>
+        <Form.Label>Hashtags</Form.Label>
         <MentionsInput
           className={styles.MentionsInput}
           value={hashtagNames}
@@ -204,11 +195,6 @@ function PostEditForm() {
           <Mention
             trigger="#"
             data={hashtags}
-            className={styles.HighlightedHashtag}
-          />
-          <Mention
-            trigger="@"
-            data={users}
             className={styles.HighlightedHashtag}
           />
         </MentionsInput>
