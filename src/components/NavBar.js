@@ -13,6 +13,7 @@ import Avatar from "./Avatar";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
+import NotificationDropdown from "./NotificationDropdown";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -63,6 +64,7 @@ const NavBar = () => {
       >
         <i className="fas fa-heart"></i>Liked
       </NavLink>
+      <NotificationDropdown />
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>
