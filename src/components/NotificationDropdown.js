@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { axiosReq } from "../api/axiosDefaults";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 
 // The forwardRef is important!!
@@ -19,9 +20,11 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
 
 const NotificationDropdown = () => {
   const [notifications, setNotifications] = useState([]);
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const fetchNotifications = async () => {
+      if (currentUser)
       try {
         const { data } = await axiosReq.get("/notifications/");
         setNotifications(data.results);
@@ -29,7 +32,7 @@ const NotificationDropdown = () => {
       }
     };
     fetchNotifications();
-  }, []);
+  }, [currentUser]);
 
 
   return (
