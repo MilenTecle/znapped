@@ -56,8 +56,6 @@ const Post = (props) => {
   };
 
   const handleLike = async (reactionType) => {
-    console.log("Reaction Type:", reactionType);
-    console.log("Post ID", id);
     try {
       if (reaction_type === reactionType) {
         await handleUnlike();
@@ -84,7 +82,6 @@ const Post = (props) => {
         }));
       }
     } catch (error) {
-      console.log("Error posting like:", error.response ? error.response.data : error.message);
     }
   };
 

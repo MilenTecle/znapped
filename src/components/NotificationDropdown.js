@@ -26,9 +26,12 @@ const NotificationDropdown = () => {
     const fetchNotifications = async () => {
       if (currentUser)
       try {
+        console.log("Fetching notifications...");
         const { data } = await axiosReq.get("/notifications/");
+        console.log("Notifications fetched", data)
         setNotifications(data.results);
       } catch (error) {
+        console.log("Error fetching notifications:", error.response || error)
       }
     };
     fetchNotifications();
@@ -46,7 +49,7 @@ const NotificationDropdown = () => {
         <Dropdown.Item
           key={notification.id}
           href={`/posts/${notification.post_id}`}
-          clasName={styles.DropdownItem}
+          className={styles.DropdownItem}
         >
           {notification.message}
         </Dropdown.Item>

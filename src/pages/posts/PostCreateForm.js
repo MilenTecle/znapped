@@ -41,7 +41,6 @@ function PostCreateForm() {
     const fetchData = async () => {
       try {
         const { data: hashtagData } = await axiosReq.get("/hashtags/");
-        console.log("Fetched data:", hashtagData)
         setHashtags(
           hashtagData.results.map((hashtag) => ({
             id: hashtag.id,
@@ -69,7 +68,6 @@ function PostCreateForm() {
   };
 
   const handleHashtagChange = (event) => {
-    console.log("Input:", event.target.value)
     setPostData({
       ...postData,
       hashtagNames: event.target.value,

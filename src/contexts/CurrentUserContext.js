@@ -32,11 +32,8 @@ export const CurrentUserProvider = ({ children }) => {
       async (config) => {
         if (shouldRefreshToken()){
           try {
-            console.log("Refreshing token...")
             await axios.post("/dj-rest-auth/token/refresh/");
-            console.log("Token refreshed successfully")
           } catch (err) {
-            console.log("Token refresh failed", err)
             setCurrentUser((prevCurrentUser) => {
               if (prevCurrentUser) {
                 history.push("/signin");
