@@ -20,45 +20,65 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
 
 const NotificationDropdown = () => {
   const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
   const currentUser = useCurrentUser();
 
   useEffect(() => {
     const fetchNotifications = async () => {
       if (currentUser)
-      try {
-        console.log("Fetching notifications...");
-        const { data } = await axiosReq.get("/notifications/");
-        console.log("Notifications fetched", data)
-        setNotifications(data.results);
-      } catch (error) {
-        console.log("Error fetching notifications:", error.response || error)
-      }
+        try {
+          const { data } = await axiosReq.get("/notifications/");
+          setNotifications(data.results);
+          setUnreadCount(data.results.filter(n => !n.read).length);
+        } catch (error) {
+          console.log("Error fetching notifications:", error.response || error)
+        }
     };
     fetchNotifications();
   }, [currentUser]);
 
 
+  const markAsRead= async () => {
+    try {
+      await axiosReq.patch("/notifications/mark-as-read/");
+      setUnreadCount(0);
+      setNotifications(prevNotifications =>
+        prevNotifications.map(n => ({ ...n, read: true }))
+      );
+    } catch (error) {
+      console.log("Error marking notificaitons as read:", error)
+    }
+  };
+
+
   return (
     <Dropdown className="ml-auto" drop="left">
-      <Dropdown.Toggle as={ThreeDots} />
+      <Dropdown.Toggle as={ThreeDots} onClick={markAsRead}>
+        {unreadCount > 0 && <span className="badge">{unreadCount}</span>}
+      </Dropdown.Toggle>
       <Dropdown.Menu
-       popperConfig={{ strategy: "fixed" }}
+        popperConfig={{ strategy: "fixed" }}
         className="text-center">
-          {notifications.length ? (
-            notifications.map((notification) => (
-        <Dropdown.Item
-          key={notification.id}
-          href={`/posts/${notification.post_id}`}
-          className={styles.DropdownItem}
-        >
-          {notification.message}
-        </Dropdown.Item>
-        ))
-      ) : (
-        <Dropdown.Item
-          className={styles.NoNotification}>
-            No notification
-        </Dropdown.Item>
+        {notifications.length ? (
+          <>
+            {notifications.slice(0, 5).map((notification) => (
+              <Dropdown.Item
+                key={notification.id}
+                href={`/posts/${notification.post_id}`}
+                className={styles.DropdownItem}
+              >
+                {notification.message}
+              </Dropdown.Item>
+            ))}
+            <Dropdown.Item href="/notifications" className={styles.ViewAll}>
+              View all notifications
+            </Dropdown.Item>
+          </>
+        ) : (
+          <Dropdown.Item
+            className={styles.NoNotification}>
+            No notifications
+          </Dropdown.Item>
         )}
       </Dropdown.Menu>
     </Dropdown>
