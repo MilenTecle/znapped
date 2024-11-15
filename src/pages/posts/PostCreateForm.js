@@ -40,7 +40,7 @@ function PostCreateForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: hashtagData } = await axiosReq.get("/hashtags/");
+        const { data: hashtagData } = await axiosReq.get("posts/hashtags/");
         setHashtags(
           hashtagData.results.map((hashtag) => ({
             id: hashtag.id,
