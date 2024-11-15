@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { axiosReq } from "../api/axiosDefaults";
+import { axiosReq } from "../../api/axiosDefaults";
 
 
 const DisplayNotifications = () => {
@@ -20,14 +20,20 @@ const DisplayNotifications = () => {
   return (
     <div>
       <h1>Your Notifications</h1>
+      {notifications.length ? (
       <ul>
         {notifications.map((notification) => (
           <li key={notification.id}>
-            <a href={`/posts/${notification.post_id}`}>{notification.message}</a>
+            <a href={`/posts/${notification.post_id}`}>
+            {notification.message}
+            </a>
             {notification.read ? null : <span className="badge">New</span>}
           </li>
         ))}
       </ul>
+      ) : (
+        <p>No notifications</p>
+      )}
     </div>
   );
 };

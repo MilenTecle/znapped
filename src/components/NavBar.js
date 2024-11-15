@@ -64,7 +64,9 @@ const NavBar = () => {
       >
         <i className="fas fa-heart"></i>Liked
       </NavLink>
-      <NotificationDropdown />
+      <div className={`${styles.NavLink}`}>
+        <NotificationDropdown />
+      </div>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>

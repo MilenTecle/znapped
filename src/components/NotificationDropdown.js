@@ -21,6 +21,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
 const NotificationDropdown = () => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [dropDownOpen, setdropDownOpen] = useState(false);
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const NotificationDropdown = () => {
   }, [currentUser]);
 
 
-  const markAsRead= async () => {
+  const markAsRead = async () => {
     try {
       await axiosReq.patch("/notifications/mark-as-read/");
       setUnreadCount(0);
@@ -50,15 +51,28 @@ const NotificationDropdown = () => {
     }
   };
 
+  const handleToggle = (isOpen) => {
+    setdropDownOpen(isOpen);
+
+    if (isOpen && unreadCount > 0) {
+      markAsRead();
+    }
+  };
+
 
   return (
-    <Dropdown className="ml-auto" drop="left">
-      <Dropdown.Toggle as={ThreeDots} onClick={markAsRead}>
+    <Dropdown
+      className="ml-auto"
+      drop="left"
+      onToggle={handleToggle}
+    >
+      <Dropdown.Toggle as={ThreeDots}>
         {unreadCount > 0 && <span className="badge">{unreadCount}</span>}
       </Dropdown.Toggle>
       <Dropdown.Menu
         popperConfig={{ strategy: "fixed" }}
-        className="text-center">
+        className="text-center"
+      >
         {notifications.length ? (
           <>
             {notifications.slice(0, 5).map((notification) => (

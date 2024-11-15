@@ -15,6 +15,7 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from './components/NotFound';
+import DisplayNotifications from './pages/notifications/Notifications';
 
 
 
@@ -103,6 +104,11 @@ function App() {
             exact
             path="/profiles/:id/edit"
             render={() => <ProfileEditForm/>}
+          />
+           <Route
+            exact
+            path="/notifications"
+            render={() => <DisplayNotifications/>}
           />
           <Route render={() => <NotFound />}
           />

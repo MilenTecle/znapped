@@ -10,3 +10,16 @@
   z-index: 99;
 }
 
+.viewAll {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.NoNotification {
+  font-style: italic;
+  color: #777;
+}
+
+
+
