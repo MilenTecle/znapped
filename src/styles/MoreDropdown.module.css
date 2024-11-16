@@ -21,5 +21,14 @@
   color: #777;
 }
 
+.badge {
+  background: red;
+  border-radius: 50%;
+}
+
+.IconWrapper {
+  display: inline-block;
+}
+
 
 

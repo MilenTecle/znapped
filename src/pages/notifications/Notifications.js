@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "../../styles/MoreDropdown.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 
 
@@ -27,7 +28,7 @@ const DisplayNotifications = () => {
             <a href={`/posts/${notification.post_id}`}>
             {notification.message}
             </a>
-            {notification.read ? null : <span className="badge">New</span>}
+            {!notification.read && <span className={styles.badge}>New</span>}
           </li>
         ))}
       </ul>

@@ -7,21 +7,23 @@ import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
-const ThreeDots = React.forwardRef(({ onClick }, ref) => (
-  <i
-    className="fas fa-bell"
-    ref={ref}
-    onClick={(e) => {
-      e.preventDefault();
-      onClick(e);
-    }}
-  />
+const NotificationIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
+  <div className={styles.IconWrapper}>
+    <i
+      className="fas fa-bell"
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    />
+    {unreadCount > 0 && <span className={styles.badge}>{unreadCount}</span>}
+  </div>
 ));
 
 const NotificationDropdown = () => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
-  const [dropDownOpen, setdropDownOpen] = useState(false);
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -29,6 +31,7 @@ const NotificationDropdown = () => {
       if (currentUser)
         try {
           const { data } = await axiosReq.get("/notifications/");
+          console.log("Fetched notifications:", data.results)
           setNotifications(data.results);
           setUnreadCount(data.results.filter(n => !n.read).length);
         } catch (error) {
@@ -37,6 +40,8 @@ const NotificationDropdown = () => {
     };
     fetchNotifications();
   }, [currentUser]);
+
+  console.log(notifications)
 
 
   const markAsRead = async () => {
@@ -52,8 +57,6 @@ const NotificationDropdown = () => {
   };
 
   const handleToggle = (isOpen) => {
-    setdropDownOpen(isOpen);
-
     if (isOpen && unreadCount > 0) {
       markAsRead();
     }
@@ -66,8 +69,10 @@ const NotificationDropdown = () => {
       drop="left"
       onToggle={handleToggle}
     >
-      <Dropdown.Toggle as={ThreeDots}>
-        {unreadCount > 0 && <span className="badge">{unreadCount}</span>}
+      <Dropdown.Toggle
+        as={NotificationIcon}
+        unreadCount={unreadCount}
+      >
       </Dropdown.Toggle>
       <Dropdown.Menu
         popperConfig={{ strategy: "fixed" }}
