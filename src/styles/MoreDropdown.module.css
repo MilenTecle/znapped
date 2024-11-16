@@ -24,10 +24,17 @@
 .badge {
   background: red;
   border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  color: white;
+  padding: 2px 5px;
+  font-size: 12px;
 }
 
 .IconWrapper {
   display: inline-block;
+  position: relative;
 }
 
 
