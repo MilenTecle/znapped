@@ -41,7 +41,7 @@ const NotificationDropdown = () => {
     fetchNotifications();
   }, [currentUser]);
 
-  console.log(notifications)
+  console.log("Unread count:", unreadCount)
 
 
   const markAsRead = async () => {

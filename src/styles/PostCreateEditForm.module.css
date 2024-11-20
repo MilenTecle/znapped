@@ -25,10 +25,12 @@
   background-color: #ffebc2;
 }
 
-[class*="__highlighter"] strong {
-  padding: 2p 4px;
-  color: #007bff;
-  background-color: #e0f7fa;
-  border-radius: 4px;
-  font-weight: bold;
+.MentionsInput [class*="__highlighter"] strong {
+  background-color: #e0f7fa !important;
+}
+
+.MentionsInput [class*="__highlighter__substring"] {
+  background-color: #e0f7fa !important;
+  visibility: visible !important;
+  color: inherit;
 }

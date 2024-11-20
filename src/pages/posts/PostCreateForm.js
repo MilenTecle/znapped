@@ -41,13 +41,13 @@ function PostCreateForm() {
     const fetchData = async () => {
       try {
         const { data: hashtagData } = await axiosReq.get("posts/hashtags/");
-        setHashtags(
-          hashtagData.results.map((hashtag) => ({
-            id: hashtag.id,
-            display: hashtag.name,
-          }))
-        );
-
+        const validHashtags = hashtagData.results
+        .filter((hashtag) => String(hashtag.name).trim())
+        .map((hashtag) => ({
+          id: hashtag.id,
+          display: String(hashtag.name),
+        }));
+        setHashtags(validHashtags)
       } catch (err) {
         console.log(err);
       }
@@ -178,7 +178,7 @@ function PostCreateForm() {
             data={hashtags}
             className={styles.hashtag}
             markup="#__display__"
-            displayTransform={(display) => `#${display}`}
+         
           />
         </MentionsInput>
       </Form.Group>

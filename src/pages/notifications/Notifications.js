@@ -11,6 +11,7 @@ const DisplayNotifications = () => {
       try {
         const { data } = await axiosReq.get("/notifications/");
         setNotifications(data.results);
+        await axiosReq.patch("/notifications/mark-as-read")
       } catch (error) {
         console.log("Error fetching notifications:", error)
       }
@@ -25,7 +26,7 @@ const DisplayNotifications = () => {
       <ul>
         {notifications.map((notification) => (
           <li key={notification.id}>
-            <a href={`/posts/${notification.post_id}`}>
+            <a href={notification.post_id? `/posts/${notification.post_id}`: "#"}>
             {notification.message}
             </a>
             {!notification.read && <span className={styles.badge}>New</span>}
