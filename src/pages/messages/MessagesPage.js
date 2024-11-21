@@ -4,26 +4,26 @@ import { fetchMessages, sendMessage } from "../../api/messages";
 import { useParams } from "react-router-dom";
 
 
-const displayMessages = () => {
-  const { userId } = useParams();
+const DisplayMessages = () => {
+  const { id } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState([]);
 
   useEffect(() => {
     const retrieveMessages = async () => {
       try {
-        const data = await fetchMessages(userId);
+        const data = await fetchMessages(id);
         setMessages(data.results);
       } catch (error) {
         console.log("Error loading messages:", error)
       }
     };
     retrieveMessages();
-  }, [userId]);
+  }, [id]);
 
   const handleSendMessage = async () => {
     try {
-      const message = await sendMessage(userId, newMessage);
+      const message = await sendMessage(id, newMessage);
       setMessages((prevMessages) => [...prevMessages, message]);
       setNewMessage("");
     } catch (error) {
@@ -33,7 +33,7 @@ const displayMessages = () => {
 
   return (
     <div>
-      <h1>Conversation</h1>
+      <h1>Conversation with User {id}</h1>
       {messages.map((message) => (
         <div key={message.id}>
           <strong>{message.sender_name}:</strong> {message.content}
@@ -51,4 +51,4 @@ const displayMessages = () => {
   );
 };
 
-export default displayMessages;
+export default DisplayMessages;

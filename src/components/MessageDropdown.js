@@ -35,7 +35,7 @@ const MessageDropdown = () => {
 
   const handleToggle = (isOpen) => {
     if (isOpen && unreadCount > 0) {
-      markMessagesAsRead();
+      handlemarkAsRead();
     }
   };
 

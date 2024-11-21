@@ -24,6 +24,7 @@ import Post from "../posts/Post";
 import { fetchMoreData } from "../../utils/utils";
 import NoResults from "../../assets/no-results.png";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -37,6 +38,12 @@ function ProfilePage() {
 
   const [profile] = pageProfile.results;
   const is_owner = currentUser?.username === profile?.owner;
+
+  const history = useHistory();
+
+  const handleSendMessage = (userId) => {
+      history.push(`/direct-messages/?user_id${id}`)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -105,6 +112,12 @@ function ProfilePage() {
               follow
             </Button>
           ))}
+          <Button
+            className={`${btnStyles.Button} ${btnStyles.Black} ml-2`}
+            onClick={() => handleSendMessage(profile.id)}
+          >
+            Message
+          </Button>
         </Col>
         {profile?.content && <Col className="p-3">{profile.content}</Col>}
       </Row>
