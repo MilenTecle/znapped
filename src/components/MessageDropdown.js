@@ -2,24 +2,32 @@ import React, { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { fetchMessages, markMessagesAsRead } from "../api/messages";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 
 const MessageDropdown = () => {
   const [messages, setMessages] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const loadMessages = async () => {
-        try {
-          const { data } = await fetchMessages();
-          setMessages(data.results);
-          setUnreadCount(data.results.filter((msg) => !msg.read).length);
-        } catch (error) {
-          console.log("Error fetching messages:", error)
-        }
+      const userId = currentUser?.pk || "";
+      if (!userId) {
+        console.log("Current user is not defined, skip fetch")
+        return;
+      }
+      console.log("Fetching messages for current user ID:", userId)
+      try {
+        const { data } = await fetchMessages(userId);
+        setMessages(data.results);
+        setUnreadCount(data.results.filter((msg) => !msg.read).length);
+      } catch (error) {
+        console.log("Error fetching messages:", error)
+      }
     };
     loadMessages();
-  }, []);
+  }, [currentUser]);
 
 
   const handlemarkAsRead = async () => {
@@ -28,10 +36,10 @@ const MessageDropdown = () => {
       await markMessagesAsRead(unreadMessages);
       setUnreadCount(0);
       setMessages((prevMessages) =>
-        prevMessages.map((msg) => ({...msg, read: true}))
-        )
-      }
-    };
+        prevMessages.map((msg) => ({ ...msg, read: true }))
+      )
+    }
+  };
 
   const handleToggle = (isOpen) => {
     if (isOpen && unreadCount > 0) {

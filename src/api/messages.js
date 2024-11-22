@@ -1,8 +1,9 @@
 import { axiosReq, axiosRes } from "./axiosDefaults"
 
 
-export const fetchMessages = async (id) => {
-  const { data } = await axiosReq.get(`/direct-messages/?user_id=${id}`)
+export const fetchMessages = async (pk) => {
+  console.log("Calling fetchMessages with pk", pk)
+  const { data } = await axiosReq.get(`/direct-messages/${pk}/`)
   return data;
 };
 
