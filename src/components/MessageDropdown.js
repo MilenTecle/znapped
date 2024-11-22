@@ -11,15 +11,16 @@ const MessageDropdown = () => {
   const currentUser = useCurrentUser();
 
   useEffect(() => {
+    if (!currentUser) {
+      console.log("Current user is not defined, skip fetch")
+      return;
+    }
     const loadMessages = async () => {
-      const userId = currentUser?.pk || "";
-      if (!userId) {
-        console.log("Current user is not defined, skip fetch")
-        return;
-      }
+      const userId = currentUser.pk
       console.log("Fetching messages for current user ID:", userId)
       try {
         const { data } = await fetchMessages(userId);
+        console.log("Fetched data:", data);
         setMessages(data.results);
         setUnreadCount(data.results.filter((msg) => !msg.read).length);
       } catch (error) {

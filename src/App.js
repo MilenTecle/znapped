@@ -113,7 +113,7 @@ function App() {
           />
           <Route
             exact
-            path="/messages/:id"
+            path="/direct-messages/:id"
             render={() => <DisplayMessages/>}
           />
           <Route render={() => <NotFound />}

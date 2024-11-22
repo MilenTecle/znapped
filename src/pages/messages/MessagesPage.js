@@ -20,6 +20,7 @@ const DisplayMessages = () => {
       console.log("Fetching messages for ID:", id)
       try {
         const data = await fetchMessages(id);
+        console.log("Fetched messages:", data)
         setMessages(data.results);
       } catch (error) {
         console.log("Error loading messages:", error)
@@ -34,7 +35,9 @@ const DisplayMessages = () => {
       return;
     }
     try {
+      console.log("Sending message...")
       const message = await sendMessage(id, newMessage);
+      console.log("Message sent", message)
       setMessages((prevMessages) => [...prevMessages, message]);
       setNewMessage("");
     } catch (error) {

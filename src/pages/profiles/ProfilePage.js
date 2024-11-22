@@ -41,8 +41,8 @@ function ProfilePage() {
 
   const history = useHistory();
 
-  const handleSendMessage = (userId) => {
-      history.push(`/direct-messages/?user_id${id}`)
+  const handleSendMessage = (id) => {
+      history.push(`/direct-messages/${id}/`)
   }
 
   useEffect(() => {
