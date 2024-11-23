@@ -21,8 +21,8 @@ const MessageDropdown = () => {
       try {
         const { data } = await fetchMessages(userId);
         console.log("Fetched data:", data);
-        setMessages(data.results);
-        setUnreadCount(data.results.filter((msg) => !msg.read).length);
+        setMessages(data.results || []);
+        setUnreadCount((data.results || []).filter((msg) => !msg.read).length);
       } catch (error) {
         console.log("Error fetching messages:", error)
       }
@@ -74,7 +74,7 @@ const MessageDropdown = () => {
                 href={`/messages/${message.id}`}
                 className={styles.DropdownItem}
               >
-                <strong>{message.sender_name}:</strong> {message.content.slice(0, 30)}
+                <strong>{message}:</strong> {message.content.slice(0, 30)}
               </Dropdown.Item>
             ))}
             <Dropdown.Item href="/messages" className={styles.ViewAll}>

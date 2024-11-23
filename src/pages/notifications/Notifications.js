@@ -11,7 +11,7 @@ const DisplayNotifications = () => {
       try {
         const { data } = await axiosReq.get("/notifications/");
         setNotifications(data.results);
-        await axiosReq.patch("/notifications/mark-as-read")
+        await axiosReq.patch("/notifications/mark-as-read/")
       } catch (error) {
         console.log("Error fetching notifications:", error)
       }

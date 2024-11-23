@@ -21,7 +21,7 @@ const DisplayMessages = () => {
       try {
         const data = await fetchMessages(id);
         console.log("Fetched messages:", data)
-        setMessages(data.results);
+        setMessages(data.results || []);
       } catch (error) {
         console.log("Error loading messages:", error)
       }
@@ -35,10 +35,10 @@ const DisplayMessages = () => {
       return;
     }
     try {
-      console.log("Sending message...")
+      console.log("Receiver id", id, "Message content", newMessage)
       const message = await sendMessage(id, newMessage);
       console.log("Message sent", message)
-      setMessages((prevMessages) => [...prevMessages, message]);
+      setMessages((prevMessages) => [message, ...prevMessages]);
       setNewMessage("");
     } catch (error) {
       console.log("Error sending message", error)
@@ -49,9 +49,11 @@ const DisplayMessages = () => {
     <div>
       <h1>Conversation with User {id}</h1>
       {messages.map((message) => (
+        message && message.sender_name ? (
         <div key={message.id}>
           <strong>{message.sender_name}:</strong> {message.content}
         </div>
+        ) : null
       ))}
       <div>
         <textarea

@@ -16,7 +16,7 @@ export const sendMessage = async (receiverId, content) => {
   console.log("Sending message to:", receiverId, "with:", content)
   try {
     const { data } = await axiosRes.post(`/direct-messages/`, {
-      receiver_id: receiverId,
+      receiver: receiverId,
       content,
     });
     return data;
