@@ -27,7 +27,7 @@ const DisplayMessages = () => {
       try {
         const data = await fetchMessages(id);
         console.log("Fetched messages:", data)
-        setMessages(data.results || []);
+        setMessages(data.results);
       } catch (error) {
         console.log("Error loading messages:", error)
       }

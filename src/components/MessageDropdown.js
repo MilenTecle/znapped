@@ -21,8 +21,8 @@ const MessageDropdown = () => {
       try {
         const { data } = await fetchMessages(userId);
         console.log("Fetched data:", data);
-        setMessages(data.results || []);
-        setUnreadCount((data.results || []).filter((msg) => !msg.read).length);
+        setMessages(data?.results || []);
+        setUnreadCount((data?.results || []).filter((msg) => !msg.read).length);
       } catch (error) {
         console.log("Error fetching messages:", error)
       }

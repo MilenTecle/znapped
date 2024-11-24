@@ -80,15 +80,24 @@ const NotificationDropdown = () => {
       >
         {notifications.length ? (
           <>
-            {notifications.slice(0, 5).map((notification) => (
-              <Dropdown.Item
-                key={notification.id}
-                href={`/posts/${notification.post_id}`}
-                className={styles.DropdownItem}
-              >
-                {notification.message}
-              </Dropdown.Item>
-            ))}
+            {notifications.slice(0, 5).map((notification) => {
+              const href =
+                notification.type === "follow"
+                  ? `/profiles/${notification.sender_profile_id}/`
+                  : notification.post_id
+                    ? `/posts/${notification.post_id}/`
+                    : "#";
+
+              return (
+                <Dropdown.Item
+                  key={notification.id}
+                  href={href}
+                  className={styles.DropdownItem}
+                >
+                  {notification.message}
+                </Dropdown.Item>
+              );
+            })}
             <Dropdown.Item href="/notifications" className={styles.ViewAll}>
               View all notifications
             </Dropdown.Item>
