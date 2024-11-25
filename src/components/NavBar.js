@@ -15,20 +15,23 @@ import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
 import NotificationDropdown from "./NotificationDropdown";
 import MessageDropdown from "./MessageDropdown";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  const history = useHistory();
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
+    } catch (err) {
+    } finally {
       setCurrentUser(null);
       removeTokenTimestamp();
-    } catch (err) {
-      // console.log(err);
+      history.push("/signin");
     }
   };
 
@@ -69,7 +72,7 @@ const NavBar = () => {
         <NotificationDropdown />
       </div>
       <div className={`${styles.NavLink}`}>
-        <MessageDropdown/>
+        <MessageDropdown />
       </div>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out

@@ -7,6 +7,15 @@ export const useRedirect = (userAuthStatus) => {
 
   useEffect(() => {
     const handleMount = async () => {
+      const refreshTokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
+
+      if (!refreshTokenTimestamp) {
+        console.log("No refresh token found");
+        if (userAuthStatus === 'loggedOut') {
+          history.push('/signin')
+        }
+        return;
+      }
       try {
         await axios.post('/dj-rest-auth/token/refresh/');
         // if user is logged in, the code below will run
@@ -14,12 +23,10 @@ export const useRedirect = (userAuthStatus) => {
           history.push('/')
         }
       } catch (err) {
-        console.error('Token refresh failed', err.response?.data || err.message)
         // if user is logged out,the code below will run
         if (userAuthStatus === 'loggedOut') {
-          history.push('/')
+          history.push('/signin')
         }
-
       }
     };
     handleMount();

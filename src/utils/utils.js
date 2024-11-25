@@ -58,7 +58,13 @@ export const setTokenTimestamp = (data) => {
 };
 
 export const shouldRefreshToken = () => {
-  return !!localStorage.getItem('refreshTokenTimestamp');
+  const refreshTokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
+  if (!refreshTokenTimestamp) {
+    return false;
+  }
+  
+  const now = Math.floor(Date.now() / 1000);
+  return now >= parseInt(refreshTokenTimestamp, 10);
 };
 
 export const removeTokenTimestamp = () => {
