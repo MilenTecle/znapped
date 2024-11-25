@@ -5,6 +5,22 @@ import { fetchMessages, markMessagesAsRead } from "../api/messages";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 
+// The forwardRef is important!!
+// Dropdown needs access to the DOM node in order to position the Menu
+const MessageIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
+  <div className={styles.IconWrapper}>
+    <i
+      className="fas fa-envelope"
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    />
+    {unreadCount > 0 && <span className={styles.badge}>{unreadCount}</span>}
+  </div>
+));
+
 const MessageDropdown = () => {
   const [messages, setMessages] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -56,11 +72,9 @@ const MessageDropdown = () => {
       onToggle={handleToggle}
     >
       <Dropdown.Toggle
-        as="div"
-        className={styles.IconWrapper}
+        as={MessageIcon}
+        unreadCount ={unreadCount}
       >
-        <i className="fas fa-envelope" />
-        {unreadCount > 0 && <span className={styles.badge}>{unreadCount}</span>}
       </Dropdown.Toggle>
       <Dropdown.Menu
         popperConfig={{ strategy: "fixed" }}
