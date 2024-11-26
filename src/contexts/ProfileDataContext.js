@@ -18,10 +18,12 @@ export const ProfileDataProvider = ({ children }) => {
   const currentUser = useCurrentUser();
 
   const handleFollow = async (clickedProfile) => {
+    console.log("Post request to /followers:", clickedProfile.id)
     try {
-      const { data } = await axiosRes.post('/followers/', {
-        followed: clickedProfile.id
+      const { data } = await axiosRes.post("/followers/", {
+        followed: clickedProfile.id,
       });
+      console.log("Follow API response:", data)
 
       setProfileData((prevState) => ({
         ...prevState,
@@ -33,17 +35,20 @@ export const ProfileDataProvider = ({ children }) => {
         popularProfiles: {
           ...prevState.popularProfiles,
           results: prevState.popularProfiles.results.map((profile) =>
-            followHelper(profile, clickedProfile, data.id)),
+            followHelper(profile, clickedProfile, data.id)
+          ),
         },
       }));
-    } catch(err) {
+    } catch (err) {
       console.log(err)
     }
   };
 
   const handleUnfollow = async (clickedProfile) => {
+    console.log("Clicked for unfollow:", clickedProfile)
     try {
       await axiosRes.delete(`/followers/${clickedProfile.following_id}/`);
+      console.log("UnFollow API successful")
       setProfileData((prevState) => ({
         ...prevState,
         pageProfile: {
@@ -58,7 +63,7 @@ export const ProfileDataProvider = ({ children }) => {
           ),
         },
       }));
-    } catch(err) {
+    } catch (err) {
       console.log(err)
     }
   };
@@ -73,7 +78,7 @@ export const ProfileDataProvider = ({ children }) => {
           ...prevState,
           popularProfiles: data,
         }));
-      } catch(err) {
+      } catch (err) {
         // console.log(err);
       }
     };
@@ -84,8 +89,8 @@ export const ProfileDataProvider = ({ children }) => {
   return (
     <ProfileDataContext.Provider value={profileData}>
       <SetProfileDataContext.Provider
-       value={{ setProfileData, handleFollow, handleUnfollow }}
-       >
+        value={{ setProfileData, handleFollow, handleUnfollow }}
+      >
         {children}
       </SetProfileDataContext.Provider>
     </ProfileDataContext.Provider>

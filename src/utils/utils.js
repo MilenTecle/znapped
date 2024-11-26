@@ -23,7 +23,7 @@ export const followHelper = (profile, clickedProfile, following_id) => {
     {
       ...profile,
       followers_count: profile.followers_count + 1,
-      following_id
+      following_id,
     }
   : profile.is_owner
   ? // This is the profile of the logged in user
@@ -62,7 +62,7 @@ export const shouldRefreshToken = () => {
   if (!refreshTokenTimestamp) {
     return false;
   }
-  
+
   const now = Math.floor(Date.now() / 1000);
   return now >= parseInt(refreshTokenTimestamp, 10);
 };
