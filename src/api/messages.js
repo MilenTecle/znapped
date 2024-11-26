@@ -4,11 +4,13 @@ import { axiosReq, axiosRes } from "./axiosDefaults"
 export const fetchMessages = async (userId) => {
   console.log("Calling fetchMessages with userId", userId)
   try {
-    const { data } = await axiosReq.get(`/direct-messages/${userId}/`);
-    console.log("Response from API:", data);
-    return data;
+    const response = await axiosReq.get(`/direct-messages/${userId}/`);
+    console.log("Full response:", response)
+    console.log("Response data:", response.data);
+    return response.data;
   } catch (error) {
     console.log("Error in fetchMessages:", error.response || error.message || error)
+    return { results: [] };
   }
 };
 

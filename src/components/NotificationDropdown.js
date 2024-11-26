@@ -31,9 +31,14 @@ const NotificationDropdown = () => {
       if (currentUser)
         try {
           const { data } = await axiosReq.get("/notifications/");
-          console.log("Fetched notifications:", data.results)
-          setNotifications(data.results);
-          setUnreadCount(data.results.filter(n => !n.read).length);
+          console.log("Fetched notifications:", data.results);
+
+          const generalNotifications = data.results.filter(
+            (notification) => notification.type !== "message"
+          );
+
+          setNotifications(generalNotifications);
+          setUnreadCount(generalNotifications.filter(n => !n.read).length);
         } catch (error) {
           console.log("Error fetching notifications:", error.response || error)
         }

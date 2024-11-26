@@ -27,24 +27,26 @@ const MessageDropdown = () => {
   const currentUser = useCurrentUser();
 
   useEffect(() => {
-    if (!currentUser) {
-      console.log("Current user is not defined, skip fetch")
-      return;
-    }
     const loadMessages = async () => {
-      const userId = currentUser.pk
-      console.log("Fetching messages for current user ID:", userId)
-      try {
-        const { data } = await fetchMessages(userId);
-        console.log("Fetched data:", data);
-        setMessages(data?.results || []);
-        setUnreadCount((data?.results || []).filter((msg) => !msg.read).length);
-      } catch (error) {
-        console.log("Error fetching messages:", error)
+      if (!currentUser) {
+        console.log("No current user, skipping fetch")
+        return;
       }
-    };
-    loadMessages();
-  }, [currentUser]);
+        try {
+          const data  = await fetchMessages(currentUser.pk);
+          console.log("Fetched messages:", data);
+
+          const results = data?.results || [];
+          setMessages(results);
+          setUnreadCount(results.filter((msg) => !msg.read).length);
+        } catch (error) {
+          console.log("Error fetching messages:", error);
+          setMessages([]);
+          setUnreadCount(0);
+        }
+      };
+      loadMessages();
+    }, [currentUser]);
 
 
   const handlemarkAsRead = async () => {
@@ -73,7 +75,7 @@ const MessageDropdown = () => {
     >
       <Dropdown.Toggle
         as={MessageIcon}
-        unreadCount ={unreadCount}
+        unreadCount={unreadCount}
       >
       </Dropdown.Toggle>
       <Dropdown.Menu
@@ -85,13 +87,13 @@ const MessageDropdown = () => {
             {messages.slice(0, 5).map((message) => (
               <Dropdown.Item
                 key={message.id}
-                href={`/messages/${message.id}`}
+                href={`/direct-messages/${message.sender}`}
                 className={styles.DropdownItem}
               >
-                <strong>{message}:</strong> {message.content.slice(0, 30)}
+                You have a new message from<strong>{message.sender_name}:</strong>
               </Dropdown.Item>
             ))}
-            <Dropdown.Item href="/messages" className={styles.ViewAll}>
+            <Dropdown.Item href="/direct-messages" className={styles.ViewAll}>
               View all messages
             </Dropdown.Item>
           </>
