@@ -14,7 +14,7 @@ import Button from "react-bootstrap/Button";
 const DisplayMessages = () => {
   const { id } = useParams();
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const DisplayMessages = () => {
       try {
         const data = await fetchMessages(id);
         console.log("Fetched messages:", data)
-        setMessages(data.results);
+        setMessages(data.results.reverse());
       } catch (error) {
         console.log("Error loading messages:", error)
       }
@@ -44,7 +44,7 @@ const DisplayMessages = () => {
       console.log("Receiver id", id, "Message content", newMessage)
       const message = await sendMessage(id, newMessage);
       console.log("Message sent", message)
-      setMessages((prevMessages) => [message, ...prevMessages]);
+      setMessages((prevMessages) => [...prevMessages, message]);
       setNewMessage("");
     } catch (error) {
       console.log("Error sending message", error)
@@ -86,6 +86,7 @@ const DisplayMessages = () => {
           variant="primary"
           onClick={handleSendMessage}
           className="float-end"
+          disabled={!newMessage.trim()}
         >
           Send
         </Button>

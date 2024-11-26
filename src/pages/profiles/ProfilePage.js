@@ -33,7 +33,7 @@ function ProfilePage() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
 
-  const {setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
+  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
   const { pageProfile } = useProfileData();
 
   const [profile] = pageProfile.results;
@@ -42,24 +42,24 @@ function ProfilePage() {
   const history = useHistory();
 
   const handleSendMessage = (id) => {
-      history.push(`/direct-messages/${id}/`)
+    history.push(`/direct-messages/${id}/`)
   }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [{data: pageProfile}, { data: profilePosts }] =
+        const [{ data: pageProfile }, { data: profilePosts }] =
           await Promise.all([
             axiosReq.get(`/profiles/${id}/`),
             axiosReq.get(`/posts/?owner__profile=${id}`),
           ]);
         setProfileData((prevState) => ({
           ...prevState,
-          pageProfile: { results: [pageProfile]},
+          pageProfile: { results: [pageProfile] },
         }));
         setProfilePosts(profilePosts);
         setHasLoaded(true);
-      } catch(err){
+      } catch (err) {
         // console.log(err);
       }
     };
@@ -96,28 +96,31 @@ function ProfilePage() {
         </Col>
         <Col lg={3} className="text-lg-right">
           {currentUser &&
-          !is_owner &&
-          (profile?.following_id ? (
-            <Button
-              className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-              onClick={() => handleUnfollow(profile)}
-            >
-              unfollow
-            </Button>
-          ) : (
-            <Button
-              className={`${btnStyles.Button} ${btnStyles.Black}`}
-              onClick={() => handleFollow(profile)}
-            >
-              follow
-            </Button>
-          ))}
-          <Button
-            className={`${btnStyles.Button} ${btnStyles.Black} ml-2`}
-            onClick={() => handleSendMessage(profile.id)}
-          >
-            Message
-          </Button>
+            !is_owner &&
+            (profile?.following_id ? (
+              <Button
+                className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
+                onClick={() => handleUnfollow(profile)}
+              >
+                unfollow
+              </Button>
+            ) : (
+              <Button
+                className={`${btnStyles.Button} ${btnStyles.Black}`}
+                onClick={() => handleFollow(profile)}
+              >
+                follow
+              </Button>
+            ))}
+          {currentUser &&
+            !is_owner && (
+              <Button
+                className={`${btnStyles.Button} ${btnStyles.Black} ml-2`}
+                onClick={() => handleSendMessage(profile.id)}
+              >
+                Message
+              </Button>
+            )}
         </Col>
         {profile?.content && <Col className="p-3">{profile.content}</Col>}
       </Row>
@@ -138,12 +141,12 @@ function ProfilePage() {
           loader={<Asset spinner />}
           hasMore={!!profilePosts.next}
           next={() => fetchMoreData(profilePosts, setProfilePosts)}
-         />
+        />
       ) : (
         <Asset
           src={NoResults}
           message={`No results found, ${profile?.owner} hasn't posted yet`}
-          />
+        />
       )}
     </>
   );
