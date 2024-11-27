@@ -26,7 +26,7 @@ const DisplayNotifications = () => {
       <ul>
         {notifications.map((notification) => (
           <li key={notification.id}>
-            <a href={notification.post_id? `/posts/${notification.post_id}`: "#"}>
+            <a href={notification.post_id ? `/posts/${notification.post_id}`: "#"}>
             {notification.message}
             </a>
             {!notification.read && <span className={styles.badge}>New</span>}

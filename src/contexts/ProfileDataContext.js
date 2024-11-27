@@ -18,12 +18,10 @@ export const ProfileDataProvider = ({ children }) => {
   const currentUser = useCurrentUser();
 
   const handleFollow = async (clickedProfile) => {
-    console.log("Post request to /followers:", clickedProfile.id)
     try {
       const { data } = await axiosRes.post("/followers/", {
         followed: clickedProfile.id,
       });
-      console.log("Follow API response:", data)
 
       setProfileData((prevState) => ({
         ...prevState,
@@ -45,10 +43,8 @@ export const ProfileDataProvider = ({ children }) => {
   };
 
   const handleUnfollow = async (clickedProfile) => {
-    console.log("Clicked for unfollow:", clickedProfile)
     try {
       await axiosRes.delete(`/followers/${clickedProfile.following_id}/`);
-      console.log("UnFollow API successful")
       setProfileData((prevState) => ({
         ...prevState,
         pageProfile: {

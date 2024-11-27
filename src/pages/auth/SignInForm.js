@@ -62,21 +62,21 @@ function SignInForm() {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"
+              src="https://res.cloudinary.com/dbzkngkda/image/upload/v1732712404/iphone-2203712_1280_aitaft.jpg"
               alt="First slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"
+              src="https://res.cloudinary.com/dbzkngkda/image/upload/v1732712947/iceberg-8532935_1280_el3apb.jpg"
               alt="Second slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"
+              src="https://res.cloudinary.com/dbzkngkda/image/upload/v1732712404/lake-696098_1280_sbpjkb.jpg"
               alt="Third slide"
             />
           </Carousel.Item>

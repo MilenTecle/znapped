@@ -89,7 +89,7 @@ const NotificationDropdown = () => {
               const href =
                 notification.type === "follow"
                   ? `/profiles/${notification.sender_profile_id}/`
-                  : notification.post_id
+                  : notification.type === "mention" && notification.post_id
                     ? `/posts/${notification.post_id}/`
                     : "#";
 

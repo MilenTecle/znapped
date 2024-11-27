@@ -42,11 +42,11 @@ function PostCreateForm() {
       try {
         const { data: hashtagData } = await axiosReq.get("posts/hashtags/");
         const validHashtags = hashtagData.results
-        .filter((hashtag) => String(hashtag.name).trim())
-        .map((hashtag) => ({
-          id: hashtag.id,
-          display: String(hashtag.name),
-        }));
+          .filter((hashtag) => String(hashtag.name).trim())
+          .map((hashtag) => ({
+            id: hashtag.id,
+            display: String(hashtag.name),
+          }));
         setHashtags(validHashtags)
       } catch (err) {
         console.log(err);
@@ -178,7 +178,7 @@ function PostCreateForm() {
             data={hashtags}
             className={styles.hashtag}
             markup="#__display__"
-         
+
           />
         </MentionsInput>
       </Form.Group>
@@ -208,7 +208,21 @@ function PostCreateForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-              {!image && (
+              {image ? (
+                <>
+                  <figure>
+                    <Image className={appStyles.Image} src={image} rounded />
+                  </figure>
+                  <div>
+                    <Form.Label
+                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                      htmlFor="image-upload"
+                    >
+                      Change the image
+                    </Form.Label>
+                  </div>
+                </>
+              ) : (
                 <Form.Label
                   className="d-flex justify-content-center"
                   htmlFor="image-upload"
@@ -219,71 +233,20 @@ function PostCreateForm() {
                   />
                 </Form.Label>
               )}
-              {!video && (
-                <Form.Label
-                  className="d-flex justify-content-center"
-                  htmlFor="video-upload"
-                >
-                  <Asset
-                    src={Upload}
-                    message="Click or tap to upload a video"
-                  />
-                </Form.Label>
-              )}
-              {video ? (
-                <div>
-                  <video
-                    controls
-                    src={video}
-                    style={{ maxWidth: "100%", height: "auto" }}
-                  />
-                  <Form.Label
-                    className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                    htmlFor="video-upload"
-                  >
-                    Change the video
-                  </Form.Label>
-                </div>
-              ) : image ? (
-                <div>
-                  <figure>
-                    <Image className={appStyles.Image} src={image} rounded />
-                  </figure>
-                  <Form.Label
-                    className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                    htmlFor="image-upload"
-                  >
-                    Change the image
-                  </Form.Label>
-                </div>
-              ) : null}
 
               <Form.File
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}
                 ref={imageInput}
-                style={{ display: 'none' }}
               />
-              {errors?.image?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
-
-              <Form.File
-                id="video-upload"
-                accept="video/*"
-                onChange={handleChangeVideo}
-                ref={videoInput}
-                style={{ display: 'none' }}
-              />
-              {errors?.video?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
             </Form.Group>
+            {errors?.image?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
+
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
