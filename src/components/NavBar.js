@@ -15,7 +15,7 @@ import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
 import NotificationDropdown from "./NotificationDropdown";
 import MessageDropdown from "./MessageDropdown";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -68,12 +68,22 @@ const NavBar = () => {
       >
         <i className="fas fa-heart"></i>Liked
       </NavLink>
-      <div className={`${styles.NavLink}`}>
-        <NotificationDropdown />
-      </div>
-      <div className={`${styles.NavLink}`}>
-        <MessageDropdown />
-      </div>
+        <NavLink
+          className={styles.NavLink}
+          activeClassName={styles.Active}
+          to="/notifications"
+        >
+          <NotificationDropdown />
+          <span className={styles.NavText}>Notifications</span>
+        </NavLink>
+        <NavLink
+          className={styles.NavLink}
+          activeClassName={styles.Active}
+          to="/direct-messages"
+        >
+          <MessageDropdown />
+          <span className={styles.NavText}>Messages</span>
+        </NavLink>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>

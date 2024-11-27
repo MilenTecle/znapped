@@ -10,3 +10,7 @@
 .NavBar .Active i {
   color: #a2c4c9;
 }
+
+.NavText {
+  margin-left: 8px;
+}
