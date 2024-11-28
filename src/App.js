@@ -17,6 +17,8 @@ import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from './components/NotFound';
 import DisplayNotifications from './pages/notifications/Notifications';
 import DisplayMessages from './pages/messages/MessagesPage';
+import AllMessagesPage from './pages/messages/AllMessagesPage';
+
 
 
 
@@ -63,7 +65,7 @@ function App() {
           <Route
             exact
             path="/signin"
-            render={() =><SignInForm/>}
+            render={() =><SignInForm />}
           />
           <Route
             exact
@@ -84,12 +86,12 @@ function App() {
           <Route
             exact
             path="/posts/:id/edit"
-            render={() => <PostEditForm/>}
+            render={() => <PostEditForm />}
           />
           <Route
             exact
             path="/profiles/:id"
-            render={() => <ProfilePage/>}
+            render={() => <ProfilePage />}
           />
           <Route
             exact
@@ -104,17 +106,22 @@ function App() {
           <Route
             exact
             path="/profiles/:id/edit"
-            render={() => <ProfileEditForm/>}
+            render={() => <ProfileEditForm />}
           />
            <Route
             exact
             path="/notifications"
-            render={() => <DisplayNotifications/>}
+            render={() => <DisplayNotifications />}
           />
           <Route
             exact
             path="/direct-messages/:id"
-            render={() => <DisplayMessages/>}
+            render={() => <DisplayMessages />}
+          />
+           <Route
+            exact
+            path="/direct-messages"
+            render={() => <AllMessagesPage />}
           />
           <Route render={() => <NotFound />}
           />

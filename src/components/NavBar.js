@@ -68,22 +68,12 @@ const NavBar = () => {
       >
         <i className="fas fa-heart"></i>Liked
       </NavLink>
-        <NavLink
-          className={styles.NavLink}
-          activeClassName={styles.Active}
-          to="/notifications"
-        >
-          <NotificationDropdown />
-          <span className={styles.NavText}>Notifications</span>
-        </NavLink>
-        <NavLink
-          className={styles.NavLink}
-          activeClassName={styles.Active}
-          to="/direct-messages"
-        >
-          <MessageDropdown />
-          <span className={styles.NavText}>Messages</span>
-        </NavLink>
+      <div className={`${styles.NavLink}`}>
+        <NotificationDropdown />
+      </div>
+      <div className={`${styles.NavLink}`}>
+        <MessageDropdown />
+      </div>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>

@@ -53,8 +53,8 @@ const NotificationDropdown = () => {
     try {
       await axiosReq.patch("/notifications/mark-as-read/");
       setUnreadCount(0);
-      setNotifications(prevNotifications =>
-        prevNotifications.map(n => ({ ...n, read: true }))
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((n) => ({ ...n, read: true }))
       );
     } catch (error) {
       console.log("Error marking notificaitons as read:", error)
