@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styles from "../../styles/MessagesPage.module.css";
 import { fetchMessages, sendMessage } from "../../api/messages";
 import { useParams } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";

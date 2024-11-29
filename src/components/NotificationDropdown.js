@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
+import Badge from "react-bootstrap/Badge";
 import styles from "../styles/MoreDropdown.module.css";
 import { axiosReq } from "../api/axiosDefaults";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
@@ -18,7 +19,11 @@ const NotificationIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
         onClick(e);
       }}
     />
-    {unreadCount > 0 && <span className={styles.badge}>{unreadCount}</span>}
+    {unreadCount > 0 && (
+      <Badge className={`${styles.badge} badge`}>
+        {unreadCount}
+      </Badge>
+    )}
   </div>
 ));
 

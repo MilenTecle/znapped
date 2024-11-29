@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
+import Badge from "react-bootstrap/Badge";
 import styles from "../styles/MoreDropdown.module.css";
 import { fetchMessages, markMessagesAsRead } from "../api/messages";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
@@ -18,11 +19,15 @@ const MessageIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
         onClick(e);
       }}
     />
-    {unreadCount > 0 && <span className={styles.badge}>{unreadCount}</span>}
+    {unreadCount > 0 && (
+      <Badge className={`${styles.badge} badge`}>
+        {unreadCount}
+      </Badge>
+    )}
   </div>
 ));
 
-const MessageDropdown = ( {mobile} ) => {
+const MessageDropdown = ({ mobile }) => {
   const [messages, setMessages] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const currentUser = useCurrentUser();
@@ -34,21 +39,21 @@ const MessageDropdown = ( {mobile} ) => {
         console.log("No current user, skipping fetch")
         return;
       }
-        try {
-          const data  = await fetchMessages(currentUser.pk);
-          console.log("Fetched messages:", data);
+      try {
+        const data = await fetchMessages(currentUser.pk);
+        console.log("Fetched messages:", data);
 
-          const results = data?.results || [];
-          setMessages(results);
-          setUnreadCount(results.filter((msg) => !msg.read).length);
-        } catch (error) {
-          console.log("Error fetching messages:", error);
-          setMessages([]);
-          setUnreadCount(0);
-        }
-      };
-      loadMessages();
-    }, [currentUser]);
+        const results = data?.results || [];
+        setMessages(results);
+        setUnreadCount(results.filter((msg) => !msg.read).length);
+      } catch (error) {
+        console.log("Error fetching messages:", error);
+        setMessages([]);
+        setUnreadCount(0);
+      }
+    };
+    loadMessages();
+  }, [currentUser]);
 
 
   const handlemarkAsRead = async () => {
