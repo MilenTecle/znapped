@@ -44,7 +44,10 @@ const NotificationDropdown = ( {mobile} ) => {
             (notification) => notification.type !== "message"
           );
 
+          console.log("Filtered notifications:", generalNotifications)
+
           setNotifications(generalNotifications);
+          console.log("Updated state notifications", generalNotifications)
           setUnreadCount(generalNotifications.filter(n => !n.read).length);
         } catch (error) {
           console.log("Error fetching notifications:", error.response || error)

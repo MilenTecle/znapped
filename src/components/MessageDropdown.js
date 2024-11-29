@@ -35,35 +35,33 @@ const MessageDropdown = ({ mobile }) => {
 
   useEffect(() => {
     const loadMessages = async () => {
-      if (!currentUser) {
-        console.log("No current user, skipping fetch")
-        return;
-      }
-      try {
-        const data = await fetchMessages(currentUser.pk);
-        console.log("Fetched messages:", data);
+      if (currentUser)
+        try {
+          const data = await fetchMessages(currentUser.pk);
+          console.log("messages API response:", data.results)
 
-        const results = data?.results || [];
-        setMessages(results);
-        setUnreadCount(results.filter((msg) => !msg.read).length);
-      } catch (error) {
-        console.log("Error fetching messages:", error);
-        setMessages([]);
-        setUnreadCount(0);
-      }
+          const results = data?.results || [];
+          setMessages(results);
+          setUnreadCount(results.filter((msg) => !msg.read).length);
+        } catch (error) {
+          console.log("Error fetching messages:", error);
+          setMessages([]);
+          setUnreadCount(0);
+        }
     };
     loadMessages();
   }, [currentUser]);
 
 
   const handlemarkAsRead = async () => {
-    const unreadMessages = messages.filter((msg) => !msg.read).map((msg) => msg.id);
-    if (unreadMessages.length) {
-      await markMessagesAsRead(unreadMessages);
+    try {
+      const undreadMessages = messages.filter((msg) => !msg.read).map((msg) => msg.id);
+      await markMessagesAsRead(undreadMessages);
       setUnreadCount(0);
       setMessages((prevMessages) =>
         prevMessages.map((msg) => ({ ...msg, read: true }))
-      )
+      );
+    } catch (error) {
     }
   };
 
