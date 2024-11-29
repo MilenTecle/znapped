@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import styles from "../../styles/MessagesPage.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import { fetchMessages } from "../../api/messages";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
@@ -13,44 +14,29 @@ const AllMessagesPage = () => {
   useEffect(() => {
     const getMessages = async () => {
         try {
-          const data  = await fetchMessages(currentUser.pk);
+          const { data } = await axiosReq.get("/direct-messages/");
           console.log("Fetched messages:", data);
-          setMessages(data.results.reverse());
+          setMessages(data.results);
         } catch (error) {
           console.log("Error fetching messages:", error);
-          setMessages([]);
         }
       };
 
-      if (currentUser && currentUser.pk) {
-           getMessages();
-      }
-
-    }, [currentUser]);
-
-  const groupedMessages = messages.reduce((acc, message) => {
-    const key = message.sender_name === message.receiver_name
-      ? message.sender_name
-      : message.sender_name < message.receiver_name
-      ? `${message.sender_name}-${message.receiver_name}`
-      : `${message.receiver_name}-${message.sender_name}`;
-
-    acc[key] = acc[key] || [];
-    acc[key].push(message);
-    return acc;
-  }, {});
+      getMessages();
+    }, []);
 
   return (
     <Container>
-      <h1 className="text-center my-4">All Messages</h1>
-      <div className="overflow-auto mb-4">
-        {Object.keys(groupedMessages).length ? (
+    <div className="overflow-auto mb-4">
+      <h1 className="text-center my-4">Your Messages</h1>
+        {messages.length > 0 ? (
           <ul>
-            {Object.entries(groupedMessages).map(([key, msgs]) => (
-              <li key={key}>
-                <Link to={`/direct-messages/${msgs[0].receiver}`}>
-                  Conversation with {msgs[0].receiver_name}
-                </Link>
+            {messages.map((message) => (
+              <li key={message.id}>
+                <a href={`/direct-messages/${message.receiver || message.sender}`}>
+                  From: {message.sender_name}
+                </a>
+                {!message.read && <span className={styles.badge}>New</span>}
               </li>
             ))}
           </ul>
@@ -58,7 +44,7 @@ const AllMessagesPage = () => {
           <p>No messages found</p>
         )}
       </div>
-    </Container>
+      </Container>
   );
 };
 

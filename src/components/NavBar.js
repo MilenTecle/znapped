@@ -17,7 +17,7 @@ import NotificationDropdown from "./NotificationDropdown";
 import MessageDropdown from "./MessageDropdown";
 import { useHistory } from "react-router";
 
-const NavBar = () => {
+const NavBar = ( {mobile} ) => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
   const history = useHistory();
@@ -69,10 +69,10 @@ const NavBar = () => {
         <i className="fas fa-heart"></i>Liked
       </NavLink>
       <div className={`${styles.NavLink}`}>
-        <NotificationDropdown />
+        <NotificationDropdown mobile={mobile} />
       </div>
       <div className={`${styles.NavLink}`}>
-        <MessageDropdown />
+        <MessageDropdown mobile={mobile} />
       </div>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out

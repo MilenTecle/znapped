@@ -3,6 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { fetchMessages, markMessagesAsRead } from "../api/messages";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
+import { useHistory } from "react-router-dom";
 
 
 // The forwardRef is important!!
@@ -21,10 +22,11 @@ const MessageIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
   </div>
 ));
 
-const MessageDropdown = () => {
+const MessageDropdown = ( {mobile} ) => {
   const [messages, setMessages] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const currentUser = useCurrentUser();
+  const history = useHistory();
 
   useEffect(() => {
     const loadMessages = async () => {
@@ -66,6 +68,23 @@ const MessageDropdown = () => {
     }
   };
 
+  const handleIconClick = (e) => {
+    e.preventDefault();
+    if (mobile) {
+      history.pushState("/direct-messages");
+    };
+  };
+
+
+  if (mobile) {
+    return (
+      <div className="ml-auto">
+        <MessageIcon
+          onClick={handleIconClick}
+          unreadCount={unreadCount} />
+      </div>
+    );
+  }
 
   return (
     <Dropdown

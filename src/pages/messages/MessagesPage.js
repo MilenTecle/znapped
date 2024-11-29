@@ -35,6 +35,13 @@ const DisplayMessages = () => {
     retrieveMessages();
   }, [id]);
 
+  const username =
+    messages.length > 0
+      ? currentUser?.username === messages[0].sender_name
+        ? messages[0].receiver_name
+        : messages[0].sender_name
+      : `User ${id}`;
+
   const handleSendMessage = async () => {
     if (!newMessage.trim()) {
       console.log("Cannot send an empty message.");
@@ -53,16 +60,25 @@ const DisplayMessages = () => {
 
   return (
     <Container>
-      <h1 className="text-center my-4">Conversation with {id}</h1>
+      <h1 className="text-center my-4">Conversation with {username}</h1>
       <div className="overflow-auto mb-4">
         {messages.map((message) =>
           message && message.sender_name ? (
             <Row
               key={message.id}
-              className={`my-2 ${message.sender_name === currentUser.username ? 'justify-content-end' : 'justify-content-start'}`}
+              className={`my-2 ${message.sender_name === currentUser?.username
+                ? 'justify-content-end'
+                : 'justify-content-start'
+                }`}
             >
-              <Col xs={10} md={8}>
-                <Card className={message.sender_name === currentUser.username ? 'bg-primary text-white' : 'bg-light'}>
+              <Col xs={10} md={8} lg={6}>
+                <Card
+                  className={
+                    message.sender_name === currentUser?.username
+                      ? 'bg-primary text-white'
+                      : 'bg-light'
+                  }
+                >
                   <Card.Body>
                     <strong>{message.sender_name}:</strong> {message.content}
                   </Card.Body>
@@ -77,7 +93,7 @@ const DisplayMessages = () => {
           <Form.Control
             as="textarea"
             rows={2}
-            vale={newMessage}
+            value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type your message..."
           />

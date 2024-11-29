@@ -3,6 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { axiosReq } from "../api/axiosDefaults";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
+import { useHistory } from "react-router";
 
 
 // The forwardRef is important!!
@@ -21,10 +22,11 @@ const NotificationIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
   </div>
 ));
 
-const NotificationDropdown = () => {
+const NotificationDropdown = ( {mobile} ) => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const currentUser = useCurrentUser();
+  const history = useHistory();
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -48,7 +50,6 @@ const NotificationDropdown = () => {
 
   console.log("Unread count:", unreadCount)
 
-
   const markAsRead = async () => {
     try {
       await axiosReq.patch("/notifications/mark-as-read/");
@@ -67,6 +68,23 @@ const NotificationDropdown = () => {
     }
   };
 
+  const handleIconClick = (e) => {
+    e.preventDefault();
+    if (mobile) {
+      history.pushState("/notifications")
+    };
+  };
+
+
+  if (mobile) {
+    return (
+      <div className="ml-auto">
+        <NotificationIcon
+          onClick={handleIconClick}
+          unreadCount={unreadCount} />
+      </div>
+    );
+  }
 
   return (
     <Dropdown
