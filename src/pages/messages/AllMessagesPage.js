@@ -46,7 +46,7 @@ const AllMessagesPage = () => {
           <ListGroup variant="flush" className="mb-4">
             {messages.map((message) => {
               const otherUser =
-                currentUser.username === message.sender_name
+                currentUser.id === message.sender
                   ? message.receiver_name
                   : message.sender_name;
 
@@ -54,11 +54,13 @@ const AllMessagesPage = () => {
                 <ListGroup.Item
                   key={message.id}
                   className="d-flex justify-content-between align-items-center"
-                  onClick={handlemarkAsRead}
                 >
-                  <a href={`/direct-messages/${message.receiver || message.sender}`}>
+                  <Link
+                    to={`/direct-messages/${message.receiver || message.sender}`}
+                    onClick={() => handlemarkAsRead(message)}
+                  >
                     From: {otherUser}
-                  </a>
+                  </Link>
                   <br />
                   <small className="text-muted">
                     {message.created_at}

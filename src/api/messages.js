@@ -3,7 +3,7 @@ import { axiosReq, axiosRes } from "./axiosDefaults"
 
 export const fetchMessages = async (userId = null) => {
   try {
-    const url= userId
+    const url = userId
       ? `/direct-messages/${userId}/`
       : `/direct-messages/`;
     console.log("Fetching messags from fetchMessages url:", url)

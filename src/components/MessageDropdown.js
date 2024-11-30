@@ -5,6 +5,7 @@ import styles from "../styles/MoreDropdown.module.css";
 import { fetchMessages, markMessagesAsRead } from "../api/messages";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { useHistory } from "react-router-dom";
+import { axiosReq } from "../api/axiosDefaults";
 
 
 // The forwardRef is important!!
@@ -37,12 +38,17 @@ const MessageDropdown = ({ mobile }) => {
     const loadMessages = async () => {
       if (currentUser)
         try {
-          const data = await fetchMessages(currentUser.pk);
+          const  {data} = await axiosReq.get("/notifications/");
           console.log("messages API response:", data.results)
 
-          const results = data?.results || [];
-          setMessages(results);
-          setUnreadCount(results.filter((msg) => !msg.read).length);
+          const messageNotifications = data.results.filter(
+            (notification) => notification.type === "message"
+          );
+
+          const unread = messageNotifications.filter((msg) => !msg.read).length;
+
+          setMessages(messageNotifications);
+          setUnreadCount(unread)
         } catch (error) {
           console.log("Error fetching messages:", error);
           setMessages([]);
@@ -56,11 +62,11 @@ const MessageDropdown = ({ mobile }) => {
   const handlemarkAsRead = async () => {
     try {
       const undreadMessages = messages.filter((msg) => !msg.read).map((msg) => msg.id);
-      await markMessagesAsRead(undreadMessages);
-      setUnreadCount(0);
-      setMessages((prevMessages) =>
-        prevMessages.map((msg) => ({ ...msg, read: true }))
-      );
+        await markMessagesAsRead(undreadMessages);
+        setUnreadCount(0);
+        setMessages((prevMessages) =>
+          prevMessages.map((msg) => ({ ...msg, read: true }))
+        );
     } catch (error) {
     }
   };
@@ -74,7 +80,7 @@ const MessageDropdown = ({ mobile }) => {
   const handleIconClick = (e) => {
     e.preventDefault();
     if (mobile) {
-      history.pushState("/direct-messages");
+      history.push("/direct-messages");
     };
   };
 

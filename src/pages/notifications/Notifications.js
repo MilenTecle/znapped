@@ -12,7 +12,12 @@ const DisplayNotifications = () => {
     const fetchNotifications = async () => {
       try {
         const { data } = await axiosReq.get("/notifications/");
-        setNotifications(data.results);
+
+        const generalNotifications = data.results.filter(
+          (notification) => notification.type !== "message"
+        );
+
+        setNotifications(generalNotifications);
         await axiosReq.patch("/notifications/mark-as-read/")
       } catch (error) {
         console.log("Error fetching notifications:", error)

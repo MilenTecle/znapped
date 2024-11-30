@@ -44,11 +44,11 @@ const NotificationDropdown = ( {mobile} ) => {
             (notification) => notification.type !== "message"
           );
 
-          console.log("Filtered notifications:", generalNotifications)
+          const unread = generalNotifications.filter((n) => !n.read).length;
 
           setNotifications(generalNotifications);
           console.log("Updated state notifications", generalNotifications)
-          setUnreadCount(generalNotifications.filter(n => !n.read).length);
+          setUnreadCount(unread);
         } catch (error) {
           console.log("Error fetching notifications:", error.response || error)
         }
@@ -60,11 +60,13 @@ const NotificationDropdown = ( {mobile} ) => {
 
   const markAsRead = async () => {
     try {
+      if (unreadCount > 0) {
       await axiosReq.patch("/notifications/mark-as-read/");
       setUnreadCount(0);
       setNotifications((prevNotifications) =>
         prevNotifications.map((n) => ({ ...n, read: true }))
       );
+    }
     } catch (error) {
       console.log("Error marking notificaitons as read:", error)
     }
@@ -79,7 +81,7 @@ const NotificationDropdown = ( {mobile} ) => {
   const handleIconClick = (e) => {
     e.preventDefault();
     if (mobile) {
-      history.pushState("/notifications")
+      history.push("/notifications")
     };
   };
 
