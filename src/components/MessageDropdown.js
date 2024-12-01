@@ -38,8 +38,7 @@ const MessageDropdown = ({ mobile }) => {
     const loadMessages = async () => {
       if (currentUser)
         try {
-          const  {data} = await axiosReq.get("/notifications/");
-          console.log("messages API response:", data.results)
+          const { data } = await axiosReq.get("/notifications/");
 
           const messageNotifications = data.results.filter(
             (notification) => notification.type === "message"
@@ -51,8 +50,6 @@ const MessageDropdown = ({ mobile }) => {
           setUnreadCount(unread)
         } catch (error) {
           console.log("Error fetching messages:", error);
-          setMessages([]);
-          setUnreadCount(0);
         }
     };
     loadMessages();
@@ -61,12 +58,14 @@ const MessageDropdown = ({ mobile }) => {
 
   const handlemarkAsRead = async () => {
     try {
-      const undreadMessages = messages.filter((msg) => !msg.read).map((msg) => msg.id);
-        await markMessagesAsRead(undreadMessages);
-        setUnreadCount(0);
+      const undreadMessageIds = messages.filter((msg) => !msg.read).map((msg) => msg.id);
+      if (undreadMessageIds.length > 0) {
+        await markMessagesAsRead(undreadMessageIds);
         setMessages((prevMessages) =>
           prevMessages.map((msg) => ({ ...msg, read: true }))
         );
+        setUnreadCount(0);
+      }
     } catch (error) {
     }
   };
@@ -77,11 +76,8 @@ const MessageDropdown = ({ mobile }) => {
     }
   };
 
-  const handleIconClick = (e) => {
-    e.preventDefault();
-    if (mobile) {
+  const handleIconClick = () => {
       history.push("/direct-messages");
-    };
   };
 
 
@@ -115,7 +111,7 @@ const MessageDropdown = ({ mobile }) => {
             {messages.slice(0, 5).map((message) => (
               <Dropdown.Item
                 key={message.id}
-                href={`/direct-messages/${message.sender}`}
+                href={`/direct-messages/${message.sender_profile_id}`}
                 className={styles.DropdownItem}
               >
                 You have a new message from<strong>{message.sender_name}:</strong>

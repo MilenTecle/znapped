@@ -17,7 +17,6 @@ const AllMessagesPage = () => {
     const getMessages = async () => {
       try {
         const { data } = await axiosReq.get("/direct-messages/");
-        console.log("messages API response:", data.results);
         setMessages(data.results);
       } catch (error) {
         console.log("Error fetching messages:", error);

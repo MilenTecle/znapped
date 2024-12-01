@@ -1,12 +1,9 @@
 import { axiosReq, axiosRes } from "./axiosDefaults"
 
 
-export const fetchMessages = async (userId = null) => {
+export const fetchMessages = async (id = null) => {
   try {
-    const url = userId
-      ? `/direct-messages/${userId}/`
-      : `/direct-messages/`;
-    console.log("Fetching messags from fetchMessages url:", url)
+    const url = id ? `/direct-messages/${id}/` : `/direct-messages/`;
     const response = await axiosReq.get(url);
     return response.data;
   } catch (error) {
@@ -16,7 +13,6 @@ export const fetchMessages = async (userId = null) => {
 };
 
 export const sendMessage = async (receiverId, content) => {
-  console.log("Sending message to:", receiverId, "with:", content)
   try {
     const { data } = await axiosRes.post(`/direct-messages/`, {
       receiver: receiverId,

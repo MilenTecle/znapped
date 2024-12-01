@@ -38,7 +38,6 @@ const NotificationDropdown = ( {mobile} ) => {
       if (currentUser)
         try {
           const { data } = await axiosReq.get("/notifications/");
-          console.log("Fetched notifications:", data.results);
 
           const generalNotifications = data.results.filter(
             (notification) => notification.type !== "message"
@@ -47,7 +46,6 @@ const NotificationDropdown = ( {mobile} ) => {
           const unread = generalNotifications.filter((n) => !n.read).length;
 
           setNotifications(generalNotifications);
-          console.log("Updated state notifications", generalNotifications)
           setUnreadCount(unread);
         } catch (error) {
           console.log("Error fetching notifications:", error.response || error)
@@ -56,7 +54,6 @@ const NotificationDropdown = ( {mobile} ) => {
     fetchNotifications();
   }, [currentUser]);
 
-  console.log("Unread count:", unreadCount)
 
   const markAsRead = async () => {
     try {
@@ -78,12 +75,9 @@ const NotificationDropdown = ( {mobile} ) => {
     }
   };
 
-  const handleIconClick = (e) => {
-    e.preventDefault();
-    if (mobile) {
+  const handleIconClick = () => {
       history.push("/notifications")
     };
-  };
 
 
   if (mobile) {
