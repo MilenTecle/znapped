@@ -15,10 +15,7 @@ const MessageIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
     <i
       className="fas fa-envelope"
       ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
+      onClick={onClick}
     />
     {unreadCount > 0 && (
       <Badge className={`${styles.badge} badge`}>
@@ -61,23 +58,22 @@ const MessageDropdown = ({ mobile }) => {
       const undreadMessageIds = messages.filter((msg) => !msg.read).map((msg) => msg.id);
       if (undreadMessageIds.length > 0) {
         await markMessagesAsRead(undreadMessageIds);
-        setMessages((prevMessages) =>
-          prevMessages.map((msg) => ({ ...msg, read: true }))
-        );
-        setUnreadCount(0);
+        const { data } = await axiosReq.get("/notifications/");
+        setMessages(data.results.filter((n) => n.type === "message"));
+        setUnreadCount(data.results.filter((n) => n.type === "message" && !n.read).length);
       }
     } catch (error) {
     }
   };
 
   const handleToggle = (isOpen) => {
-    if (isOpen && unreadCount > 0) {
+    if (!mobile && isOpen && unreadCount > 0) {
       handlemarkAsRead();
     }
   };
 
   const handleIconClick = () => {
-      history.push("/direct-messages");
+    history.push("/direct-messages");
   };
 
 

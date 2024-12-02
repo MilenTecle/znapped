@@ -14,10 +14,7 @@ const NotificationIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
     <i
       className="fas fa-bell"
       ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
+      onClick={onClick}
     />
     {unreadCount > 0 && (
       <Badge className={`${styles.badge} badge`}>
@@ -70,7 +67,7 @@ const NotificationDropdown = ( {mobile} ) => {
   };
 
   const handleToggle = (isOpen) => {
-    if (isOpen && unreadCount > 0) {
+    if (!mobile && isOpen && unreadCount > 0) {
       markAsRead();
     }
   };
