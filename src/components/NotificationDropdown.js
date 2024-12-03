@@ -24,7 +24,7 @@ const NotificationIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
   </div>
 ));
 
-const NotificationDropdown = ( {mobile} ) => {
+const NotificationDropdown = () => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const currentUser = useCurrentUser();
@@ -55,85 +55,32 @@ const NotificationDropdown = ( {mobile} ) => {
   const markAsRead = async () => {
     try {
       if (unreadCount > 0) {
-      await axiosReq.patch("/notifications/mark-as-read/");
-      setUnreadCount(0);
-      setNotifications((prevNotifications) =>
-        prevNotifications.map((n) => ({ ...n, read: true }))
-      );
-    }
+        await axiosReq.patch("/notifications/mark-as-read/");
+        setUnreadCount(0);
+        setNotifications((prevNotifications) =>
+          prevNotifications.map((n) => ({ ...n, read: true }))
+        );
+      }
     } catch (error) {
       console.log("Error marking notificaitons as read:", error)
     }
   };
 
-  const handleToggle = (isOpen) => {
-    if (!mobile && isOpen && unreadCount > 0) {
-      markAsRead();
-    }
+
+  const handleIconClick = async () => {
+    markAsRead();
+    history.push("/notifications")
   };
 
-  const handleIconClick = () => {
-      history.push("/notifications")
-    };
-
-
-  if (mobile) {
-    return (
-      <div className="ml-auto">
-        <NotificationIcon
-          onClick={handleIconClick}
-          unreadCount={unreadCount} />
-      </div>
-    );
-  }
 
   return (
-    <Dropdown
-      className="ml-auto"
-      drop="left"
-      onToggle={handleToggle}
-    >
-      <Dropdown.Toggle
-        as={NotificationIcon}
+    <div
+      className="ml-auto">
+      <NotificationIcon
+        onClick={handleIconClick}
         unreadCount={unreadCount}
-      >
-      </Dropdown.Toggle>
-      <Dropdown.Menu
-        popperConfig={{ strategy: "fixed" }}
-        className="text-center"
-      >
-        {notifications.length ? (
-          <>
-            {notifications.slice(0, 5).map((notification) => {
-              const href =
-                notification.type === "follow"
-                  ? `/profiles/${notification.sender_profile_id}/`
-                  : notification.type === "mention" && notification.post_id
-                    ? `/posts/${notification.post_id}/`
-                    : "#";
-
-              return (
-                <Dropdown.Item
-                  key={notification.id}
-                  href={href}
-                  className={styles.DropdownItem}
-                >
-                  {notification.message}
-                </Dropdown.Item>
-              );
-            })}
-            <Dropdown.Item href="/notifications" className={styles.ViewAll}>
-              View all notifications
-            </Dropdown.Item>
-          </>
-        ) : (
-          <Dropdown.Item
-            className={styles.NoNotification}>
-            No notifications
-          </Dropdown.Item>
-        )}
-      </Dropdown.Menu>
-    </Dropdown>
+      />
+    </div>
   );
 };
 

@@ -25,7 +25,7 @@ const MessageIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
   </div>
 ));
 
-const MessageDropdown = ({ mobile }) => {
+const MessageDropdown = () => {
   const [messages, setMessages] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const currentUser = useCurrentUser();
@@ -36,15 +36,13 @@ const MessageDropdown = ({ mobile }) => {
       if (currentUser)
         try {
           const { data } = await axiosReq.get("/notifications/");
-
           const messageNotifications = data.results.filter(
             (notification) => notification.type === "message"
           );
 
-          const unread = messageNotifications.filter((msg) => !msg.read).length;
-
-          setMessages(messageNotifications);
-          setUnreadCount(unread)
+          const unreadMessages = messageNotifications.filter((msg) => !msg.read)
+          setMessages(messageNotifications)
+          setUnreadCount(unreadMessages.length)
         } catch (error) {
           console.log("Error fetching messages:", error);
         }
@@ -58,73 +56,32 @@ const MessageDropdown = ({ mobile }) => {
       const undreadMessageIds = messages.filter((msg) => !msg.read).map((msg) => msg.id);
       if (undreadMessageIds.length > 0) {
         await markMessagesAsRead(undreadMessageIds);
-        const { data } = await axiosReq.get("/notifications/");
-        setMessages(data.results.filter((n) => n.type === "message"));
-        setUnreadCount(data.results.filter((n) => n.type === "message" && !n.read).length);
+        setMessages((prevMessages) =>
+          prevMessages.map((msg) =>
+            undreadMessageIds.includes(msg.id) ? { ...msg, read: true } : msg
+          )
+        )
+        setUnreadCount(0);
       }
     } catch (error) {
     }
   };
 
-  const handleToggle = (isOpen) => {
-    if (!mobile && isOpen && unreadCount > 0) {
-      handlemarkAsRead();
-    }
-  };
 
-  const handleIconClick = () => {
+  const handleIconClick = async () => {
+    await handlemarkAsRead();
     history.push("/direct-messages");
   };
 
 
-  if (mobile) {
-    return (
-      <div className="ml-auto">
-        <MessageIcon
-          onClick={handleIconClick}
-          unreadCount={unreadCount} />
-      </div>
-    );
-  }
-
   return (
-    <Dropdown
-      className="ml-auto"
-      drop="left"
-      onToggle={handleToggle}
-    >
-      <Dropdown.Toggle
-        as={MessageIcon}
+    <div
+      className="ml-auto">
+      <MessageIcon
+        onClick={handleIconClick}
         unreadCount={unreadCount}
-      >
-      </Dropdown.Toggle>
-      <Dropdown.Menu
-        popperConfig={{ strategy: "fixed" }}
-        className="text-center"
-      >
-        {messages.length ? (
-          <>
-            {messages.slice(0, 5).map((message) => (
-              <Dropdown.Item
-                key={message.id}
-                href={`/direct-messages/${message.sender_profile_id}`}
-                className={styles.DropdownItem}
-              >
-                You have a new message from<strong>{message.sender_name}:</strong>
-              </Dropdown.Item>
-            ))}
-            <Dropdown.Item href="/direct-messages" className={styles.ViewAll}>
-              View all messages
-            </Dropdown.Item>
-          </>
-        ) : (
-          <Dropdown.Item
-            className={styles.NoNotification}>
-            No messages
-          </Dropdown.Item>
-        )}
-      </Dropdown.Menu>
-    </Dropdown>
+      />
+    </div>
   );
 };
 

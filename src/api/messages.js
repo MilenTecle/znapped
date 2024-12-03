@@ -16,7 +16,7 @@ export const sendMessage = async (receiverId, content) => {
   try {
     const { data } = await axiosRes.post(`/direct-messages/`, {
       receiver: receiverId,
-      content,
+      content: content,
     });
     return data;
   } catch (error) {
@@ -25,5 +25,6 @@ export const sendMessage = async (receiverId, content) => {
 };
 
 export const markMessagesAsRead = async (messageIds) => {
+  console.log("Sent to mark messags as read:", messageIds)
   await axiosRes.patch(`/direct-messages/mark-as-read/`, { message_ids: messageIds })
 };
