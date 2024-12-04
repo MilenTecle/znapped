@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
+import { NotificationsDeleteDropdown } from '../../components/MoreDropdown';
 import { axiosReq } from "../../api/axiosDefaults";
-import { fetchMessages, markMessagesAsRead } from "../../api/messages";
+import { markMessagesAsRead } from "../../api/messages";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 
@@ -33,6 +34,18 @@ const AllMessagesPage = () => {
           msg.id === message.id ? { ...msg, read: true } : msg
         )
       )
+    }
+  };
+
+  const handleDelete = async (id) => {
+    console.log(`Handledelete triggered with ID: ${id}`)
+    try {
+      await axiosReq.delete(`/direct-messages/${id}/`)
+      console.log(`Message with ID ${id} deleted`)
+      setMessages((prevMessages) =>
+        prevMessages.filter((msg) => msg.id !== id)
+      );
+    } catch (error) {
     }
   };
 
@@ -68,6 +81,9 @@ const AllMessagesPage = () => {
                       New
                     </Badge>
                   )}
+                  <NotificationsDeleteDropdown
+                    handleDelete={() => handleDelete(message.id)}
+                  />
                 </ListGroup.Item>
               );
             })}

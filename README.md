@@ -1,7 +1,6 @@
 # Znapped
 
-The Znapped app is built using Django and is designed to help users efficiently manage their inventories and promote sustainable living. The Znapped
-app provides a user-friendly interface for creating, organizing and sharing lists of items. Each list is associated with a unique QR code for easy access and sharing.
+Znapped is a social media application built using React and Django REST Framework. It allows users to create posts, follow other users, like and comment on posts, send direct messages and manage notifications. The platform emphasizes user interaction and engagement through intuitive UI and dynamic content.
 
 The live link can be found here - [Znapped](https://znapped-972f129d36da.herokuapp.com/)
 
@@ -90,38 +89,37 @@ and user stories, a GitHub project was created, using the Kanban board method. T
 associated tasks, please see link to the project board [here](https://github.com/users/MilenTecle/projects/5). Each user story has been categorized with labels indicating its importance and relevance to the overall functionality and usability of the application.
 
 ### Site Owner Goals
-The primary goals of the Znapped app are to provide users with an efficient and user-friendly platform for organizing and managing their belongings.
-The Znapped app is also intended to promote awareness of possesions to encourage suistanable and mindful consumption.
-Main goals include optimizing inventory management, user engagement and integrating QR code functionality. Through a visually appealing and accessible interface,
-delivering a high level of user satisfaction. Using QR codes to share inventories is designed to simplify daily life and encourage sharing or exchanging of items left unused. These goals aim to create a reliable and simple application with focus usability, security and innovation.
+The primary goals for Znapped include:
+- Encouraging user interaction through posts, comments and likes.
+- Providing seamless navigation and content discovery.
+- Enabling users to communicate directly through messages.
+- Offering personalized feeds based on user activity.
 
 ## 5 planes of UX
 
 ### Strategy
-The strategy for the Znapped app centers around meeting user needs by providing an efficient and user-friendly platform for organizing belongings.
-The focus is on optimizing inventory management and creating awareness for sustainable and mindful consumption.
+Deliver a user-friendly social media app focusing on engagement and content sharing.
 
 ### Scope
-The project prioritizes essential functionality, ensuring features like user registration, login, efficient inventory creation, adding items, QR code integration and secure data handling. Future features are considered based on upcoming needs and user feedback.
+Features include posts, comments, likes, follows, notifications and messaging.
 
 ### Structure
-The app's structure includes user-friendly navigation, seamless QR code integration, and sharing features. The design emphazises on accessibility, inclusivity and
-intuitive use for a positive user experience.
+Easy navigation with clear paths to key features.
 
 ### Skeleton
-The Znapped app is designed for easy navigation with clear interface and user flows. QR code generation, inventory sharing and secure user authentication are well integrated to enhance the overall user experience.
+Intuitive layouts for all devices with responsive design.
 
 ### Surface
-The visual design of the app prioritizes clarity, accessiblity and an appealing interface. The emphasis is on creating a visually appealing and user-centric experience while maintaining focus on sustainability and awareness.
+Modern, clean visuals with emphasis on functionality.
 
 
 ## Design
 
 ### Images
-The background image on the landing page has graphic elements of various abstract shapes, which contributes to the theme of organization and categorization, aligning with the application's purpose.
+Images are dynamically rendered based on user uploads, with placeholder assets for profiles and no-content states.
 
 ### Colours
-The colours used for the website consists of a vibrant orange colour, same colour as the background image, giving the user a sense of energy and enthusiasm along with a modern website. The dark colour breaks off the orange and creates a balance throughout the website.
+A modern, neutral palette is used, ensuring high readability and accessibility.
 
 
 ### Fonts
@@ -165,10 +163,8 @@ The wireframes were produced via Balsamiq.
 ## Features
  ### Navigation
 
-- Navbar with icon that on click will redirect not logged in user back to the landing page, and a logged in user back to the inventory page.
-- Different navlinks visible for users that are not logged in and for logged in users.
-- Active link is orange instead of the default white to make it clear to the user where the user is.
-- Collapsible burger menu with drop-down function on small to medium screens.
+1. Responsive navbar with dynamic links for logged-in and logged-out users.
+2. Burger menu for smaller screens.
 
   <details open>
   <summary>Navbar not logged in</summary>
@@ -190,218 +186,51 @@ The wireframes were produced via Balsamiq.
 
 </details>
 
-### The Landing Page
+### Posts
 
-- Welcome text that explains the purpose with the application and invites the user to sign up with a call to action, or if user already has an account, to sign in instead.
-
+1. Users can create, edit, delete and view posts.
+2. Posts support text, images and hashtags.
+3. User can like post with various reactions (heart, thumbs, happy, sad and angry)
   <details open>
   <summary>Landing Page</summary>
 
   ![Landing Page](docs/readme_images/features/landing_page.png)
 </details>
 
+### Comments
+1. User can add, edit and delete comments on posts.
+2. Mentions are supported, allowing users to tag others in comments.
 
+### Profiles
+1. View other users's profiles wither their posts and follwer statistics.
+2. Follo/unfollow functionality.
+3. Profile editing, change image, password or username.
 
- ### Footer
+### Notifications
+1. Notifications for likes,  mentions, follows and messages.
+2. Mark notifications as read when clicked.
 
-- The footer contains social media links which takes the user to my LinkedIn profile and my Github repo page for the Znapped.
-- The links opens in a new tab which allows for the user to navigate easy.
-- A link to the privacy policy page that opens in a new tab.
+### Messaging
+1. Direct messaging feature for private communication.
+2. Threaded view for conversations.
 
-   <details open>
-  <summary>Footer</summary>
-
-  ![Footer](docs/readme_images/features/footer.png)
-</details>
-
- ### User Account
- - Django allauth was installed and is used for the user authentication functionality:
-  Sign up, Email verification, Log in, Remember me, Password reset, Google and Log out.
-
-  - Success messages informs the user if they have logged in or logged out successfully.
-
-  - I was planning on using Facebook as a login method as well.  I decided not to proceed with the implementation due to the complexity of adding that functionality.
-
-
-  <details open>
-  <summary>Sign up</summary>
-
-  ![Sign Up](docs/readme_images/features/sign_up.png)
-   </details>
-
-  <details open>
-  <summary>Email verification</summary>
-
-  ![Email verification](docs/readme_images/features/email_verification.png)
-  ![Confirm email](docs/readme_images/features/confirm_email.png)
-  </details>
-
-  <details open>
-  <summary>Log in</summary>
-
-  ![Log in](docs/readme_images/features/login.png)
-  </details>
-
-  <details open>
-  <summary>Remember me</summary>
-
-  ![Sign Up](docs/readme_images/features/remember_me.png)
-  </details>
-
- <details open>
-  <summary>Password reset</summary>
-
-  ![Sign Up](docs/readme_images/features/password_reset.png)
-  ![Sign Up](docs/readme_images/features/password_reset.2.png)
-   </details>
-
-
-   <details open>
-   <summary>Google</summary>
-
-  ![Sign Up](docs/readme_images/features/google_sign_in.png)
-  ![Sign Up](docs/readme_images/features/google_sign_in.2.png)
-
-
-   </details>
-
-   </details>
-
-
- <details open>
-  <summary>Log out</summary>
-
-  ![Log out](docs/readme_images/features/log_out.png)
-</details>
-
-
-## My Inventory
-1. Once logged in, the user can create an inventory list immediately. First by choosing a unique name for the inventory list. If a list name already exists, the user will get an error message. A "General" category is provided to the user, so that the user can get started quickly and add/modify categories further on. The user will then get a success message of the created inventory list, and will be redirected to the Itemsform, to add the items to the list.
-
-2. The user can add several items at once and will recieve a success message upon added items, and error messages if no items are added. The user can't save an empty list. When the user clicks on save list, the user will be redirected to the dashboard with a success message of successful save.
-
-3. The list is now saved and visible on the dashboard with number 1 appended to the list name. The next list will have the number 2 and so on. The lists will also be ordered alfabetically. The QR code-image is rendered when the list is saved, so the user can now scan the QR-code.
-
-4. The user can download the QR-code image, that will open i a new tab. The user can also share the link to the QR-code via email with a prepopulated email.
-
-5. The user can also clone a list by clicking on "clone list". There, the user can edit, delete and add items. When saved, the user will get a success message and be redirected to the dashboard where the cloned list now will be visible.
-
-6. If the user clicks on "view details" the user will get to a view where the user can click on "edit list" or "delete list". If the user clicks on delete list, the user will be prompted to confirm deletion, and a success message will render. The user will be redirected to the Itemsform if user clicks on "edit list".
-<details open>
-  <summary>Create Inventory List</summary>
-
-  ![Empty dashboard](docs/readme_images/features/dashboard.1.png)
-  ![Create inventory](docs/readme_images/features/create_inventory.png)
-</details>
-
-<details open>
-  <summary>Add Items</summary>
-
-  ![Add Items](docs/readme_images/features/add_items.png)
-</details>
-
-<details open>
-  <summary>Saved list</summary>
-
-  ![Saved list](docs/readme_images/features/saved_list.png)
-</details>
-
-<details open>
-  <summary>Scanned QR-code</summary>
-
-  ![Scanned QR-code](docs/readme_images/features/scanned_qr_code_list_owner.png)
-  ![Scanned QR-code](docs/readme_images/features/scanned_qr_code_not_list_owner.png)
-</details>
-
-<details open>
-  <summary>Download QR-code</summary>
-
-  ![Download QR-code](docs/readme_images/features/download_qr_code.png)
-</details>
-
-<details open>
-  <summary>Share QR-code</summary>
-
-  ![Share QR-code](docs/readme_images/features/share_qr_code.png)
-</details>
-
-<details open>
-  <summary>Clone list</summary>
-
-  ![Clone list](docs/readme_images/features/clone_list.png)
-  ![Clone list](docs/readme_images/features/cloned_list_view.png)
-</details>
-
-<details open>
-  <summary>Edit or delete list</summary>
-
-  ![Edit or delete list](docs/readme_images/features/edit_delete_list.png)
-  ![Edit list](docs/readme_images/features/edit_list.png)
-  ![Delete list](docs/readme_images/features/delete_list.png)
-</details>
-
-## Categories
-- The user can create categories, also with unique names to prevent duplicates. The user will get an error message if a category already exists.
-- When saved, the category will be visible on the category page.
-- The user can edit a category by using inline editing so that the user can stay on the page, and a save button will appear. When saved, user will get a success message.
-- The user can delete a category. If the user wants to delete a category the user needs to confirm deletion. The user will get a success message after deletion.
-
-<details open>
-  <summary>Add Categories</summary>
-
-  ![Add Categories](docs/readme_images/features/add_categories.png)
-  ![Add Categories](docs/readme_images/features/add_categories.2.png)
-  ![Add Categories](docs/readme_images/features/category_added.png)
-</details>
-
-<details open>
-  <summary>Edit or delete categories</summary>
-
-  ![Edit categories](docs/readme_images/features/edit_category.png)
-  ![Delete categories](docs/readme_images/features/delete_category.png)
-</details>
-
-
-## Contact
-- All fields in the contact form are mandatory. The user will get a success messages after submitting the form.
-- The user will get an automated email to their email after the submission.
-- Admin will get a notification to their email of a new submission from the sender, so that admin can get a notification without manually needing to log in to the admin panel.
-
-<details open>
-  <summary>Contact form</summary>
-
-  ![Contact form](docs/readme_images/features/contact_form.png)
-</details>
-
-<details open>
-  <summary>Automated email</summary>
-
-  ![Automated email to sender](docs/readme_images/features/automated_email_to_sender.png)
-  ![Automated email to admin](docs/readme_images/features/automated_email_to_admin.png)
-</details>
+### Authentication
+1. Token-basen authentication with auto-refresh.
 
 
 ### Features left to implement
-  - When a user shares an inventory list, the user can choose to share permission, only read permisson or edit and/or delete permission.
-  - When a user wants to clone the orignial list again, the user will get an error message saying "The invenontory has already been cloned". I've added that as a solution to not violate the unique name constraint. In the future, I would like to implement so that
-  an incrementing number, starting from 1 is appended after the word "cloned" to get around this problem.
-  - Create a view on the landing page so that non registered users can see a QR code containing an example list. The share and download links are disabled so that the user can see what features are available for a registered user.
-  - Let the user choose to have public or private lists so that other users can copy another users list.
-  - Implement a search bar, so the user can search for inventories if there are many inventory lists.
-  - Implement pagination in case of many inventory lists, in particular on mobile view.
-  - To change my emailaddress to a more generic emailaddress in the application.
 
 
 ## CRUD
 CRUD functionality is included in the above features.
 
-**Create**: An authenticated user can create and save an inventory list, items and categories.
+**Create**: An authenticated user can create posts.
 
-**Read**: A user can read the content of their own inventory lists.
+**Read**: A user can read the content of their own feed and messages.
 
-**Update** An authenticated user can edit and update their inventory lists as well as categories.
+**Update** An authenticated user can edit and update their posts, comments and user details.
 
-**Delete**: An authenticated user can delete their own items, categories and inventory lists.
+**Delete**: An authenticated user can delete their own posts, comments.
 
 
 ## Database Design
@@ -414,31 +243,6 @@ The entity relationship diagram provided is the first draft and does not include
 
   ![Database schema](docs/readme_images/database_schema.png)
 </details>
-
-#### User Model (AllAuth)
-Django AllAuth was used for the user authentication. The user model handles authentication and representes users in the system. Its function is to store information about users, allowing them to log in and manage their data.
-
-Relationship:
-
-One-to-may relationship with the Inventory Model: One user can have multiple inventories.
-
-#### Inventory Model
-The inventory model is managing collections of items. Its function is to organize and store information about inventories created by users. Each inventory is associated with a specific user and can include multiple items. The QR-code image is associated with the inventory.
-
-Relationships:
-
-Many-to-one relationship with the User Model: Many inventories can belong to one user.
-
-One-to-many relationship with the Items Model: One inventory can have multiple items.
-
-Many-to-one relationship with the Category Model: Many inventories can belong to one category.
-
-#### Category Model
-Its function is to categorize the inventories. The category model also includes a user field. Categories that was added by other users would be seen by everyone, and that's why I hade to add a user field to link the category to the user. I also choose not to delete the inventory list if a category is deleted. That gives the user the option to change category or delete a list by them self.
-
-Relationship:
-
-Many-to-one relationsship with the Inventory Model: Once category can be associated with multiple inventories.
 
 
 
@@ -453,9 +257,6 @@ If empty or incorrect data is added to a form, the form won't submit. An error w
 ### User Authentication
 Limits access for non-registred users and permission control so that only the owner of a list can edit and delete a list when shared with others.
 
-### Database Security
-- All passwords, API keys, ID:s and the database url are stored in the env.py file to ensure that sensitive information is not shared, along with env.py being listed in the gitignore file.
-- CSRF tokens are used on all forms throughout the application.
 
 ## Technologies & Languages used
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/MoreDropdown.module.css";
+import { NotificationsDeleteDropdown } from '../../components/MoreDropdown';
 import { axiosReq } from "../../api/axiosDefaults";
 import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
@@ -25,6 +26,19 @@ const DisplayNotifications = () => {
     fetchNotifications();
   }, []);
 
+  const handleDelete = async (id) => {
+    console.log(`Handledelete triggered with ID: ${id}`)
+    try {
+      await axiosReq.delete(`/notifications/${id}/`)
+      console.log(`Notification with ID ${id} deleted`)
+      setNotifications((prevNotifications) =>
+        prevNotifications.filter((n) => n.id)
+      );
+    } catch (error) {
+    }
+  };
+
+
   return (
     <div>
       <h1>Your Notifications</h1>
@@ -39,16 +53,19 @@ const DisplayNotifications = () => {
                 {notification.message}
               </a>
               <small className="text-muted">
-                  {notification.created_at}
-                </small>
+                {notification.created_at}
+              </small>
               {!notification.read && (
                 <Badge bg="primary" pill>
                   New
                 </Badge>
               )}
-              </ListGroup.Item>
+              <NotificationsDeleteDropdown
+                handleDelete={() => handleDelete(notification.id)}
+              />
+            </ListGroup.Item>
           ))}
-          </ListGroup>
+        </ListGroup>
       ) : (
         <p>No notifications</p>
       )}

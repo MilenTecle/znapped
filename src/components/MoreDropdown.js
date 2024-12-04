@@ -44,6 +44,29 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   );
 };
 
+
+export const NotificationsDeleteDropdown = ({ handleDelete }) => {
+  return (
+    <Dropdown className="ml-auto" drop="left">
+      <Dropdown.Toggle as={ThreeDots} />
+
+      <Dropdown.Menu
+        className="text-center"
+        popperConfig={{ strategy: "fixed" }}
+      >
+        <Dropdown.Item
+          className={styles.DropdownItem}
+          onClick={handleDelete}
+          aria-label="delete"
+        >
+          <i className="fas fa-trash-alt" />
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  );
+};
+
+
 export const ProfileEditDropdown = ({ id }) => {
   const history = useHistory();
   return (
@@ -61,15 +84,15 @@ export const ProfileEditDropdown = ({ id }) => {
           aria-label="edit-username"
         >
           <i className="far fa-id-card" />
-            change username
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => history.push(`/profiles/${id}/edit/password`)}
-            aria-label="edit-password"
+          change username
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => history.push(`/profiles/${id}/edit/password`)}
+          aria-label="edit-password"
         >
           <i className="fas fa-key" />
-            change password
-          </Dropdown.Item>
+          change password
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
