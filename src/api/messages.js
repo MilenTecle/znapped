@@ -7,7 +7,6 @@ export const fetchMessages = async (id = null) => {
     const response = await axiosReq.get(url);
     return response.data;
   } catch (error) {
-    console.log("Error in fetchMessages:", error.response || error.message || error)
     return { results: [] };
   }
 };
@@ -20,11 +19,9 @@ export const sendMessage = async (receiverId, content) => {
     });
     return data;
   } catch (error) {
-    console.log("Error in SendMessage:", error.response?.data || error.message)
   }
 };
 
 export const markMessagesAsRead = async (messageIds) => {
-  console.log("Sent to mark messags as read:", messageIds)
   await axiosRes.patch(`/direct-messages/mark-as-read/`, { message_ids: messageIds })
 };

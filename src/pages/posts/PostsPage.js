@@ -36,7 +36,6 @@ function PostsPage({ message, filter = "" }) {
         const queryParam = query ? `search=${query}&` : "";
         const hashtagParam = hashtag ? `hashtags__name=${hashtag}&` : "";
         const { data } = await axiosReq.get(`/posts/?${filter}${queryParam}${hashtagParam}`);
-        console.log("API response:", data)
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {

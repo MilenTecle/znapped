@@ -10,7 +10,6 @@ export const useRedirect = (userAuthStatus) => {
       const refreshTokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
 
       if (!refreshTokenTimestamp) {
-        console.log("No refresh token found");
         if (userAuthStatus === 'loggedOut') {
           history.push('/signin')
         }

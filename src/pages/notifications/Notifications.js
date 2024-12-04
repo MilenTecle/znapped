@@ -20,7 +20,6 @@ const DisplayNotifications = () => {
         setNotifications(generalNotifications);
         await axiosReq.patch("/notifications/mark-as-read/")
       } catch (error) {
-        console.log("Error fetching notifications:", error)
       }
     };
     fetchNotifications();

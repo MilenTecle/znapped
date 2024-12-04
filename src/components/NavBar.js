@@ -17,7 +17,7 @@ import NotificationDropdown from "./NotificationDropdown";
 import MessageDropdown from "./MessageDropdown";
 import { useHistory } from "react-router";
 
-const NavBar = ( {mobile} ) => {
+const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
   const history = useHistory();

@@ -44,7 +44,6 @@ const MessageDropdown = () => {
           setMessages(messageNotifications)
           setUnreadCount(unreadMessages.length)
         } catch (error) {
-          console.log("Error fetching messages:", error);
         }
     };
     loadMessages();

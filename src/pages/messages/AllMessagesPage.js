@@ -19,7 +19,6 @@ const AllMessagesPage = () => {
         const { data } = await axiosReq.get("/direct-messages/");
         setMessages(data.results);
       } catch (error) {
-        console.log("Error fetching messages:", error);
       }
     };
 

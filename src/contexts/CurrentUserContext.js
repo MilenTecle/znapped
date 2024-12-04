@@ -17,15 +17,12 @@ export const CurrentUserProvider = ({ children }) => {
   const handleMount = async () => {
     const refreshTokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
     if (!refreshTokenTimestamp) {
-      console.log("No refresh token found");
       return;
     }
     try {
       const { data } = await axiosRes.get("dj-rest-auth/user/");
       setCurrentUser(data);
-      console.log("Current user data", data)
     } catch (err) {
-      console.error("Error fetching current user:", err.response?.data || err.message);
     }
   };
 

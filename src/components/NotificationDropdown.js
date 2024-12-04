@@ -45,7 +45,6 @@ const NotificationDropdown = () => {
           setNotifications(generalNotifications);
           setUnreadCount(unread);
         } catch (error) {
-          console.log("Error fetching notifications:", error.response || error)
         }
     };
     fetchNotifications();
@@ -62,7 +61,6 @@ const NotificationDropdown = () => {
         );
       }
     } catch (error) {
-      console.log("Error marking notificaitons as read:", error)
     }
   };
 

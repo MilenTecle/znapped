@@ -12,7 +12,6 @@ import Button from "react-bootstrap/Button";
 
 const DisplayMessages = () => {
   const { id } = useParams();
-  console.log("UseParams Id:", id)
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const currentUser = useCurrentUser();
@@ -26,7 +25,6 @@ const DisplayMessages = () => {
         const data = await fetchMessages(id);
         setMessages(data.results.reverse());
       } catch (error) {
-        console.log("Error loading messages:", error)
       }
     };
     retrieveMessages();
@@ -48,7 +46,6 @@ const DisplayMessages = () => {
       setMessages((prevMessages) => [...prevMessages, message]);
       setNewMessage("");
     } catch (error) {
-      console.log("Error sending message", error)
     }
   };
 
