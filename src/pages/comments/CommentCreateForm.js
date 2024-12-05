@@ -36,11 +36,8 @@ function CommentCreateForm(props) {
     fetchProfiles();
   }, []);
 
-  const handleContentChange = (event, newValue, plainTextValue) => {
-    setContent(plainTextValue);
-
-    const mentions = plainTextValue.match(/@\w+/g) || [];
-    setMentionUsernames(mentions.map((mention) => mention.slice(1)));
+  const handleContentChange = (event) => {
+    setContent(event.target.value);
   };
 
   const handleChange = (event) => {
@@ -57,11 +54,14 @@ function CommentCreateForm(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const extractMentions = [...new Set((content.match(/@(\w+)/g) || []).map(m => m.slice(1)))]
+    console.log("Extraced mentions", extractMentions)
     try {
       const { data } = await axiosRes.post("/comments/", {
         content,
         post,
-        mention_usernames: mentionUsernames,
+        mention_usernames: extractMentions,
       });
       setComments((prevComments) => ({
         ...prevComments,
@@ -99,7 +99,7 @@ function CommentCreateForm(props) {
             <Mention
               trigger="@"
               data={users}
-              markup="@{{__display__}}"
+              markup="@__display__"
               displayTransform={(id, display) => `@${display}`}
               className={styles.CommentMention}
             />

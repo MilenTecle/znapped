@@ -15,7 +15,7 @@ const DisplayNotifications = () => {
         const { data } = await axiosReq.get("/notifications/");
 
         const generalNotifications = data.results.filter(
-          (notification) => notification.type !== "message"
+          (notification) => notification.type === "mention" || notification.type !== "message"
         );
 
         setNotifications(generalNotifications);
@@ -32,7 +32,7 @@ const DisplayNotifications = () => {
       await axiosReq.delete(`/notifications/${id}/`)
       console.log(`Notification with ID ${id} deleted`)
       setNotifications((prevNotifications) =>
-        prevNotifications.filter((n) => n.id)
+        prevNotifications.filter((n) => n.id !== id)
       );
     } catch (error) {
     }
@@ -44,27 +44,35 @@ const DisplayNotifications = () => {
       <h1>Your Notifications</h1>
       {notifications.length ? (
         <ListGroup variant="flush">
-          {notifications.map((notification) => (
-            <ListGroup.Item
-              key={notification.id}
-              className="d-flex justify-content-between align-items-center"
-            >
-              <a href={notification.post_id ? `/posts/${notification.post_id}` : "#"}>
-                {notification.message}
-              </a>
-              <small className="text-muted">
-                {notification.created_at}
-              </small>
-              {!notification.read && (
-                <Badge bg="primary" pill>
-                  New
-                </Badge>
-              )}
-              <NotificationsDeleteDropdown
-                handleDelete={() => handleDelete(notification.id)}
-              />
-            </ListGroup.Item>
-          ))}
+          {notifications.map((notification) => {
+            const href =
+              notification.type === "follow"
+                ? `/profiles/${notification.sender_profile_id}/`
+                : notification.type === "mention" && notification.post_id
+                ? `/posts/${notification.post_id}/`
+                : "#";
+            return (
+              <ListGroup.Item
+                key={notification.id}
+                className="d-flex justify-content-between align-items-center"
+              >
+                <a href={href}>
+                  {notification.message}
+                </a>
+                <small className="text-muted">
+                  {notification.created_at}
+                </small>
+                {!notification.read && (
+                  <Badge bg="primary" pill>
+                    New
+                  </Badge>
+                )}
+                <NotificationsDeleteDropdown
+                  handleDelete={() => handleDelete(notification.id)}
+                />
+              </ListGroup.Item>
+            );
+          })}
         </ListGroup>
       ) : (
         <p>No notifications</p>
