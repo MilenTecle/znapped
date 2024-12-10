@@ -1,8 +1,12 @@
 # Znapped
 
-Znapped is a social media application built using React and Django REST Framework. It allows users to create posts, follow other users, like and comment on posts, send direct messages and manage notifications. The platform emphasizes user interaction and engagement through intuitive UI and dynamic content.
+Znapped is a social media application built using React.js for the frontend and Django REST Framework for the backend. It allows users to create posts, follow other users, like and comment on posts, send direct messages and manage notifications. The platform emphasizes user interaction and engagement through intuitive UI and dynamic content.
 
-The live link can be found here - [Znapped](https://znapped-972f129d36da.herokuapp.com/)
+Live Links
+- Frontend live Site: [Znapped](https://znapped-972f129d36da.herokuapp.com/)
+- Backend live API: []
+
+Backend repository: []
 
 ![Znapped Am I Responsive Image](docs/readme_images/am_i_responsive.png)
 
@@ -48,39 +52,57 @@ The live link can be found here - [Znapped](https://znapped-972f129d36da.herokua
 ## UX/UI
 ## User Stories
 
-### User Profile
-- As a Site User, I can create an account so that I can start managing my inventories.
-- As a Site user, I can verify my account via the verification link sent to my email upon registration.
-- As a Site User, I can login to my account so that I can access my existing inventories.
-- As a Site User, I can login via Google so that I have several login options.
+### Navigation & Authentication
+- Navbar: As a user, I can access a navigation bar on every page so I can easily browse between different sections of the app.
+- Seamless Navigation: As a user, I can navigate between pages without refreshing so that I experience fast and smooth transitions.
+- Sign Up: As a user, I can create an account so that I can access features available only to registered users.
+- Sign In: As a user, I can log into my account so that I can use the functionality available to logged-in users.
+- Logged-in Status: As a user, I can easily tell whether I am logged in or not so that I know when I need to sign in.
+- Token Refresh: As a logged-in user, I can stay logged in until I choose to log out so that my session is maintained without interruptions.
+- Conditional Navbar: As a logged-out user, I can see sign-in and sign-up options in the navbar so that I can access my account or create a new one.
 
-### User Navigation
-- As a Site User I can navigate easily through the site due to a responsive navbar so that I understand where to go and it is always visible to me.
-- As a Site User, I can see my lists in a dropdown list from the navigation bar, so that I can navigate to my lists easily.
-- As a Site User I can click on the social media links so that I can explore the work of the developer and see the developers profile.
 
-### User Feedback
-- As a Site User, I can receive feedback whenever I make an action, so that I know if my action was successful or not.
+### Post Interaction (Comments, Likes, Edit)
+- Post Comments: As a user, I can read comments on a post so that I can engage with the community’s thoughts on the content.
+- Add Comments: As a logged-in user, I can comment on posts so that I can share my opinions or reactions.
+- Like Notifications: As a user, I will receive notifications when someone likes my post so that I know when my content is appreciated.
+- Comment Notifications: As a user, I will receive notifications when someone comments on my post so that I stay informed about new interactions.
+- Edit Posts: As a post owner, I can edit the title or description of my post so that I can update or correct content after posting.
+- Delete/Modify Comments: As a comment owner, I can delete or edit my comments so that I can control the content I’ve shared.
 
-### Create Inventories
-- As a Site User, I can create unique inventory lists so that I can't create inventory lists with the same name.
-- As a Site User, I can create an inventory list and add multiple items at once, so that I can organize my belongings efficiently.
 
-### Manage Inventories
-- As a Site User, I can generate a QR code for my inventory so that I can identify my belongings easily.
-- As a Site User, I can scan the QR code so that I can see my inventory list immediately.
-- As a Site User, I can share my inventory with others using the generated QR code so that I can provide a visual and efficient view of the contents of my Inventory to others.
-- As a Site User I can clone my lists so that I can reuse a list and just modify it.
-- As a Site User, I can see numbers next to the inventory list name so that I can find boxes with an qr code easily if I have many boxes.
+### The Feed on homepage
+- View Recent Posts: As a user, I can see the latest posts ordered by the most recent so that I stay up to date with new content.
+- Search Posts: As a user, I can search for posts by keywords so that I can quickly find posts and user profiles that interest me.
+- Liked Posts: As a logged-in user, I can view a collection of posts I’ve liked so that I can easily revisit content I enjoy.
+- Followed Users' Posts: As a logged-in user, I can see posts from users I follow so that I can keep track of their updates.
+- As a user, I can see a list of the most popular profiles so that I can see which profiles are the most popular.
 
-### Contact Form
-- As a Site User, I can make contact through a contact form, so that I can ask questions, report issues or make suggestions.
 
-### Site Administration
-- As a Site owner I can log in to the admin dashboard using my username and password so that I can access the functionalities of the superuser.
-- As a Site owner I can view a list of all inventory items so that I can edit, delete or add items, inventories and categories.
-- As a Site Owner I can download the QR codes for each inventory so that I can share the QR code with team members.
-- As a Site owner I can receive messages submitted through the form so that I can respond to the messages.
+### User profiles & Profile page
+- Profile Pages: As a user, I can view profiles of other users so that I can learn more about them and their posts.
+- View All Posts by a User: As a user, I can see all the posts by a specific user so that I can explore their content or catch up on their latest updates.
+- Edit Profile: As a logged-in user, I can edit my profile picture, bio, and other details so that I can personalize my account.
+- Update Username & Password: As a logged-in user, I can change my username and password so that I can maintain account security.
+- Profile image: As a user, I can see avatars of other users so that I can easily identify them on the platform.
+- Infinite Scroll: As a user, I can scroll through posts continuously without having to click on next pages so that browsing is more convenient.
+
+
+### Follows
+- Follow/Unfollow: As a logged-in user, I can follow or unfollow users so that I can manage whose content appears in my feed.
+- New Follower Notification: As a user, I will receive a notification when someone starts following me so that I can stay informed about new connections.
+
+### Hashtags & tags
+- Hashtag Posts: As a user, I can add hashtags to my posts so that they can be categorized and discovered by other users.
+- Search by Hashtags: As a user, I can search for posts using hashtags so that I can find content related to specific topics or themes.
+- Tagging users: As a user, I can tag or mention another users in posts or comments for direct interaction/attention with a specific user.
+
+### Direct Messages
+- As a user, I can send a message directly to a user so that we can have separate conversation.
+
+
+### Final Touches
+- As a product owner, I want the application to be fully polished, tested, and documented so that it is ready for deployment and provides a seamless experience for users.
 
 
 ## Agile
@@ -132,33 +154,58 @@ The wireframes were produced via Balsamiq.
 <details>
   <summary>Landing Page</summary>
 
-  ![Landing Page](docs/wireframes/landing_page.png)
+  ![Landing Page](src/assets/wireframes/Landing-page.png)
 </details>
 
 <details>
-  <summary>Logged In</summary>
+  <summary>Sign up</summary>
 
-  ![Logged In](docs/wireframes/logged_in.png)
+  ![Sign up](src/assets/wireframes/Sign-up.png)
 </details>
 
 <details>
-  <summary>My Inventory</summary>
+  <summary>Home</summary>
 
-  ![My Inventory](docs/wireframes/my_inventory.png)
+  ![Home](src/assets/wireframes/Home.png)
 </details>
 
 <details>
-  <summary>Contact Form</summary>
+  <summary>Create Post</summary>
 
-  ![Contact Form](docs/wireframes/contact_form.png)
+  ![Create Post](src/assets/wireframes/Add-post.png)
 </details>
 
 
 <details>
-  <summary>Mobile</summary>
+  <summary>Liked</summary>
 
-  ![Contact Form](docs/wireframes/mobile.png)
+  ![Liked](src/assets/wireframes/Liked.png)
 </details>
+
+<details>
+  <summary>Profile</summary>
+
+  ![Profile](src/assets/wireframes/Profile.png)
+</details>
+
+<details>
+  <summary>Notifications Page</summary>
+
+  ![Notification page](src/assets/wireframes/Notifications-page.png)
+</details>
+
+<details>
+  <summary>Message Page</summary>
+
+  ![Notification page](src/assets/wireframes/Message-page.png)
+</details>
+
+<details>
+  <summary>Direct Message conversation</summary>
+
+  ![Direct Message](src/assets/wireframes/Direct-message-conversation.png)
+</details>
+
 
 ## Features
  ### Navigation
