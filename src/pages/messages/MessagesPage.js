@@ -11,18 +11,21 @@ import Button from "react-bootstrap/Button";
 
 
 const DisplayMessages = () => {
-  const { id } = useParams();
+  const { id } = useParams();   // Get the user ID from the URL
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const currentUser = useCurrentUser();
 
   useEffect(() => {
+    // Fetch all messages with the selected user
     const retrieveMessages = async () => {
       if (!id) {
         return;
       }
       try {
+        // API call to fetch messages
         const data = await fetchMessages(id);
+        // Reverse messages for ordering
         setMessages(data.results.reverse());
       } catch (error) {
       }
@@ -30,6 +33,7 @@ const DisplayMessages = () => {
     retrieveMessages();
   }, [id]);
 
+  // Determine the name of the other user in the conversation
   const username =
     messages.length > 0
       ? currentUser?.pk === messages[0].sender
@@ -37,12 +41,15 @@ const DisplayMessages = () => {
         : messages[0].sender_name
       : `User ${id}`;
 
+  // Handling sending a new message
   const handleSendMessage = async () => {
     if (!newMessage.trim()) {
-      return;
+      return; // Prevent sending empty messages
     }
     try {
+      // API call to send message
       const message = await sendMessage(id, newMessage);
+      // Add new message to state
       setMessages((prevMessages) => [...prevMessages, message]);
       setNewMessage("");
     } catch (error) {
@@ -53,6 +60,7 @@ const DisplayMessages = () => {
     <Container>
       <h1 className="text-center my-4">Conversation with {username}</h1>
       <div className="overflow-auto mb-4">
+        {/* Loop through and display all messages */}
         {messages.map((message) =>
           message && message.sender_name ? (
             <Row
@@ -71,6 +79,7 @@ const DisplayMessages = () => {
                   }
                 >
                   <Card.Body>
+                    {/* Display message sender and content */}
                     <strong>{message.sender_name}:</strong> {message.content}
                   </Card.Body>
                 </Card>

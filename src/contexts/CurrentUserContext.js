@@ -10,10 +10,20 @@ export const SetCurrentUserContext = createContext();
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
+/**
+ * CurrentUserProvider provides the current user context and handles token
+ * management for user authentication.
+ * It manages the user login state, refreshes tokens when needed, and logs the
+ * user out on token expiration.
+ */
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
 
+  /**
+   * Checks if the refresh token exists in localStorage.
+   * If present, fetches the current user's data from the API.
+   */
   const handleMount = async () => {
     const refreshTokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
     if (!refreshTokenTimestamp) {
@@ -30,15 +40,19 @@ export const CurrentUserProvider = ({ children }) => {
     handleMount();
   }, []);
 
+  /**
+   * Intercepts outgoing requests to check token validity and refresh the
+   * access token if needed.
+   */
   useMemo(() => {
     axiosReq.interceptors.request.use(
       async (config) => {
         const refreshTokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
-
+        // Exit if no token timestamp exists
         if (!refreshTokenTimestamp) {
           return config;
         }
-
+        // Refresh token if needed
         if (shouldRefreshToken()) {
           try {
             const { data } = await axios.post("/dj-rest-auth/token/refresh/");
@@ -58,12 +72,16 @@ export const CurrentUserProvider = ({ children }) => {
       }
     );
 
+    /**
+     * Handles unauthorized responses(401). Refreshes
+     * token or logs out the user.
+     */
     axiosRes.interceptors.response.use(
       (response) => response,
       async (err) => {
         if (err.response?.status === 401) {
           const refreshTokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
-
+          // Log out user if no refresh token exists
           if (!refreshTokenTimestamp) {
             setCurrentUser(null);
             history.push("/signin");
@@ -71,6 +89,7 @@ export const CurrentUserProvider = ({ children }) => {
           }
 
           try {
+            // Refresh the token
             const { data } = await axios.post("/dj-rest-auth/token/refresh/");
             setTokenTimestamp(data);
             err.config.headers.Authorization = `Bearer ${data.access}`;

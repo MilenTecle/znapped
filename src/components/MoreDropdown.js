@@ -16,6 +16,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   />
 ));
 
+// Provides edit and delete options for posts and comments
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   return (
     <Dropdown className="ml-auto" drop="left">
@@ -44,6 +45,7 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   );
 };
 
+// Custom "Three Dots" icon for delete option for messages and notifications.
 
 export const NotificationsDeleteDropdown = ({ handleDelete }) => {
   return (
@@ -66,7 +68,7 @@ export const NotificationsDeleteDropdown = ({ handleDelete }) => {
   );
 };
 
-
+// Custom "Three Dots" icon to edit the Profile"
 export const ProfileEditDropdown = ({ id }) => {
   const history = useHistory();
   return (

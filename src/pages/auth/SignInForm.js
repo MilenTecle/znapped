@@ -22,6 +22,7 @@ function SignInForm() {
   const setCurrentUser = useSetCurrentUser();
   useRedirect('loggedIn')
 
+// State to store user input for sign-in
   const [signInData, setSignInData] = useState({
     username: "",
     password: "",
@@ -31,19 +32,27 @@ function SignInForm() {
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
+  /**
+   * Handles form submission, sends user credentials to the backend for
+   * authentication.
+   * sets the current state user context, and redirects user on sucess.
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
+        // Send sign-in data to the API
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
-      setTokenTimestamp(data);
+      setTokenTimestamp(data); // Save token timestamp
       history.goBack();
     } catch (err) {
       setErrors(err.response?.data);
     }
   };
-
+  /**
+   * Updates the stae when the user types into the form fields.
+   */
   const handleChange = (event) => {
     setSignInData({
       ...signInData,

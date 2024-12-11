@@ -10,15 +10,20 @@ const DisplayNotifications = () => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
+    // Fetch notificatins when the component mounts
     const fetchNotifications = async () => {
       try {
+        // Make a GET request to retrieve all notifications
         const { data } = await axiosReq.get("/notifications/");
-
+        // Filter out general notifications, excluding messages
         const generalNotifications = data.results.filter(
           (notification) => notification.type === "mention" || notification.type !== "message"
         );
 
+        // Update state with filtered notifications
         setNotifications(generalNotifications);
+
+        // Mark notifications as read using a PATCH request
         await axiosReq.patch("/notifications/mark-as-read/")
       } catch (error) {
       }
@@ -26,11 +31,15 @@ const DisplayNotifications = () => {
     fetchNotifications();
   }, []);
 
+  // Handles deletion of notifications
   const handleDelete = async (id) => {
     console.log(`Handledelete triggered with ID: ${id}`)
     try {
+      // Make a DELETE request to remove the specific notification
       await axiosReq.delete(`/notifications/${id}/`)
       console.log(`Notification with ID ${id} deleted`)
+
+      // Update state by filtering out the deleted notification
       setNotifications((prevNotifications) =>
         prevNotifications.filter((n) => n.id !== id)
       );
@@ -44,7 +53,9 @@ const DisplayNotifications = () => {
       <h1>Your Notifications</h1>
       {notifications.length ? (
         <ListGroup variant="flush">
+            {/* Map through the list of notifications */}
           {notifications.map((notification) => {
+            // Determine the link destination based on notification type
             const href =
               notification.type === "follow"
                 ? `/profiles/${notification.sender_profile_id}/`
@@ -62,6 +73,7 @@ const DisplayNotifications = () => {
                 <small className="text-muted">
                   {notification.created_at}
                 </small>
+                {/* Display a badge "new" for undread notifications */}
                 {!notification.read && (
                   <Badge bg="primary" pill>
                     New

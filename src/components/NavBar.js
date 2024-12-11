@@ -17,6 +17,9 @@ import NotificationDropdown from "./NotificationDropdown";
 import MessageDropdown from "./MessageDropdown";
 import { useHistory } from "react-router";
 
+/**
+ * Renders a navigation bar with links for logged-in and logged-out users.
+ */
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
@@ -24,6 +27,10 @@ const NavBar = () => {
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
+  /**
+   * Handles user sign-out, resets current user, and redirects
+   * to sign-in page.
+   */
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");

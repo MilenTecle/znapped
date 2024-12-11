@@ -13,6 +13,7 @@ Backend repository: []
 ## Contents
 
 - [UI/UX](#)
+    - [Project Sections](#project-sections)
     - [User Stories](#user-stories)
     - [Agile](#agile)
     - [Site Owner Goals](#site-owner-goals)
@@ -50,6 +51,14 @@ Backend repository: []
 
 
 ## UX/UI
+
+## Project Sections
+The frontend is built using React.js and includes:
+- User Authentication (Sign Up, Sign In, Token Management)
+- CRUD Features: Create, read, update, delete posts, comments, messages and notifications.
+- Notifications: Interactive notficications for likes, messages and followers.
+- Responsive Design: The app is fully optimized for all screen sizes.
+
 ## User Stories
 
 ### Navigation & Authentication
@@ -208,7 +217,12 @@ The wireframes were produced via Balsamiq.
 
 
 ## Features
- ### Navigation
+### Authentication
+1. User registration and login.
+2. Logged-in status management.
+3. Token-basen authentication with auto-refresh.
+
+### Navigation
 
 1. Responsive navbar with dynamic links for logged-in and logged-out users.
 2. Burger menu for smaller screens.
@@ -238,11 +252,14 @@ The wireframes were produced via Balsamiq.
 1. Users can create, edit, delete and view posts.
 2. Posts support text, images and hashtags.
 3. User can like post with various reactions (heart, thumbs, happy, sad and angry)
+4. Users can view all posts with infinite scrolling.
+
   <details open>
   <summary>Landing Page</summary>
 
   ![Landing Page](docs/readme_images/features/landing_page.png)
 </details>
+
 
 ### Comments
 1. User can add, edit and delete comments on posts.
@@ -256,16 +273,19 @@ The wireframes were produced via Balsamiq.
 ### Notifications
 1. Notifications for likes,  mentions, follows and messages.
 2. Mark notifications as read when clicked.
+3. Delete notifications in the NotificaionList.
 
 ### Messaging
 1. Direct messaging feature for private communication.
 2. Threaded view for conversations.
+3. Delete messages in the MessageList.
 
-### Authentication
-1. Token-basen authentication with auto-refresh.
 
 
 ### Features left to implement
+1. Add video upload functionality for posts. I was planning on implementing that but I had to leave it out due to time constraints.
+2. Implement user mentions for post captions. I was planning on implementing this as well but I hade to leave this out as well due to time constraints.
+3. Instant reply functionality in messages. I didn't have time to implement this but for the future I'm planning to add this as well.
 
 
 ## CRUD
@@ -277,7 +297,7 @@ CRUD functionality is included in the above features.
 
 **Update** An authenticated user can edit and update their posts, comments and user details.
 
-**Delete**: An authenticated user can delete their own posts, comments.
+**Delete**: An authenticated user can delete their own posts, comments, notifications and messages.
 
 
 ## Database Design
@@ -296,21 +316,12 @@ The entity relationship diagram provided is the first draft and does not include
 ## Testing
 Testing and the results can be found [here](/TESTING.md).
 
-## Security Features
-
-### Form Validation
-If empty or incorrect data is added to a form, the form won't submit. An error will arise, informing the user what field caused the error.
-
-### User Authentication
-Limits access for non-registred users and permission control so that only the owner of a list can edit and delete a list when shared with others.
-
 
 ## Technologies & Languages used
 
   - HTML5
   - CSS
   - Javascript
-  - Python
 
   - [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/) - Was used throughout the project to make changes and to test the responsivness.
   - [Django](https://docs.djangoproject.com/en/5.0/) - Main python framework for development of this project.

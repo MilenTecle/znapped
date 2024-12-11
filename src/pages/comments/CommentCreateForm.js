@@ -10,13 +10,19 @@ import { axiosRes } from "../../api/axiosDefaults";
 import { axiosReq } from "../../api/axiosDefaults";
 import { Mention, MentionsInput } from "react-mentions";
 
-
+/**
+ * CommentCreateForm allows users to create new comments for a specific post.
+ * Users can mention other users, using @.
+ */
 function CommentCreateForm(props) {
   const { post, setPost, setComments, profileImage, profile_id } = props;
   const [content, setContent] = useState("");
   const [mentionUsernames, setMentionUsernames] = useState([]);
   const [users, setUsers] = useState([]);
 
+  /**
+   * Fetch user profiles when the component mounts.
+   */
   useEffect(() => {
     const fetchProfiles = async () => {
       try {
@@ -36,6 +42,7 @@ function CommentCreateForm(props) {
     fetchProfiles();
   }, []);
 
+  // Updates the comment content as the user types.
   const handleContentChange = (event) => {
     setContent(event.target.value);
   };
@@ -51,22 +58,28 @@ function CommentCreateForm(props) {
     };
   };
 
-
+  /**
+   * Submits the comment to the backend and updates the comments list,
+   * and post's comment count.
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Extract mentions from content using regular expression
     const extractMentions = [...new Set((content.match(/@(\w+)/g) || []).map(m => m.slice(1)))]
     console.log("Extraced mentions", extractMentions)
     try {
       const { data } = await axiosRes.post("/comments/", {
         content,
         post,
-        mention_usernames: extractMentions,
+        mention_usernames: extractMentions, // Include mentioned usernames
       });
+      // Update the comments lists
       setComments((prevComments) => ({
         ...prevComments,
         results: [data, ...prevComments.results],
       }));
+      // Update the post's comment count
       setPost((prevPost) => ({
         results: [
           {
@@ -96,6 +109,7 @@ function CommentCreateForm(props) {
             placeholder="Type @ for mentions"
             rows={2}
           >
+            {/* Mention component for displaying user suggestions */}
             <Mention
               trigger="@"
               data={users}

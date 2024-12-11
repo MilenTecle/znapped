@@ -17,6 +17,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 
 const SignUpForm = () => {
   useRedirect('loggedIn')
+  // State for user input during sign-up
   const [signUpData, setSignUpData] = useState({
     username: "",
     password1: "",
@@ -28,6 +29,9 @@ const SignUpForm = () => {
 
   const history = useHistory();
 
+  /**
+   * Updates the form data state as the user types into the input fields.
+   */
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
@@ -35,6 +39,10 @@ const SignUpForm = () => {
     });
   };
 
+  /**
+   * Sumbits the sign-up form data to the backend for user registration.
+   * Redirects the user to the sign-in page on success.
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

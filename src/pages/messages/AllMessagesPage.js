@@ -14,6 +14,7 @@ const AllMessagesPage = () => {
   const [messages, setMessages] = useState([]);
   const currentUser = useCurrentUser;
 
+  // Fetch all direct messages on component mount
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -25,9 +26,10 @@ const AllMessagesPage = () => {
 
     getMessages();
   }, []);
-
+ // Mark a message as read
   const handlemarkAsRead = async (message) => {
     if (!message.read) {
+        // API call to mark messages as read
       await markMessagesAsRead([message.id]);
       setMessages((prevMessages) =>
         prevMessages.map((msg) =>
@@ -37,12 +39,14 @@ const AllMessagesPage = () => {
     }
   };
 
+  // Handles deletion of a message
   const handleDelete = async (id) => {
-    console.log(`Handledelete triggered with ID: ${id}`)
     try {
+        // API call to delete a message
       await axiosReq.delete(`/direct-messages/${id}/`)
       console.log(`Message with ID ${id} deleted`)
       setMessages((prevMessages) =>
+        // Remove message from state
         prevMessages.filter((msg) => msg.id !== id)
       );
     } catch (error) {
@@ -56,6 +60,7 @@ const AllMessagesPage = () => {
         {messages.length > 0 ? (
           <ListGroup variant="flush" className="mb-4">
             {messages.map((message) => {
+                // Determine the other user involved in the message
               const otherUser =
                 currentUser.id === message.sender
                   ? message.receiver_name
@@ -76,6 +81,7 @@ const AllMessagesPage = () => {
                   <small className="text-muted">
                     {message.created_at}
                   </small>
+                  {/* Badge for unread messages */}
                   {!message.read && (
                     <Badge bg="primary" pill>
                       New

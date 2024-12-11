@@ -5,15 +5,21 @@ import { axiosRes } from "../../api/axiosDefaults";
 
 import styles from "../../styles/CommentCreateEditForm.module.css";
 
+// Allows users to edit their existing comments.
 function CommentEditForm(props) {
   const { id, content, setShowEditForm, setComments } = props;
 
   const [formContent, setFormContent] = useState(content);
 
+  // Updates the form content state as the user types.
   const handleChange = (event) => {
     setFormContent(event.target.value);
   };
 
+  /**
+   *Submits the updated comment to the backend and updates
+   the comments list.
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -21,6 +27,7 @@ function CommentEditForm(props) {
         content: formContent.trim(),
       });
       setComments((prevComments) => ({
+        // Update the comments state by replacing the edited comment's content.
         ...prevComments,
         results: prevComments.results.map((comment) => {
           return comment.id === id

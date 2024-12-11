@@ -9,7 +9,11 @@ import { axiosRes } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import styles from '../../styles/Comment.module.css'
 
-
+/**
+ * The Comment Component displays a single comment with edit and delete
+ * options if the user is the comment owner.
+ * Displays an avatar, username, timestamp and the comment content.
+ */
 const Comment = (props) => {
   const {
     profile_id,
@@ -22,11 +26,16 @@ const Comment = (props) => {
     setComments,
   } = props;
 
+  // State to toggle the edit form
   const [showEditForm, setShowEditForm] = useState(false);
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
 
+  /**
+   * Deletes the comment and updates the post's comment count
+   * and comments list.
+   */
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/comments/${id}/`)
@@ -54,8 +63,10 @@ const Comment = (props) => {
           <Avatar src={profile_image} />
         </Link>
         <Media.Body className="align-self-center ml-2">
+            {/* Display owner name and timestamp */}
           <span className={styles.Owner}>{owner}</span>
           <span className={styles.Date}>{updated_at}</span>
+        {/* Edit form or content */}
           {showEditForm ? (
             <CommentEditForm
               id={id}
@@ -69,6 +80,7 @@ const Comment = (props) => {
             <p>{content}</p>
           )}
         </Media.Body>
+        {/* Dropdownn for Edit/Delete options if the user owns the comment */}
         {is_owner && !showEditForm && (
           <MoreDropdown
             handleEdit={() => setShowEditForm(true)}
