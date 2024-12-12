@@ -6,6 +6,7 @@ import Profile from './Profile';
 import { useProfileData } from '../../contexts/ProfileDataContext';
 
 const PopularProfiles = ({ mobile }) => {
+  // Retrive popular profile data from context
   const { popularProfiles } = useProfileData();
 
   return (
@@ -14,6 +15,7 @@ const PopularProfiles = ({ mobile }) => {
         mobile && 'd-lg-none text-center mb-3'
       }`}
     >
+      {/* Check if popular profiles are available */}
       {popularProfiles.results.length ? (
         <>
           <p>Most followed profiles.</p>
@@ -24,6 +26,7 @@ const PopularProfiles = ({ mobile }) => {
               ))}
             </div>
           ) : (
+            // Render all profiles
             popularProfiles.results.map((profile) => (
               <Profile key={profile.id} profile={profile} />
             ))

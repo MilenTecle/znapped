@@ -29,25 +29,28 @@ function PostEditForm() {
     title: "",
     content: "",
     image: "",
-    video: "",
     hashtagNames: "",
   });
 
-  const { title, content, image, video, hashtagNames } = postData;
+  const { title, content, image, hashtagNames } = postData;
 
   const imageInput = useRef(null);
-  const videoInput = useRef(null);
   const history = useHistory();
   const { id } = useParams();
   const [hashtags, setHashtags] = useState([]);
 
+  // Fetch the existing post data when the component mounts
   useEffect(() => {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/${id}`)
-        const { title, content, image, video, is_owner, hashtagNames } = data;
+        const { title, content, image, is_owner, hashtagNames } = data;
 
-        is_owner ? setPostData({ title, content, image, video, hashtagNames }) : history.push("/");
+        /**
+         * If user is the owner, populate the form with the post data
+         * otherwise redirect.
+         */
+        is_owner ? setPostData({ title, content, image, hashtagNames }) : history.push("/");
       } catch (err) {
         // console.log(err);
       }
@@ -56,8 +59,7 @@ function PostEditForm() {
     handleMount();
   }, [history, id]);
 
-
-
+  // Fetch the available hashtags from the  API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -77,6 +79,7 @@ function PostEditForm() {
     fetchData();
   }, []);
 
+  // Handle changes to text fields (title, content, hashtags)
   const handleChange = (event) => {
     setPostData({
       ...postData,
@@ -84,6 +87,7 @@ function PostEditForm() {
     });
   };
 
+  // Handle changes to the hashtag input
   const handleHashtagChange = (event) => {
     setPostData({
       ...postData,
@@ -91,28 +95,18 @@ function PostEditForm() {
     });
   };
 
+  // Handle image file input and update the image state
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
       setPostData({
         ...postData,
         image: URL.createObjectURL(event.target.files[0]),
-        video: "",
       });
     }
   };
 
-  const handleChangeVideo = (event) => {
-    if (event.target.files.length) {
-      URL.revokeObjectURL(video);
-      setPostData({
-        ...postData,
-        video: URL.createObjectURL(event.target.files[0]),
-        image: "",
-      });
-    }
-  };
-
+  // Handles the "Enter" key press to submit the form
   function handleKeyDown(event) {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -120,24 +114,19 @@ function PostEditForm() {
     };
   };
 
+  // Handles the form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
 
     formData.append("title", title);
     formData.append("content", content);
-
-    if (imageInput.current && imageInput.current.files[0]) {
-      formData.append("image", imageInput.current.files[0]);
-    } else if (videoInput.current && videoInput.current.files[0]) {
-      formData.append("video", videoInput.current.files[0]);
-    }
-
+    formData.append("image", imageInput.current.files[0]);
     formData.append(
       "hashtag_names",
       hashtagNames.split(" ").map(name => name.trim()).filter(name => name));
 
-
+    // Send PUT request to update the post
     try {
       await axiosReq.put(`/posts/${id}/`, formData);
       history.push(`/posts/${id}`);
@@ -225,7 +214,21 @@ function PostEditForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-              {!image && (
+              {image ? (
+                <>
+                  <figure>
+                    <Image className={appStyles.Image} src={image} rounded />
+                  </figure>
+                  <div>
+                    <Form.Label
+                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                      htmlFor="image-upload"
+                    >
+                      Change the image
+                    </Form.Label>
+                  </div>
+                </>
+              ) : (
                 <Form.Label
                   className="d-flex justify-content-center"
                   htmlFor="image-upload"
@@ -236,71 +239,19 @@ function PostEditForm() {
                   />
                 </Form.Label>
               )}
-              {!video && (
-                <Form.Label
-                  className="d-flex justify-content-center"
-                  htmlFor="video-upload"
-                >
-                  <Asset
-                    src={Upload}
-                    message="Click or tap to upload a video"
-                  />
-                </Form.Label>
-              )}
-              {video ? (
-                <div>
-                  <video
-                    controls
-                    src={video}
-                    style={{ maxWidth: "100%", height: "auto" }}
-                  />
-                  <Form.Label
-                    className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                    htmlFor="video-upload"
-                  >
-                    Change the video
-                  </Form.Label>
-                </div>
-              ) : image ? (
-                <div>
-                  <figure>
-                    <Image className={appStyles.Image} src={image} rounded />
-                  </figure>
-                  <Form.Label
-                    className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                    htmlFor="image-upload"
-                  >
-                    Change the image
-                  </Form.Label>
-                </div>
-              ) : null}
 
               <Form.File
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}
                 ref={imageInput}
-                style={{ display: 'none' }}
               />
-              {errors?.image?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
-
-              <Form.File
-                id="video-upload"
-                accept="video/*"
-                onChange={handleChangeVideo}
-                ref={videoInput}
-                style={{ display: 'none' }}
-              />
-              {errors?.video?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
             </Form.Group>
+            {errors?.image?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>

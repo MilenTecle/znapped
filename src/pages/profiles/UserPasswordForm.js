@@ -27,6 +27,7 @@ const UserPasswordForm = () => {
 
   const [errors, setErrors] = useState({});
 
+  // Handle changes in form inputs
   const handleChange = (event) => {
     setUserData({
       ...userData,
@@ -41,9 +42,11 @@ const UserPasswordForm = () => {
     }
   }, [currentUser, history, id]);
 
+  // Handle form sumbmisson to change password
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      // Send new password data to the server
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
       history.goBack();
     } catch (err) {

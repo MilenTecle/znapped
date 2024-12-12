@@ -22,8 +22,11 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
+  // React Router's hookto get current location and query parameter
   const location = useLocation();
   const { pathname } = location;
+
+  // Extracts hashtag from the URL query parameters
   const hashtag = new URLSearchParams(location.search).get("hashtag");
 
   const [query, setQuery] = useState("");
@@ -31,11 +34,17 @@ function PostsPage({ message, filter = "" }) {
   const currentUser = useCurrentUser();
 
   useEffect(() => {
+    // Fetch posts based on filter, search query and hashtags
     const fetchPosts = async () => {
       try {
+        // If a search term exists, add it to the URL
         const queryParam = query ? `search=${query}&` : "";
+        // If a hashtag exists, add it to the URL
         const hashtagParam = hashtag ? `hashtags__name=${hashtag}&` : "";
+
+        // Send GET request to fetch posts
         const { data } = await axiosReq.get(`/posts/?${filter}${queryParam}${hashtagParam}`);
+        // Update posts state
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
@@ -44,10 +53,11 @@ function PostsPage({ message, filter = "" }) {
     };
 
     setHasLoaded(false);
+    // Delay fetching posts to avoid excessive API calls
     const timer = setTimeout(() => {
       fetchPosts();
     }, 1000);
-
+    // Cleanup function to clear the timer
     return () => {
       clearTimeout(timer);
     };
@@ -57,7 +67,8 @@ function PostsPage({ message, filter = "" }) {
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <PopularProfiles mobile />
-        <h1>{hashtag ? `Posts tagged with #${hashtag}` : "All Posts"}</h1>
+        {/* Displays the title if a hashtag is present */}
+        {hashtag && <h1>Posts tagged with #${hashtag}</h1>}
         <i className={`fas fa-search ${styles.SearchIcon}`} />
         <Form
           className={styles.SearchBar}
@@ -74,6 +85,7 @@ function PostsPage({ message, filter = "" }) {
 
         {hasLoaded ? (
           <>
+          {/* Check if posts are available */}
             {posts.results.length ? (
               <InfiniteScroll
                 children={posts.results.map((post) => (

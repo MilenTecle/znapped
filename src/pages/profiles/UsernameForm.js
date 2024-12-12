@@ -27,6 +27,10 @@ const UsernameForm = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
+  /**
+   * Set the current username if the user owns the profile, otherwise
+   * redirect
+   */
   useEffect(() => {
     if (currentUser?.profile_id?.toString() === id) {
       setUsername(currentUser.username);
@@ -35,12 +39,15 @@ const UsernameForm = () => {
     }
   }, [currentUser, history, id]);
 
+  // Handle form submission to update username
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      // Send updated username to the server
       await axiosRes.put("/dj-rest-auth/user/", {
         username,
       });
+      // Update the current user context with the new username
       setCurrentUser((prevUser) => ({
         ...prevUser,
         username,

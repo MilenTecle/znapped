@@ -26,12 +26,21 @@ function PostPage() {
   const [comments, setComments] = useState({ results: [] });
 
   useEffect(() => {
+    /**
+     * Fetch post and its comments when the component mounts
+     * or the post ID changes.
+     */
     const handleMount = async () => {
       try {
+        /**
+         * Use Promise.all to execute both post and comments API request
+         * at the same time.
+         */
         const [{ data: post }, {data: comments}] = await Promise.all([
           axiosReq.get(`/posts/${id}`),
           axiosReq.get(`/comments/?post=${id}`)
         ])
+        // Update state with fetched post and comments data
         setPost({ results: [post] })
         setComments(comments)
       } catch (err) {
@@ -43,13 +52,14 @@ function PostPage() {
   }, [id]);
 
 
-
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <PopularProfiles mobile />
+        {/*Render the post */}
         <Post {...post.results[0]} setPosts={setPost} postPage />
         <Container className={appStyles.Content}>
+          {/* Display comment create form if user is logged in */}
           {currentUser ? (
             <CommentCreateForm
               profile_id={currentUser.profile_id}
@@ -61,6 +71,7 @@ function PostPage() {
           ) : comments.results.length ? (
             "Comments"
           ) : null}
+          {/* Render comments with infinite scroll */}
           {comments.results.length ? (
             <InfiniteScroll
              children={comments.results.map((comment) => (

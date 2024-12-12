@@ -18,6 +18,7 @@ import {
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
+// ProfileEditForm allows users to edit their profile details
 const ProfileEditForm = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
@@ -34,12 +35,15 @@ const ProfileEditForm = () => {
 
   const [errors, setErrors] = useState({});
 
+  // Fetch the existing profile data when the component mounts
   useEffect(() => {
     const handleMount = async () => {
+      // Ensure the current user matches the profile being edited
       if (currentUser?.profile_id?.toString() === id) {
         try {
           const { data } = await axiosReq.get(`/profiles/${id}/`);
           const { name, content, image } = data;
+          // Populate form fields with fetched data
           setProfileData({ name, content, image });
         } catch (err) {
           // console.log(err);
@@ -53,6 +57,7 @@ const ProfileEditForm = () => {
     handleMount();
   }, [currentUser, history, id]);
 
+  // Update form data when an input changes
   const handleChange = (event) => {
     setProfileData({
       ...profileData,
@@ -60,18 +65,21 @@ const ProfileEditForm = () => {
     });
   };
 
+  // Handle form submission to update profile data
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
     formData.append("content", content);
 
+    // Append image file if a new one is uploaded
     if (imageFile?.current?.files[0]) {
       formData.append("image", imageFile?.current?.files[0]);
     }
 
     try {
       const { data } = await axiosReq.put(`/profiles/${id}/`, formData);
+      // Update current user data to reflect the new profile image
       setCurrentUser((currentUser) => ({
         ...currentUser,
         profile_image: data.image,
@@ -119,6 +127,7 @@ const ProfileEditForm = () => {
         <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={6}>
           <Container className={appStyles.Content}>
             <Form.Group>
+              {/* Display the current profile image */}
               {image && (
                 <figure>
                   <Image src={image} fluid />

@@ -26,6 +26,7 @@ import NoResults from "../../assets/no-results.png";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+// ProfilePage renders a user's profile information and their posts.
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profilePosts, setProfilePosts] = useState({ results: [] });
@@ -34,25 +35,34 @@ function ProfilePage() {
   const { id } = useParams();
 
   const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
+  // Retrives profle data from the context
   const { pageProfile } = useProfileData();
 
+  // Extract the profile data from results
   const [profile] = pageProfile.results;
   const is_owner = currentUser?.username === profile?.owner;
 
   const history = useHistory();
 
+  // Navigates to the messaging page for the selected user
   const handleSendMessage = (id) => {
     history.push(`/direct-messages/${id}/`)
   }
 
+  /**
+   * Fetch profile and related posts data when the component mounts
+   * or the ID changes
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch profile and posts data at the same time
         const [{ data: pageProfile }, { data: profilePosts }] =
           await Promise.all([
             axiosReq.get(`/profiles/${id}/`),
             axiosReq.get(`/posts/?owner__profile=${id}`),
           ]);
+          // Update the profile data and user's posts
         setProfileData((prevState) => ({
           ...prevState,
           pageProfile: { results: [pageProfile] },
@@ -68,6 +78,7 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
+    {/* Dropdown menu for editing profile if user is the owner */}
       {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
@@ -94,6 +105,7 @@ function ProfilePage() {
             </Col>
           </Row>
         </Col>
+        {/* Follow/Unfollow buttons and message button */}
         <Col lg={3} className="text-lg-right">
           {currentUser &&
             !is_owner &&
@@ -127,6 +139,7 @@ function ProfilePage() {
     </>
   );
 
+  // Section displaying the user's posts
   const mainProfilePosts = (
     <>
       <hr />

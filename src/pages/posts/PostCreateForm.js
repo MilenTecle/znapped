@@ -30,16 +30,16 @@ function PostCreateForm() {
     title: "",
     content: "",
     image: "",
-    video: "",
     hashtagNames: "",
   });
 
-  const { title, content, image, video, hashtagNames } = postData;
+  const { title, content, image, hashtagNames } = postData;
   const [hashtags, setHashtags] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch hashtag suggestions
         const { data: hashtagData } = await axiosReq.get("posts/hashtags/");
         const validHashtags = hashtagData.results
           .filter((hashtag) => String(hashtag.name).trim())
@@ -57,9 +57,9 @@ function PostCreateForm() {
   }, []);
 
   const imageInput = useRef(null);
-  const videoInput = useRef(null)
   const history = useHistory();
 
+  // Update form data on input change
   const handleChange = (event) => {
     setPostData({
       ...postData,
@@ -67,6 +67,10 @@ function PostCreateForm() {
     });
   };
 
+  /**
+   * Updates the 'hashtagNames' field in the postData state when user types
+   * or modifies hashtags in the input field
+   */
   const handleHashtagChange = (event) => {
     setPostData({
       ...postData,
@@ -74,28 +78,18 @@ function PostCreateForm() {
     });
   };
 
+  // Handles changes to the image upload input field
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
       setPostData({
         ...postData,
         image: URL.createObjectURL(event.target.files[0]),
-        video: "",
       });
     }
   };
 
-  const handleChangeVideo = (event) => {
-    if (event.target.files.length) {
-      URL.revokeObjectURL(video);
-      setPostData({
-        ...postData,
-        video: URL.createObjectURL(event.target.files[0]),
-        image: "",
-      });
-    }
-  };
-
+  // Handles the "Enter" key press to submit the form
   function handleKeyDown(event) {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -103,19 +97,14 @@ function PostCreateForm() {
     };
   };
 
+  // Submit the form data
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
 
     formData.append("title", title);
     formData.append("content", content);
-
-    if (imageInput.current && imageInput.current.files[0]) {
-      formData.append("image", imageInput.current.files[0]);
-    } else if (videoInput.current && videoInput.current.files[0]) {
-      formData.append("video", videoInput.current.files[0]);
-    }
-
+    formData.append("image", imageInput.current.files[0]);
     formData.append(
       "hashtag_names",
       hashtagNames.split(" ").map((name) => name.trim()).filter((name) => name));
@@ -246,7 +235,6 @@ function PostCreateForm() {
                 {message}
               </Alert>
             ))}
-
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>

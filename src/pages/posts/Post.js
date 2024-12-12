@@ -34,6 +34,7 @@ const Post = (props) => {
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
 
+  // Reaction options for liking a post
   const reactions = [
     { name: "heart", icon: "fas fa-heart" },
     { name: "thumbs_up", icon: "fas fa-thumbs-up" },
@@ -42,10 +43,12 @@ const Post = (props) => {
     { name: "angry", icon: "fas fa-angry" },
   ];
 
+  // Navigate to edit page for the post
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
   };
 
+  // Delete a post and navigate back
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/posts/${id}/`);
@@ -55,19 +58,22 @@ const Post = (props) => {
     }
   };
 
+  // Handle adding a reaction/like to a post
   const handleLike = async (reactionType) => {
     try {
       if (reaction_type === reactionType) {
-        await handleUnlike();
+        await handleUnlike(); // Remove the reaction if it's the same
       } else {
         if (like_id) {
-          await handleUnlike();
+          await handleUnlike(); // Remove any existing reaction
         }
       }
       const { data } = await axiosRes.post("/likes/", {
         post: id,
         reaction_type: reactionType
       });
+
+      // Update the post's state with the new like/reaction
       setPosts((prevPosts) => ({
         ...prevPosts,
         results: prevPosts.results.map((post) =>
@@ -86,7 +92,7 @@ const Post = (props) => {
     }
   };
 
-
+  // Handle removing a like/reaction
   const handleUnlike = async () => {
     try {
       await axiosRes.delete(`/likes/${like_id}/`);
@@ -118,6 +124,7 @@ const Post = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
+            {/* Display dropdown for delete/edit if user is the post owner */}
             {is_owner && postPage && (
               <MoreDropdown
                 handleEdit={handleEdit}
@@ -133,6 +140,7 @@ const Post = (props) => {
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
+        {/* Display hashtags */}
         <div className={styles.HighlightedHashtag}>
           {hashtags.map((hashtag) => (
             <Link
@@ -151,6 +159,7 @@ const Post = (props) => {
             </OverlayTrigger>
           ) : (
             <div className={styles.Reactions}>
+              {/* Reaction icon options */}
               {reactions.map((reaction) => (
                 <OverlayTrigger
                   key={reaction.name}
