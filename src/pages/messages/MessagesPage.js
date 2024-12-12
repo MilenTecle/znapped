@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchMessages, sendMessage } from "../../api/messages";
+import { fetchMessages, sendMessage, fetchUser } from "../../api/messages";
 import { useParams } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Card from "react-bootstrap/Card";
@@ -14,6 +14,7 @@ const DisplayMessages = () => {
   const { id } = useParams();   // Get the user ID from the URL
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [username, setUsername] = useState("");
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -30,16 +31,18 @@ const DisplayMessages = () => {
       } catch (error) {
       }
     };
+    // Fetch the username of the other user
+    const getUserName = async () => {
+      const userData = await fetchUser(id);
+      if (userData) {
+        setUsername(userData.owner)
+      }
+    };
+
     retrieveMessages();
+    getUserName();
   }, [id]);
 
-  // Determine the name of the other user in the conversation
-  const username =
-    messages.length > 0
-      ? currentUser?.pk === messages[0].sender
-        ? messages[0].receiver_name
-        : messages[0].sender_name
-      : `User ${id}`;
 
   // Handling sending a new message
   const handleSendMessage = async () => {
@@ -58,7 +61,7 @@ const DisplayMessages = () => {
 
   return (
     <Container>
-      <h1 className="text-center my-4">Conversation with {username}</h1>
+      <h1 className="text-center my-4">Conversation with {username || `User ${id}`}</h1>
       <div className="overflow-auto mb-4">
         {/* Loop through and display all messages */}
         {messages.map((message) =>

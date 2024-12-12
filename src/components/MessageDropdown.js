@@ -15,12 +15,10 @@ import { axiosReq } from "../api/axiosDefaults";
  * Event handler triggered on icon click.
  */
 const MessageIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
-  <div className={styles.IconWrapper}>
+  <div className={styles.IconWrapper} onClick={onClick} ref={ref}>
     <i
-      className="fas fa-envelope"
-      ref={ref}
-      onClick={onClick}
-    />
+      className="fas fa-envelope" />
+    <span className={styles.IconText}>Messages</span>
     {unreadCount > 0 && (
       <Badge className={`${styles.badge} badge`}>
         {unreadCount}
@@ -46,7 +44,7 @@ const MessageDropdown = () => {
       if (currentUser)
         try {
           const { data } = await axiosReq.get("/notifications/");
-        // Filter notifications of type "message"
+          // Filter notifications of type "message"
           const messageNotifications = data.results.filter(
             (notification) => notification.type === "message"
           );
@@ -62,9 +60,9 @@ const MessageDropdown = () => {
     loadMessages();
   }, [currentUser]);
 
-/**
- * Marks all unread messages as 'read' by sending their IDs to the API.
- */
+  /**
+   * Marks all unread messages as 'read' by sending their IDs to the API.
+   */
   const handlemarkAsRead = async () => {
     try {
       const undreadMessageIds = messages.filter((msg) => !msg.read).map((msg) => msg.id);
@@ -82,10 +80,10 @@ const MessageDropdown = () => {
     }
   };
 
-/**
- * Handles the click event on the message icion and navigates
- * to the messages Page.
- */
+  /**
+   * Handles the click event on the message icion and navigates
+   * to the messages Page.
+   */
   const handleIconClick = async () => {
     await handlemarkAsRead();
     history.push("/direct-messages");

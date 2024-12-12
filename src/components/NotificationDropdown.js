@@ -15,12 +15,10 @@ import { useHistory } from "react-router";
  * Event handler triggered on icon click.
  */
 const NotificationIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
-  <div className={styles.IconWrapper}>
+  <div className={styles.IconWrapper} onClick={onClick} ref={ref}>
     <i
-      className="fas fa-bell"
-      ref={ref}
-      onClick={onClick}
-    />
+      className="fas fa-bell" />
+      <span className={styles.IconText}>Notifications</span>
     {unreadCount > 0 && (
       <Badge className={`${styles.badge} badge`}>
         {unreadCount}

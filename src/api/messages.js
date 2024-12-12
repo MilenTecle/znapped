@@ -37,6 +37,16 @@ export const sendMessage = async (receiverId, content) => {
   }
 };
 
+// Fetch a specific user's profile details from the API.
+export const fetchUser = async(userId) => {
+  try {
+    const { data } = await axiosReq.get(`/profiles/${userId}/`);
+    // Return the fetched user profile data.
+    return data;
+  } catch (error) {
+  }
+}
+
 /**
  * Mark specific messages as read by sending their IDs to the API.
  * @param {*} messageIds - An array of message IDs to mark as read.
