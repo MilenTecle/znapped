@@ -2,15 +2,15 @@ import { axiosReq, axiosRes } from "./axiosDefaults"
 
 /**
  * Fetch messages from the API
- * If an ID is provided, fetch a specific direct message by ID
+ * If an ID is provided, fetch the direct messages between current user and
+ * another user.
  * If no ID is provided, fetch all direct messages (for the MessagePage)
- * @param - The optional ID of a specific message to fetch.
  * @returns - The data containing the list of messages or the specific message.
  */
-export const fetchMessages = async (id = null) => {
+export const fetchMessages = async (userId = null) => {
   try {
     // Construct the URL based on wether and ID is provided
-    const url = id ? `/direct-messages/${id}/` : `/direct-messages/`;
+    const url = userId ? `/direct-messages/?user_id=${userId}/` : `/direct-messages/`;
     const response = await axiosReq.get(url);
     return response.data;
   } catch (error) {

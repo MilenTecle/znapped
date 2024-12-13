@@ -66,13 +66,12 @@ function CommentCreateForm(props) {
     event.preventDefault();
 
     // Extract mentions from content using regular expression
-    const extractMentions = [...new Set((content.match(/@(\w+)/g) || []).map(m => m.slice(1)))]
-    console.log("Extraced mentions", extractMentions)
+    const mentionedUsernames = [...new Set((content.match(/@(\w+)/g) || []).map(m => m.slice(1)))]
     try {
       const { data } = await axiosRes.post("/comments/", {
         content,
         post,
-        mention_usernames: extractMentions, // Include mentioned usernames
+        mention_usernames: mentionedUsernames, // Include mentioned usernames
       });
       // Update the comments lists
       setComments((prevComments) => ({
@@ -88,6 +87,9 @@ function CommentCreateForm(props) {
           },
         ],
       }));
+
+      const mentionNotification = await axiosRes.get("/notifications/");
+      console.log("Mention notifications:", mentionNotification)
       setContent("");
       setMentionUsernames([]);
     } catch (err) {

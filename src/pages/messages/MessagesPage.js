@@ -24,23 +24,21 @@ const DisplayMessages = () => {
         return;
       }
       try {
-        // API call to fetch messages
-        const data = await fetchMessages(id);
+        // API call to fetch messages and user details at the same time
+        const [messagesData, userData] = await Promise.all([
+          fetchMessages(id),
+          fetchUser(id),
+        ]);
         // Reverse messages for ordering
-        setMessages(data.results.reverse());
+        setMessages(messagesData.results.reverse());
+        // Set username state and fallback if data is missing
+        setUsername(userData?.owner || `User ${id}`)
       } catch (error) {
-      }
-    };
-    // Fetch the username of the other user
-    const getUserName = async () => {
-      const userData = await fetchUser(id);
-      if (userData) {
-        setUsername(userData.owner)
+        console.error("Error fetching messages or user details:", error);
       }
     };
 
     retrieveMessages();
-    getUserName();
   }, [id]);
 
 
@@ -92,23 +90,25 @@ const DisplayMessages = () => {
         )}
       </div>
       <Form>
-        <Form.Group controlId="messageInput">
-          <Form.Control
-            as="textarea"
-            rows={2}
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type your message..."
-          />
-        </Form.Group>
-        <Button
-          variant="primary"
-          onClick={handleSendMessage}
-          className="float-end"
-          disabled={!newMessage.trim()}
-        >
-          Send
-        </Button>
+          <Col xs={12} md={8} lg={6}>
+            <Form.Group controlId="messageInput">
+              <Form.Control
+                as="textarea"
+                rows={2}
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                placeholder="Type your message..."
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              onClick={handleSendMessage}
+              className="float-end"
+              disabled={!newMessage.trim()}
+            >
+              Send
+            </Button>
+          </Col>
       </Form>
     </Container>
   );
