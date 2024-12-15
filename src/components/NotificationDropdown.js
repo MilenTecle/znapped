@@ -47,9 +47,12 @@ const NotificationDropdown = () => {
       if (currentUser)
         try {
           const { data } = await axiosReq.get("/notifications/");
+          const notificationTypes = ["mention", "comment", "follow", "like"]
 
           const generalNotifications = data.results.filter(
-            (notification) => notification.type !== "message"
+            (notification) =>
+              notificationTypes.includes(notification.type) &&
+              notification.type !== "message"
           );
 
           // Calculate the number of unread notifications
