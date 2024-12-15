@@ -68,7 +68,7 @@ function PostsPage({ message, filter = "" }) {
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <PopularProfiles mobile />
         {/* Displays the title if a hashtag is present */}
-        {hashtag && <h1>Posts tagged with #${hashtag}</h1>}
+        {hashtag && <h1>Posts tagged with ${hashtag}</h1>}
         <i className={`fas fa-search ${styles.SearchIcon}`} />
         <Form
           className={styles.SearchBar}

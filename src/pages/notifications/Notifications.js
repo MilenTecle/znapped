@@ -15,9 +15,14 @@ const DisplayNotifications = () => {
       try {
         // Make a GET request to retrieve all notifications
         const { data } = await axiosReq.get("/notifications/");
+        console.log("Fetched notificaions", data.results)
         // Filter out general notifications, excluding messages
+        const notificationTypes = ["mention", "comment", "follow", "like"]
+
         const generalNotifications = data.results.filter(
-          (notification) => notification.type === "mention" || notification.type !== "message"
+          (notification) =>
+            notificationTypes.includes(notification.type) &&
+            notification.type !== "message"
         );
 
         // Update state with filtered notifications
@@ -58,8 +63,8 @@ const DisplayNotifications = () => {
             // Determine the link destination based on notification type
             const href =
               notification.type === "follow"
-                ? `/profiles/${notification.sender_profile_id}/`
-                : notification.type === "mention" && notification.post_id
+                ? `/profiles/${notification.sender_profile_id}/` // Follow
+                : ["like" ,"comment", "mention"].includes(notification.type)
                 ? `/posts/${notification.post_id}/`
                 : "#";
             return (

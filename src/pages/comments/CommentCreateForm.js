@@ -17,7 +17,7 @@ import { Mention, MentionsInput } from "react-mentions";
 function CommentCreateForm(props) {
   const { post, setPost, setComments, profileImage, profile_id } = props;
   const [content, setContent] = useState("");
-  const [mentionUsernames, setMentionUsernames] = useState([]);
+  const [mentions, setMentions] = useState([]);
   const [users, setUsers] = useState([]);
 
   /**
@@ -27,13 +27,12 @@ function CommentCreateForm(props) {
     const fetchProfiles = async () => {
       try {
         const { data } = await axiosReq.get("/profiles/");
-        setUsers(
-          data.results.map((user) => ({
-            id: user.id,
-            display: user.owner,
-          }))
-        );
-
+        const userList = data.results.map((user) => ({
+          id: user.owner,
+          display: user.owner,
+        }));
+        console.log("Fetched users:", userList)
+        setUsers(userList)
       } catch (err) {
         console.log(err);
       }
@@ -43,8 +42,10 @@ function CommentCreateForm(props) {
   }, []);
 
   // Updates the comment content as the user types.
-  const handleContentChange = (event) => {
-    setContent(event.target.value);
+  const handleContentChange = (event, newValue, newPlainTextValue, newMentions) => {
+    console.log("New mentions:", newMentions)
+    setContent(newPlainTextValue);
+    setMentions(newMentions);
   };
 
   const handleChange = (event) => {
@@ -65,13 +66,17 @@ function CommentCreateForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Extract mentions from content using regular expression
-    const mentionedUsernames = [...new Set((content.match(/@(\w+)/g) || []).map(m => m.slice(1)))]
+  console.log("Payload being sent:",{
+    content,
+    post,
+    mention_usernames: mentions.map((mention) => mention.id), // Include mentioned usernames
+  });
+
     try {
       const { data } = await axiosRes.post("/comments/", {
         content,
         post,
-        mention_usernames: mentionedUsernames, // Include mentioned usernames
+        mention_usernames: mentions.map((mention) => mention.id), // Include mentioned usernames
       });
       // Update the comments lists
       setComments((prevComments) => ({
@@ -91,7 +96,7 @@ function CommentCreateForm(props) {
       const mentionNotification = await axiosRes.get("/notifications/");
       console.log("Mention notifications:", mentionNotification)
       setContent("");
-      setMentionUsernames([]);
+      setMentions([]);
     } catch (err) {
       // console.log(err);
     }
@@ -115,7 +120,7 @@ function CommentCreateForm(props) {
             <Mention
               trigger="@"
               data={users}
-              markup="@__display__"
+              markup="@[__display__](__id__)"
               displayTransform={(id, display) => `@${display}`}
               className={styles.CommentMention}
             />
