@@ -31,7 +31,6 @@ function CommentCreateForm(props) {
           id: user.owner,
           display: user.owner,
         }));
-        console.log("Fetched users:", userList)
         setUsers(userList)
       } catch (err) {
         console.log(err);
@@ -41,15 +40,16 @@ function CommentCreateForm(props) {
     fetchProfiles();
   }, []);
 
+  useEffect(() => {
+    console.log("mentions state updated:", mentions);
+  }, [mentions]);
+
   // Updates the comment content as the user types.
   const handleContentChange = (event, newValue, newPlainTextValue, newMentions) => {
     console.log("New mentions:", newMentions)
     setContent(newPlainTextValue);
-    setMentions(newMentions);
-  };
 
-  const handleChange = (event) => {
-    setContent(event.target.value);
+    setMentions(newMentions);
   };
 
   function handleKeyDown(event) {
@@ -66,18 +66,15 @@ function CommentCreateForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-  console.log("Payload being sent:",{
+  const payload = {
     content,
     post,
     mention_usernames: mentions.map((mention) => mention.id), // Include mentioned usernames
-  });
+  };
 
     try {
-      const { data } = await axiosRes.post("/comments/", {
-        content,
-        post,
-        mention_usernames: mentions.map((mention) => mention.id), // Include mentioned usernames
-      });
+      const { data } = await axiosRes.post("/comments/", payload)
+
       // Update the comments lists
       setComments((prevComments) => ({
         ...prevComments,
@@ -92,9 +89,7 @@ function CommentCreateForm(props) {
           },
         ],
       }));
-
-      const mentionNotification = await axiosRes.get("/notifications/");
-      console.log("Mention notifications:", mentionNotification)
+      console.log("API response after POST:", data);
       setContent("");
       setMentions([]);
     } catch (err) {
@@ -113,6 +108,7 @@ function CommentCreateForm(props) {
             className={`${styles.CommentMentionsInput} ${styles.Form}`}
             value={content}
             onChange={handleContentChange}
+            onKeyDown={handleKeyDown}
             placeholder="Type @ for mentions"
             rows={2}
           >

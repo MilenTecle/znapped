@@ -10,7 +10,7 @@ import { axiosReq, axiosRes } from "./axiosDefaults"
 export const fetchMessages = async (userId = null) => {
   try {
     // Construct the URL based on wether and ID is provided
-    const url = userId ? `/direct-messages/?user_id=${userId}/` : `/direct-messages/`;
+    const url = userId ? `/direct-messages/?user_id=${userId}` : `/direct-messages/`;
     const response = await axiosReq.get(url);
     return response.data;
   } catch (error) {
