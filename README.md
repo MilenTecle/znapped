@@ -4,11 +4,12 @@ Znapped is a social media application built using React.js for the frontend and 
 
 Live Links
 - Frontend live Site: [Znapped](https://znapped-972f129d36da.herokuapp.com/)
-- Backend live API: []
+- Backend live API: [Znapped API](https://znapped-drfapi-8eee30ca5ab2.herokuapp.com/)
 
-Backend repository: []
+- Backend repository: [Backend repository](https://github.com/MilenTecle/znapped-drf-api/tree/main)
 
-![Znapped Am I Responsive Image](docs/readme_images/am_i_responsive.png)
+
+![Znapped Am I Responsive Image](src/assets/readme-images/znapped-am-i-responsive.PNG)
 
 ## Contents
 
@@ -222,6 +223,18 @@ The wireframes were produced via Balsamiq.
 2. Logged-in status management.
 3. Token-basen authentication with auto-refresh.
 
+ <details open>
+  <summary>Sign up</summary>
+
+  ![Sign Up](src/assets/readme-images/sign_up.PNG)
+  </details>
+
+  <details open>
+  <summary>Sign in </summary>
+
+  ![Sign in](src/assets/readme-images/sign_in.PNG)
+   </details>
+
 ### Navigation
 
 1. Responsive navbar with dynamic links for logged-in and logged-out users.
@@ -230,7 +243,7 @@ The wireframes were produced via Balsamiq.
   <details open>
   <summary>Navbar not logged in</summary>
 
-  ![My Inventory](docs/readme_images/features/navbar_not_logged_in.png)
+  ![Navbar - not logged in](src/assets/readme-images/navbar_not_logged_in.PNG)
   </details>
 
   <details open>
@@ -240,9 +253,9 @@ The wireframes were produced via Balsamiq.
    </details>
 
    <details open>
-   <summary>Burger menu</summary>
+   <summary>Burger dropdown</summary>
 
-  ![My Inventory](docs/readme_images/features/burger_menu.png)
+  ![Burger dropdown](src/assets/readme-images/burger_dropdown.PNG)
    </details>
 
 </details>
@@ -254,10 +267,22 @@ The wireframes were produced via Balsamiq.
 3. User can like post with various reactions (heart, thumbs, happy, sad and angry)
 4. Users can view all posts with infinite scrolling.
 
-  <details open>
-  <summary>Landing Page</summary>
+ <details open>
+  <summary>Create post</summary>
 
-  ![Landing Page](docs/readme_images/features/landing_page.png)
+  ![Create post](src/assets/readme-images/create_post.PNG)
+</details>
+
+  <details open>
+  <summary>Edit and delete post</summary>
+
+  ![Edit and delete post](src/assets/readme-images/edit_delete_post.PNG)
+</details>
+
+  <details open>
+  <summary>Like posts</summary>
+
+  ![Like posts](src/assets/readme-images/like_posts_reaction.PNG)
 </details>
 
 
@@ -265,27 +290,86 @@ The wireframes were produced via Balsamiq.
 1. User can add, edit and delete comments on posts.
 2. Mentions are supported, allowing users to tag others in comments.
 
+<details open>
+  <summary>Comments</summary>
+
+  ![Post, edit and delete](src/assets/readme-images/post_edit_delete_comment.PNG)
+</details>
+
 ### Profiles
-1. View other users's profiles wither their posts and follwer statistics.
-2. Follo/unfollow functionality.
+1. View other users's profiles with their posts and follower statistics.
+2. Follow/unfollow functionality.
 3. Profile editing, change image, password or username.
 
+
+  <details open>
+  <summary>View other profiles</summary>
+
+  ![Other users profiles](src/assets/readme-images/other_users_profile.PNG)
+</details>
+
+  <details open>
+  <summary>Edit profile</summary>
+
+  ![Edit profile](src/assets/readme-images/edit_profile.PNG)
+</details>
+
+
+
 ### Notifications
-1. Notifications for likes,  mentions, follows and messages.
+1. Notifications for likes, comments, mentions, follows and messages.
 2. Mark notifications as read when clicked.
-3. Delete notifications in the NotificaionList.
+3. Delete notifications in the NotificationsList.
+
+  <details open>
+  <summary>Notifications</summary>
+
+  ![Notifications](src/assets/readme-images/notification_displayed.PNG)
+</details>
+
+  <details open>
+  <summary>Notifications page</summary>
+
+  ![Notifications page](src/assets/readme-images/notifications_page.PNG)
+</details>
+
+  <details open>
+  <summary>Delete notifications</summary>
+
+  ![Delete notifications](src/assets/readme-images/delete_notifications.PNG)
+</details>
+
 
 ### Messaging
 1. Direct messaging feature for private communication.
+2. Message notifications.
 2. Threaded view for conversations.
 3. Delete messages in the MessageList.
 
+  <details open>
+  <summary>Messages</summary>
+
+  ![Message notifications](src/assets/readme-images/message_notification.PNG)
+</details>
+
+  <details open>
+  <summary>Messages page</summary>
+
+  ![Messages page](src/assets/readme-images/messages_page.PNG)
+</details>
+
+  <details open>
+  <summary>Delete messages</summary>
+
+  ![Delete messages](src/assets/readme-images/delete_messages.PNG)
+</details>
 
 
 ### Features left to implement
 1. Add video upload functionality for posts. I was planning on implementing that but I had to leave it out due to time constraints.
 2. Implement user mentions for post captions. I was planning on implementing this as well but I hade to leave this out as well due to time constraints.
 3. Instant reply functionality in messages. I didn't have time to implement this but for the future I'm planning to add this as well.
+4. Add success messages when user logs in and performs edit and delete operations.
 
 
 ## CRUD

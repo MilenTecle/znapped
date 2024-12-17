@@ -26,15 +26,10 @@
   border-radius: 50%;
   position: absolute;
   top: -5px;
-  right: -10px;
+  left: 35px;
   color: white;
   padding: 2px 5px;
   font-size: 12px;
-}
-
-.IconWrapper {
-  display: inline-block;
-  position: relative;
 }
 
 .IconText {
@@ -43,5 +38,16 @@
     padding: 5px;
   }
 
+.NavLink {
+  padding: 5px;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+    .badge {
+        top: -5px;
+        left: 25px;
+    }
+  }
 
 

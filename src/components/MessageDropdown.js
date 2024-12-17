@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Dropdown from "react-bootstrap/Dropdown";
 import Badge from "react-bootstrap/Badge";
 import styles from "../styles/MoreDropdown.module.css";
-import { fetchMessages, markMessagesAsRead } from "../api/messages";
+import { markMessagesAsRead } from "../api/messages";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../api/axiosDefaults";
+import { NavLink } from "react-bootstrap";
 
 /**
  * The forwardRef is important!!
@@ -15,7 +15,13 @@ import { axiosReq } from "../api/axiosDefaults";
  * Event handler triggered on icon click.
  */
 const MessageIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
-  <div className={styles.IconWrapper} onClick={onClick} ref={ref}>
+  <NavLink
+    to="/direct-messages"
+    className={styles.NavLink}
+    activeClassName={styles.Active}
+    onClick={onClick}
+    ref={ref}
+  >
     <i
       className="fas fa-envelope" />
     <span className={styles.IconText}>Messages</span>
@@ -24,7 +30,7 @@ const MessageIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
         {unreadCount}
       </Badge>
     )}
-  </div>
+  </NavLink>
 ));
 
 /**
@@ -91,13 +97,10 @@ const MessageDropdown = () => {
 
 
   return (
-    <div
-      className="ml-auto">
       <MessageIcon
         onClick={handleIconClick}
         unreadCount={unreadCount}
       />
-    </div>
   );
 };
 

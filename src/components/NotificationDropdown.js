@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Dropdown from "react-bootstrap/Dropdown";
 import Badge from "react-bootstrap/Badge";
 import styles from "../styles/MoreDropdown.module.css";
 import { axiosReq } from "../api/axiosDefaults";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { useHistory } from "react-router";
+import { NavLink } from "react-bootstrap";
 
 
 /**
@@ -15,16 +15,22 @@ import { useHistory } from "react-router";
  * Event handler triggered on icon click.
  */
 const NotificationIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
-  <div className={styles.IconWrapper} onClick={onClick} ref={ref}>
-    <i
-      className="fas fa-bell" />
+  <NavLink
+    to="/notifications"
+    className={styles.NavLink}
+    activeClassName={styles.Active}
+    onClick={onClick}
+    ref={ref}
+  >
+      <i
+        className="fas fa-bell" />
       <span className={styles.IconText}>Notifications</span>
-    {unreadCount > 0 && (
-      <Badge className={`${styles.badge} badge`}>
-        {unreadCount}
-      </Badge>
-    )}
-  </div>
+      {unreadCount > 0 && (
+        <Badge className={`${styles.badge} badge`}>
+          {unreadCount}
+        </Badge>
+      )}
+  </NavLink>
 ));
 
 /**
@@ -73,10 +79,10 @@ const NotificationDropdown = () => {
     fetchNotifications();
   }, [currentUser]);
 
-/**
- * Marks all unread notifications as 'read' via an API request.
- * Updates local state to reflect the changes.
- */
+  /**
+   * Marks all unread notifications as 'read' via an API request.
+   * Updates local state to reflect the changes.
+   */
   const markAsRead = async () => {
     try {
       if (unreadCount > 0) {
@@ -91,10 +97,10 @@ const NotificationDropdown = () => {
     }
   };
 
-/**
- * Marks notifications as read and navigates user to the
- * notifications page.
- */
+  /**
+   * Marks notifications as read and navigates user to the
+   * notifications page.
+   */
   const handleIconClick = async () => {
     markAsRead();
     history.push("/notifications")
@@ -102,13 +108,10 @@ const NotificationDropdown = () => {
 
 
   return (
-    <div
-      className="ml-auto">
       <NotificationIcon
         onClick={handleIconClick}
         unreadCount={unreadCount}
       />
-    </div>
   );
 };
 

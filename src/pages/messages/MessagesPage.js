@@ -30,7 +30,7 @@ const DisplayMessages = () => {
           fetchUser(id),
         ]);
         // Reverse messages for ordering
-        setMessages(messagesData.results.reverse());
+        setMessages(messagesData.results);
         // Set username state and fallback if data is missing
         setUsername(userData?.owner || `User ${id}`)
       } catch (error) {
