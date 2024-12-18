@@ -92,13 +92,107 @@
 |As a Site owner I can receive messages submitted through the form so that I can respond to the messages.| Functionality in place so the user gets an automated email confirming that the message has been recieved and admin gets the user's submitted message to the email.|✅
 
 
+## Manual Testing
+
+
+### Landing page
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Carousel slider**  | Images are sliding as expected and the slider is hidden on small screens.   | ✅ |
+| **Sign in url**  | The url for the signin page is correct. | ✅ |
+| **Login form**  | The sign in form with input fields username and password are correctly displayed. |  ✅ |
+| **'Sign Up' Link** | If user doesn't have an account, user can click on the link leading to the sign up form instead. | ✅ |
+| **Navlinks**  | The navlinks, sign in and sign up are correctly displayed. |  ✅ |
+
+### Sign up form
+Unauthenticated users can create an account.
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Sign up form**   | The sign up form with input fields username, password and confirm password are correctly displayed. |  ✅ |
+| **Form validation** | Incorrect or incomplete fields will be displayed with the relevant error and the user will remain on the page. | ✅ |
+| **Submit** | Form submission is working correctly and user is redirected to the sign-in page upon successful submission. | ✅ |
+| **'Sign In' Link** | If user aldready has an account, user can click on the link leading to the sign in form instead. | ✅ |
+| **Navlinks**  | The navlinks, sign in and sign up are correctly displayed. |  ✅ |
+
+
+### Login form
+Authenticated users can sign in to existing account.
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Login form**  | Renders the following input fields: username and password.  | ✅  |
+| **Form validation** | Incorrect or incomplete fields will be displayed with the relevant error and the user will remain on the page. | ✅ |
+| **Submit** | Form submission is working correctly and user is re-directed to home page upon succesful submission.  | ✅  |
+| **'Sign Up' Link** | If doesn't have an account, user can click on the link leading to the sign up form instead. | ✅ |
+| **Navlinks**  | The navlinks, sign in and sign up are correctly displayed. |  ✅ |
+
+
+
+### Navigation
+#### Not signed In
+ The navigation links and the icon can be found in the navbar or in the drop-down menu on smaller screens.
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Icon**             | User is redirected back to landing page. | ✅  |
+| **'Sign In' Link**   | User is directed to Login form.          | ✅  |
+| **'Sign Up' Link**   |  User is directed to Sign Up form.       | ✅ |
+
+
+#### Signed In
+ The navigation links and the icon can be found in the navbar or in the drop-down menu on smaller screens.
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Home Link**           | The link is working as expected and navigates to Home page. | ✅ |
+| **Feed Link**           | The link is working as expected and navigates to the feed page. |✅ |
+| **Liked Link**          | The link is working as expected and navigates to the liked page.   |✅ |
+| **Notifications Link**  | The link is working as expected and navigates to the notifications page. |✅ |
+| **Messages Link**       | The link is working as expected and navigates to the message page. |✅ |
+| **"Sign out" Link**    | The link is working as expected and navigates to the sign in page.|✅ |
+
+#### Home page
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Search posts**   |Search functionality is working correctly. |✅ |
+| **View posts**           | All posts are correctly displayed. | ✅ |
+| **Clicking on a post**    | Working correctly and navigates to post page | ✅ |
+| **Infinite scroll**       | Infinite scroll is working correctly. |✅ |
+| **Most followed profiles**  | The most followed profiles section, with avatar image, username and follow/unfullow button are correctly displayed.   |✅ |
+| **Follow/unfollow button**   |Clicking on follow/unfollow button triggers the correct behaviour. |✅ |
+| **Users avatar images**   |Clicking on users avatar image in most followed profiles is working correctly and navigates to users profiles. |✅ |
+
+### Create Post
+Authenticated users can create a post
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Plus sign icon**   | The link to posts create page is working correctly and |✅ |
+| **Upload image**     | Uploading an image is working correctly, and user is informed if image size is exceeded. |✅ |
+| **Post content**     | Input fields for title and content are working correctly. |✅ |
+| **Add hashtag**     | The functionality when # is typed in the input field and suggestions are displayed is working as expected. Typing without using a hashtag without using suggestion from list is also working as expected.|✅ |
+| **Form validation** |The field, 'Title' cannot be empty and an error message will be displayed if empty and the user will remain on the page. | ✅ |
+| **Submit**           |Form submission is working correctly and user is redirected to the post page upon successful submission. | ✅ |
+
+
+
+### Log out
+Authenticated users can sign out from their account.
+
+| Feature 	           | Action    |  Expected Result                         | Pass/Fail |
+|----------------------|-----------|------------------------------------------|-----------|
+| **'Logout' link** | Click | User is directed to logout page, asking user to confirm or cancel the logout action. | Pass |
+| **Sign out button** | Click | When clicked, a self-closing success message of the logout is displayed to the user. User is re-directed to the landing page with the navbar for unauthenticated users.      | Pass      |
+| **Cancel button** | Click | When clicked, user is re-directed to the dashboard. | Pass |
 
 
 ## Validator Testing
 ### W3C HTML
 |**TEST**|**ACTION**|**EXPECTATION**|**RESULT**|
 |-------------------------|---------------------------|---------------------------|-------------|
-|public/index.html| [W3C CSS](https://jigsaw.w3.org/css-validator/) | [No issues found](src/assets/testing-images/app.module.css.PNG) | ✅ |
+|public/index.html| [W3C html](https://validator.w3.org/) | [Info fixed](src/assets/testing-images/W3C_html_fixed.png) | ✅ |
 
 ### W3C CSS
 
@@ -122,89 +216,18 @@
 |SignInupForm.module.css| [W3C CSS](https://jigsaw.w3.org/css-validator/) | [No issues found](src/assets/testing-images/signin.signup.module.PNG)  | ✅ |
 <br>
 
-**Fixed errors**
-<details>
-  <summary>Inventory page</summary>
+### ESLint Javasript
+<details open>
+  <summary>ESLint warnings</summary>
 
-  ![Inventory page](docs/readme_images/inventory_page_errors.png)
-  ![Inventory page](docs/readme_images/inventory_page_no_errors.png)
+   ![ESLint warnings](src/assets/testing-images/Eslint_warnings.PNG)
 </details>
 
+<details open>
+  <summary>ESLint all clear</summary>
 
-<details>
-  <summary>Inventory detail page</summary>
-
-  ![Inventory detail page](docs/readme_images/inventory_detail_error.png)
-  ![Inventory detail page](docs/readme_images/inventory_detail_no_errors.png)
+   ![ESLint all clear](src/assets/testing-images/Eslint_all_clear.PNG)
 </details>
-
-
-<details>
-  <summary>Inventory clone page</summary>
-
-  ![Inventory clone page](docs/readme_images/inventory_clone_errors.png)
-  ![Inventory clone page](docs/readme_images/inventory_clone_no_errors.png)
-</details>
-
-<details>
-  <summary>Log In page</summary>
-
-  ![Log In page](docs/readme_images/login_page_errors.png)
-  ![Log In page](docs/readme_images/login_page_no_errors.png)
-</details>
-
-<details>
-  <summary>Log out page</summary>
-
-  ![Log out page](docs/readme_images/log_out_page_errors.png)
-  ![Log out page](docs/readme_images/logut_page_no_errors.png)
-</details>
-
-### CSS
-No errors were found when passing my CSS file through
-[W3C CSS Validator](https://jigsaw.w3.org/css-validator/).
-
-<details>
-  <summary>CSS</summary>
-
-  ![Jshint](docs/readme_images/css_validation.png)
-</details>
-
-
-### JavaScript
-No errors were found when passing the javascript code through
-[Jshint](https://jshint.com).
-
-<details>
-  <summary>Jshint</summary>
-
-  ![Jshint](docs/readme_images/jshint_validation.png)
-</details>
-
-### Python
-All Python files were run through Pep8. A lot of errors were
-returned. The errors involved too long lines, whitespaces, trailing
-whitespaces, blank lines and "continuation line under-indented for visaul
-indent. I resolved the trailing whitespace issue by enabling "Trim Trailing
-Whitespace" in file -> preferences -> settings, under the section file here
-in Gitpod. I also added a ruler in settings (settings.json) set to 78 to make
-sure that the lines I needed to correct wouldn't exceed that line. I resolved
-all the errors and ran the code for each page through Pep8 again and no errors were returned.
-
-
-<details>
-  <summary>Pep8 errors</summary>
-
-  ![Python Pep8](docs/readme_images/pep8_validation_errors.png)
-  ![Python Pep8](docs/readme_images/pep8_validation_errors2.png)
-</details>
-
-<details>
-  <summary>Pep8 all clear</summary>
-
-   ![Python Pep8](docs/readme_images/pep8_validation_clear.png)
-</details>
-
 
 
 ### Lighthouse
@@ -212,13 +235,13 @@ Ligthouse testing was carried out in Incognito mode to achieve best results.
 <details>
   <summary>Lighthouse results desktop</summary>
 
-   ![Lighthouse desktop](docs/readme_images/lighthouse_desktop.png)
+   ![Lighthouse desktop]()
 </details>
 
 <details>
   <summary>Lighthouse results mobile</summary>
 
-   ![Lighthouse mobile](docs/readme_images/lighthouse_mobile.png)
+   ![Lighthouse mobile]()
 </details>
 
 ## Browser Testing
@@ -252,198 +275,6 @@ Inventory Manager was tested on Microsoft Edge, Google Chrome, Firefox and Safar
 
   ## Friends and Family
    - Family members and friends were asked to test the website for bugs and overall experience.
-
-## Manual Testing
-
-
-### Landing Page
-| Feature               | Action  | Expected Result                       | Pass/Fail |
-|-----------------------|---------|---------------------------------------|-----------|
-| **'Sign Up' Button**  | Click   | User is directed to Sign up form      | Pass      |
-| **'Sign In' Button**  | Click   | User is directed to the Sign in form  | Pass      |
-
-### Navigation
-#### Not signed In
-
- The navigation links and the icon can be found in the navbar or in the drop-down menu on smaller screens.
-
-| Feature 	           | Action    |  Expected Result                         | Pass/Fail |
-|----------------------|-----------|------------------------------------------|-----------|
-| **Icon**             | Click     | User is redirected back to landing page. | Pass      |
-| **'Sign In' Link**   | Click     | User is directed to Login form.          | Pass      |
-| **'Sign Up' Link**   | Click 	   | User is directed to Sign Up form.        | Pass      |
-
-
-#### Signed In
-
- The navigation links and the icon can be found in the navbar or in the drop-down menu on smaller screens.
-
-| Feature 	           | Action    |  Expected Result                                                                 | Pass/Fail |
-|----------------------|-----------|----------------------------------------------------------------------------------|-----------|
-| **Icon**             | Click     | User is redirected back to Inventory page.                                       | Pass      |
-| **Dashboard**        | Display   | User is on the dashboard page with dashboard being displayed as the active link. | Pass      |
-| **My lists**         | Click     | Once the user creates a list the user can find each list here, in a dropdown menu. When a list is clicked from here, the user is directed to the Saved List view.                                                                | Pass      |
-| **Categories**       | Click 	   | User is directed to Categories page.                                             | Pass      |
-| **Contact us**       | Click     | User is directed to Contact page.                                                | Pass      |
-| **"Log out" Link**   | Click 	   | User is directed to Log out page.                                                   | Pass      |
-
-
-
-
-### Sign up form
-Unauthenticated users can create an account.
-
-| Feature            | Action  | Expected Result                                                                                                                                                     | Pass/Fail |
-|--------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| **Sign up form**   | Display | Renders the following input fields: Email, username, password and password confirm.                                                                                 | Pass      |
-| **Submit** | Click | User is directed to a page where the user is informed that a verification link has been sent and the user needs to verify by clicking on that link, from their mail. After confirmation, the user will see the sign-in form instead. | Pass      |
-|**Form incomplete** | Display | Incorrect or incomplete fields will be displayed with the relevant error and the user will remain on the page. | Pass |
-| **'Sign In' Link** | Click | If user aldready has an account, user can click on the link leading to the sign in form instead. | Pass      |
-
-
-### Login form
-
-Authenticated users can sign in to existing account.
-
-| Feature               | Action  | Expected Result                                             | Pass/Fail |
-|-----------------------|---------|-------------------------------------------------------------|-----------|
-| **Login form**        | Display | Renders the following input fields: username and password.  | Pass      |
-| **Submit** | Click | Upon successful login, user is re-directed to the dashboard, with a self-closing success message with the username.  | Pass
-|**Form incomplete** | Display | Incorrect or incomplete fields will be displayed with the relevant error and the user will remain on the page. | Pass |
-| **Remember me**       | Check | When the "remember me" checkbox is ticked, the form is pre-populated with username and hidden password when user logs in again after the user have logged out.  | Pass      |
-| **Password reset**    | Click | When clicked, the user is directed to the password reset page where the user fills out their email and submits. An email with the reset link is then sent to the user.  | Pass      |
-| **''Google' button**  | Click   | User is directed to a separate page where user needs to confirm logging in with a third party. After that, user needs to enter email and password for gmail. Upon successful login, user is re-directed to the dashboard, with a self-closing success message with the username.  | Pass      |
-| **"Sign Up" Link** | Click | If user doesn't have an account, user can click on the link leading to the sign up form instead. | Pass      |
-
-
-
-### Create Inventory
-
-Authenticated users can create inventory lists.
-
-| Feature              | Action  | Expected Result                                      | Pass/Fail |
-|----------------------|---------|------------------------------------------------------|-----------|
-| **Plus sign icon**   | Click   | The inventory form is toggled                        | Pass      |
-| **Inventory Form**   | Display | The input field and category dropdown are rendered.  | Pass      |
-| **Submit**           | Click   | User is redirected to the Itemsform upon successful login, with a self-closing success message  | Pass      |
-|**Form incomplete**   | Display | Incorrect or incomplete field will be displayed with the relevant error and the user will remain on the page. | Pass |
-| **Unique name**      | Display | The list name needs to be unique. If not, an error message will display and user will remain on the page.  | Pass      |
-
-
-Authenticated users can add items to their inventory lists as well as edit and delete items.
-
-
-### Add Items to inventory
-| Feature              | Action  | Expected Result                                      | Pass/Fail |
-|----------------------|---------|------------------------------------------------------|-----------|
-| **'Add item' button**  | Click   | If user clicks without adding an item a self-closing error message will display and user remains on the page. User can add multiple items by clicking on add item.                  | Pass      |
-| **Edit and delete icons**   | Display | Once an item is added, an edit and delete icon will be visible on the same row.  | Pass      |
-| **Edit icon**   | Click| When clicked, the readonly attribute is removed from the items row and inline editing is enabled.  | Pass
-| **Delete icon**   | Click| When clicked, a confirm delete modal will display. If confirmed, a self-closing success message will display and user will stay on the Itemsform.  | Pass
-| **Save list without items**   | Display | An error message will display and user remains on the page.  | Pass      |
-| **Submit**           | Click| User is redirected to the Dashboard upon successful login, with a self-closing success message.   | Pass      |
-
-
-### Dashboard
-Authenticated users can see their inventory lists on the dashboard along with functionalities such as: scan QR-code, download QR-code, share QR-code, clone list and view list details (where the user can edit and delete a list.).
-
-### Numbered list in alphabetical order
-| Feature               | Action  | Expected Result                       | Pass/Fail |
-|-----------------------|---------|---------------------------------------|-----------|
-| **Number next to list name**    |Display  | When the inventory list is created, a number, starting at 1 will automatically be appended next to the list name.      | Pass      |
-| **Sorted in alfabetical order**  |Display  | The list displayed in the dashboard are sorted in alfabetical order to find lists easily. | Pass      |
-
-
-### QR-code
-| Feature               | Action  | Expected Result                       | Pass/Fail |
-|-----------------------|---------|---------------------------------------|-----------|
-| **QR-code image**    | Display | The QR-code image is associated with the inventory list. When scanned the user will see the Saved list view without the edit/delete functionality since only the owner of the list can edit or delete a list.      | Pass      |
-
-
-### Download and Share
-| Feature               | Action  | Expected Result                              | Pass/Fail |
-|-----------------------|---------|----------------------------------------------|-----------|
-| **'Download' link**   | Click   | A new tab is opened with the QR-code image    | Pass      |
-| **'Share' link**      | Click   | Users email with the QR-code link and a pre-populated message is displayed in a new window.  | Pass     |
-
-
-### View Details
-| Feature               | Action  | Expected Result                       | Pass/Fail |
-|-----------------------|---------|---------------------------------------|-----------|
-| **'View details' Button**  | Click   | User is directed to the Saved List view where the user can Edit and Delete the inventory list.      | Pass      |
-
-
-
-### Clone list
-
-Authenticated users can clone a list, so the user can reuse and/or adapt an existing list.
-| Feature               | Action  | Expected Result                       | Pass/Fail |
-|-----------------------|---------|---------------------------------------|-----------|
-| **'Clone list' Button**  | Click   | User is directed to the Itemsform. | Pass      |
-| **'Clone list' Itemsform**  | Display  | User can add more items, edit or delete items before cloning the list. | Pass      |
-| **'Submit'**    | Click   | User is redirected to the dashboard with a self-closing success message. | Pass      |
-| **The cloned list**  | Display  |"Cloned" is appended to the cloned list to avoid violating the unique name constraint. | Pass
-| **Clone same list again**  | Click   |When the "clone list" button is clicked on the original list, an error message about list already being cloned is displayed and user remains on the page (the dashboard). | Pass      |
-
-
-
-### Saved inventory list
-
-Authenticated users will see the inventory list and edit and delete list functionality. Only list owner will see the view with the edit and delete option when QR-code is scanned.
-
-| Feature               | Action  | Expected Result                               | Pass/Fail |
-|-----------------------|-----------------|---------------------------------------|-----------|
-|**Saved inventory list view**  | Click/Scan   | User is directed to the saved inventory list view by clicking on "View details", clicking on "My lists" in the navbar and choosing a list or by scanning the QR-code.                                                             | Pass      |
-| **Saved list**  | Display   | User can view the inventory list and its content. | Pass      |
-| **'Edit list' button**  | Click  | User can edit the list and upon click, the user will be directed to the Itemsform. There, the user can click on edit, delete or add items.  | Pass      |
-| **'Delete list' button'**  | Click   |  When clicked, a confirm delete modal will display. If confirmed, a self-closing success message will display and user will be re-directed to the dashboard. | Pass      |
-
-
-### Categories
-
-Authenticated users can create unique categories, edit and delete.
-
-| Feature              | Action  | Expected Result                              | Pass/Fail |
-|----------------------|---------|----------------------------------------------|-----------|
-| **Plus sign icon**   | Click   | The category form is toggled.                | Pass      |
-| **Category Form**    | Display | The name input field is rendered.            | Pass      |
-| **Submit**           | Click   | A success message with a self-closing success message will display and user stays on category page. | Pass      |
-|**Incomplete form**   | Display | Incorrect or incomplete field will be displayed with the relevant error and the user will remain on the page. | Pass |
-| **Unique name**      | Display | The category name needs to be unique. If not, an error message will display and user will remain on the page.  | Pass      |
-| **Edit icon**   | Click   | When the icon is clicked, the readonly attribute is removed from the category name, and inline editing is enabled. A save button is also visible now. Upon successful submission, a self-closing success message will display and user remains on the page.               | Pass      |
- **Delete icon**   | Click   | When clicked, a confirm delete modal will display. If confirmed, a self-closing success message will display and user will remain on the page.           | Pass      |
-
-
-### Contact Form
-Authenticated users can submit a message using the contact form.
-
-| Feature              | Action  | Expected Result                                            | Pass/Fail |
-|----------------------|---------|------------------------------------------------------------|-----------|
-| **'Contact us' link**  | Click   | Takes the user to the contact form.                         | Pass      |
-| **Contact Form**     | Display | Name, email and message are all required fields.           | Pass      |
-| **Submit**           | Click   | A success message with a self-closing success message will display and user stays on the page. | Pass      |
-| **Incomplete form**  | Display | Incorrect or incomplete field will be displayed with the relevant error and the user will remain on the page.                         | Pass      |
-| **Email confirmation**| Display| User will get an email confirmation of the recieved message.                        | Pass      |
-
-
-### Log out
-Authenticated users can sign out from their account.
-
-| Feature 	           | Action    |  Expected Result                         | Pass/Fail |
-|----------------------|-----------|------------------------------------------|-----------|
-| **'Logout' link** | Click | User is directed to logout page, asking user to confirm or cancel the logout action. | Pass |
-| **Sign out button** | Click | When clicked, a self-closing success message of the logout is displayed to the user. User is re-directed to the landing page with the navbar for unauthenticated users.      | Pass      |
-| **Cancel button** | Click | When clicked, user is re-directed to the dashboard. | Pass |
-
-
-
-### Footer
-The footer remains the same for authenticated and unauthenticated users.
-
-| Feature 	           | Action    |  Expected Result                         | Pass/Fail |
-|----------------------|-----------|------------------------------------------|-----------|
-| **Social media link icons** | Click | When clicked, a new tab is opened with the relevant social media site. | Pass |
-| **Privacy Policy link** | Click | When clicked, a new tab is opened to the privacy policy page. | Pass |
 
 
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styles from "../../styles/MoreDropdown.module.css";
 import { NotificationsDeleteDropdown } from '../../components/MoreDropdown';
 import { axiosReq } from "../../api/axiosDefaults";
 import ListGroup from "react-bootstrap/ListGroup";

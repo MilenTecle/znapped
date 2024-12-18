@@ -39,7 +39,7 @@ const NotificationIcon = React.forwardRef(({ onClick, unreadCount }, ref) => (
  * the user clicks on the icon.
  */
 const NotificationDropdown = () => {
-  const [notifications, setNotifications] = useState([]);
+  const [, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const currentUser = useCurrentUser();
   const history = useHistory();
