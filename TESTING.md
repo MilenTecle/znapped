@@ -109,6 +109,7 @@ Unauthenticated users can create an account.
 
 **Feature**|**Expectation**|**Result**
 |-------------------------|---------------------------|---------------------------|
+| **Logo**             | User is redirected back to sign in page. | ✅  |
 | **Sign up form**   | The sign up form with input fields username, password and confirm password are correctly displayed. |  ✅ |
 | **Form validation** | Incorrect or incomplete fields will be displayed with the relevant error and the user will remain on the page. | ✅ |
 | **Submit** | Form submission is working correctly and user is redirected to the sign-in page upon successful submission. | ✅ |
@@ -135,7 +136,7 @@ Authenticated users can sign in to existing account.
 
 **Feature**|**Expectation**|**Result**
 |-------------------------|---------------------------|---------------------------|
-| **Icon**             | User is redirected back to landing page. | ✅  |
+| **Logo**             | User is redirected back to landing page. | ✅  |
 | **'Sign In' Link**   | User is directed to Login form.          | ✅  |
 | **'Sign Up' Link**   |  User is directed to Sign Up form.       | ✅ |
 
@@ -145,6 +146,7 @@ Authenticated users can sign in to existing account.
 
 **Feature**|**Expectation**|**Result**
 |-------------------------|---------------------------|---------------------------|
+| **Logo**           | Is working as expected and navigates to Home page when clicked.
 | **Home Link**           | The link is working as expected and navigates to Home page. | ✅ |
 | **Feed Link**           | The link is working as expected and navigates to the feed page. |✅ |
 | **Liked Link**          | The link is working as expected and navigates to the liked page.   |✅ |
@@ -156,6 +158,7 @@ Authenticated users can sign in to existing account.
 
 **Feature**|**Expectation**|**Result**
 |-------------------------|---------------------------|---------------------------|
+| **Active Home icon**   | The icon is correctly displayed as active when navigated to the home page.|✅ |
 | **Search posts**   |Search functionality is working correctly. |✅ |
 | **View posts**           | All posts are correctly displayed. | ✅ |
 | **Clicking on a post**    | Working correctly and navigates to post page | ✅ |
@@ -169,23 +172,127 @@ Authenticated users can create a post
 
 **Feature**|**Expectation**|**Result**
 |-------------------------|---------------------------|---------------------------|
-| **Plus sign icon**   | The link to posts create page is working correctly and |✅ |
-| **Upload image**     | Uploading an image is working correctly, and user is informed if image size is exceeded. |✅ |
+| **Plus sign icon**   | The link to posts create page is working correctly and navigates to post create page.|✅ |
+| **Active Plus sign icon**   | The icon is correctly displayed as active when navigated to post create page.|✅ |
+| **Search functionality**   |Search functionality is working correctly, filters posts by username, post title and hashtag . |✅ |
 | **Post content**     | Input fields for title and content are working correctly. |✅ |
 | **Add hashtag**     | The functionality when # is typed in the input field and suggestions are displayed is working as expected. Typing without using a hashtag without using suggestion from list is also working as expected.|✅ |
 | **Form validation** |The field, 'Title' cannot be empty and an error message will be displayed if empty and the user will remain on the page. | ✅ |
 | **Submit**           |Form submission is working correctly and user is redirected to the post page upon successful submission. | ✅ |
 
+### Feed page
 
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Feed icon**   | The link to feed page is working correctly and navigates to the feed page.|✅ |
+| **Active Feed icon**   | The icon is correctly displayed as active when navigated to the feed page.|✅ |
+| **Search functionality**   |Search functionality is working correctly, filters posts by username, post title and hashtag . |✅ |
+| **Content**     | The feed page correctly displays all posts. |✅ |
+
+### Liked page
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Like Icon**   | The link to liked page is working correctly and navigates to the liked page.|✅ |
+| **Active Liked icon**   | The icon is correctly displayed as active when navigated to the liked page.|✅ |
+| **Search functionality**   |Search functionality is working correctly, filters posts by title and hashtag . |✅ |
+| **Content**     | The liked page correctly displays all posts liked by the current user. |✅ |
+
+### Liked functionality
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Like reactions**   | Choose from different reactions is working correctly.|✅ |
+| **Like reactions count**   | When liking a post with a reaction, or switch between reactions the likes couunt is updated accordingly.|✅ |
+| **Post owner cant' like**   | Works correctly as the post owner can't like their own posts.|✅ |
+
+### Comment functionality
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Comment field**   | Correctly displayed under each post.|✅ |
+| **Comment submission**   | Working correctly and the comment is added to the post.|✅ |
+| **comments count**   | Working correctly and the comments count goes up after the comment has been subitted or if comment is deleted, the count goes down.|✅ |
+| **Edit/delete dropdown**           |Is correctly displayed for the comment owner and toggled when clicked. | ✅ |
+| **Edit comment**           |Correctly displays the comment field as an inline edit field when clicked on and the comment can be edited. | ✅ |
+| **Edit comment form submission**           |Working correctly and comment is updated with the edited content when save is clicked. | ✅ |
+| **Cancel edit comment** |Working correctly when cancel button is clicked and the comment is displayed as is. | ✅ |
+| **Delete comment form submission** |Working correctly and comment is deleted when the delete button is clicked. | ✅ |
+
+
+### Notifications page
+Authenticated users can create a post
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Notifications Icon**   | The link to notifications page is working correctly and navigates to the notifications page.|✅ |
+| **Notifications Badge**   | Is correctly displaying the number of undread notifications, and resets the count upon click.|✅ |
+| **Notification list order**     | The notifications are displayed in the correct order, by the latest notification at the top and with the date displayed. |✅ |
+| **Displayed content**     | The notification type and the sender are correctly displayed. |✅ |
+| **Unread notification**     | An unread notification is correctly displayed with "New", and is marked as read when clicked. |✅ |
+| **Notifications link**     | When clicking on the notification, it correctly navigates to the relevant page. |✅ |
+| **Delete dropdown** | Is correctly displayed and works as expected by deleting the notification. |✅ |
+
+### Messages page
+Authenticated users can create a post
+
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Messagegs Icon**   | The link to messages page is working correctly and navigates to the messagegs page.|✅ |
+| **Messages Badge**   | Is correctly displaying the number of undread messages, and resets the count upon click.|✅ |
+| **Messages list order**     | The messages are displayed in the correct order, by the latest message at the top and with the date displayed. |✅ |
+| **Displayed content**     | The message sender is correctly displayed. |✅ |
+| **Unread messages**     | An unread message is correctly displayed with "New", and is marked as read when clicked. |✅ |
+| **Messages link**     | When clicking on the message, it correctly navigates to the exchanges conversation page. |✅ |
+| **Delete dropdown** | Is correctly displayed and works as expected by deleting the notification. |✅ |
+
+### Messages conversation page
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Displays the username**     | Correctly displays whom the conversation is with by displaying the username. |✅ |
+| **Message exchange**     | Correctly differentiates the conversation for the sender and receiver with different colors, blue and white. |✅ |
+| **Submit**           |Form submission is working correctly and the message is correctly displayed at the bottom. | ✅ |
+| **Input field**     | Correctly clears the input field after submission. |✅ |
+
+### Profile page
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Profile icon**     | The link to the profile page is working correctly and navigates to the users profile. |✅ |
+| **Displayed content**     | The users username, number of post, followers and following, and the users posts are correctly displayed. |✅ |
+| **Edit dropdown**           |Is correctly displayed and toggled when clicked. | ✅ |
+
+#### Edit Profile
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Edit profile**     |Correctly navigates to edit profile page when clicked. | ✅ |
+| **Change image**     |Changing image is working correctly and upon form submission, navigates back to profile page. | ✅ |
+| **Edit Bio**     |Working correctly when editing bio and upon form submission, navigates back to profile page. | ✅ |
+| **Cancel Button**     |Working correctly and when clicked, navigates back to profile page. | ✅ |
+
+#### Change username
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Change username**     |Correctly navigates to edit username page when clicked. | ✅ |
+| **Input field**     |Correctly displays the input field, 'change username'. | ✅ |
+| **Form validation**     |Correctly displays error if changing to a username that already exists. | ✅ |
+| **Form submission**     |Working correctly when changing username and upon form submission, navigates back to profile page. | ✅ |
+| **Cancel Button**     |Working correctly and when clicked, navigates back to profile page. | ✅ |
+
+#### Change password
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Change password**     |Correctly navigates to edit password page when clicked. | ✅ |
+| **Input fields**     |Correctly displays the input fields, 'new password' and 'confirm password'. | ✅ |
+| **Form validation**     |Correctly displays error if passwords doesn't match. exists. | ✅ |
+| **Form submission**     |Working correctly when changing password and upon form submission, navigates back to profile page. | ✅ |
+| **Cancel Button**     |Working correctly and when clicked, navigates back to profile page. | ✅ |
 
 ### Log out
 Authenticated users can sign out from their account.
 
-| Feature 	           | Action    |  Expected Result                         | Pass/Fail |
-|----------------------|-----------|------------------------------------------|-----------|
-| **'Logout' link** | Click | User is directed to logout page, asking user to confirm or cancel the logout action. | Pass |
-| **Sign out button** | Click | When clicked, a self-closing success message of the logout is displayed to the user. User is re-directed to the landing page with the navbar for unauthenticated users.      | Pass      |
-| **Cancel button** | Click | When clicked, user is re-directed to the dashboard. | Pass |
+**Feature**|**Expectation**|**Result**
+|-------------------------|---------------------------|---------------------------|
+| **Sign Out**     | Works correctly and redirects user to sign-in page after log out. |✅ |
 
 
 ## Validator Testing
