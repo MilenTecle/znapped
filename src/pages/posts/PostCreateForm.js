@@ -108,9 +108,9 @@ function PostCreateForm() {
     formData.append(
       "hashtag_names",
       hashtagNames
-      .split(" ")
-      .map((name) => name.trim().replace(/^#+/, ""))
-      .filter((name) => name));
+        .split(" ")
+        .map((name) => name.trim().replace(/^#+/, ""))
+        .filter((name) => name));
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);

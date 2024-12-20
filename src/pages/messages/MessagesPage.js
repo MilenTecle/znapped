@@ -33,7 +33,7 @@ const DisplayMessages = () => {
         ]);
 
         // Reverse messages for ordering
-        setMessages(messagesData.results.reverse);
+        setMessages(messagesData.results);
         // Set username state and fallback if data is missing
         setUsername(userData?.username || `User ${id}`)
       } catch (error) {

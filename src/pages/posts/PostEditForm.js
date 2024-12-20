@@ -127,12 +127,14 @@ function PostEditForm() {
     formData.append("content", content);
 
     if (imageInput?.current.files[0]) {
-       formData.append("image", imageInput.current.files[0]);
+      formData.append("image", imageInput.current.files[0]);
     }
     formData.append(
       "hashtag_names",
-      hashtagNames.replace(/#/g, ""))
-
+      hashtagNames
+        .split(" ")
+        .map((name) => name.trim().replace(/^#+/, ""))
+        .filter((name) => name));
 
     // Send PUT request to update the post
     try {
