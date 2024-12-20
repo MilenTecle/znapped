@@ -147,7 +147,7 @@ const Post = (props) => {
               to={`/?hashtag=${hashtag.name}`}
               key={hashtag.id}
             >
-              {hashtag.name}{" "}
+              #{hashtag.name}{" "}
             </Link>
           ))}
           {is_owner ? (

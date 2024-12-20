@@ -42,10 +42,10 @@ function PostCreateForm() {
         // Fetch hashtag suggestions
         const { data: hashtagData } = await axiosReq.get("posts/hashtags/");
         const validHashtags = hashtagData.results
-          .filter((hashtag) => String(hashtag.name).trim())
+          .filter((hashtag) => (hashtag.name).trim())
           .map((hashtag) => ({
             id: hashtag.id,
-            display: String(hashtag.name),
+            display: `#${hashtag.name.replace(/^#+/, "#")}`,
           }));
         setHashtags(validHashtags)
       } catch (err) {
@@ -107,7 +107,10 @@ function PostCreateForm() {
     formData.append("image", imageInput.current.files[0]);
     formData.append(
       "hashtag_names",
-      hashtagNames.split(" ").map((name) => name.trim()).filter((name) => name));
+      hashtagNames
+      .split(" ")
+      .map((name) => name.trim().replace(/^#+/, ""))
+      .filter((name) => name));
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
@@ -158,6 +161,7 @@ function PostCreateForm() {
         <MentionsInput
           className={styles.MentionsInput}
           value={hashtagNames}
+          name="hashtagNames"
           onChange={handleHashtagChange}
           onKeyDown={handleKeyDown}
           placeholder="Type # for hashtags"

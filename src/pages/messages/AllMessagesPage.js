@@ -12,24 +12,43 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const AllMessagesPage = () => {
   const [messages, setMessages] = useState([]);
-  const currentUser = useCurrentUser;
+  const currentUser = useCurrentUser();
 
   // Fetch all direct messages on component mount
   useEffect(() => {
+    let isMounted = true;
+
     const getMessages = async () => {
+      if (!currentUser?.pk) {
+        return
+      }
       try {
         const { data } = await axiosReq.get("/direct-messages/");
-        setMessages(data.results);
+
+        const filteredMessages = data.results.filter(
+          (message) => message.receiver === currentUser.pk
+        )
+
+        if (isMounted) {
+           setMessages(filteredMessages);
+        }
+
       } catch (error) {
+        console.error("Error fetcing messages:", error);
       }
     };
 
     getMessages();
-  }, []);
- // Mark a message as read
+
+    return () => {
+      isMounted = false;
+    };
+  }, [currentUser?.pk]);
+
+  // Mark a message as read
   const handlemarkAsRead = async (message) => {
     if (!message.read) {
-        // API call to mark messages as read
+      // API call to mark messages as read
       await markMessagesAsRead([message.id]);
       setMessages((prevMessages) =>
         prevMessages.map((msg) =>
@@ -42,7 +61,7 @@ const AllMessagesPage = () => {
   // Handles deletion of a message
   const handleDelete = async (id) => {
     try {
-        // API call to delete a message
+      // API call to delete a message
       await axiosReq.delete(`/direct-messages/${id}/`)
       console.log(`Message with ID ${id} deleted`)
       setMessages((prevMessages) =>
@@ -60,9 +79,9 @@ const AllMessagesPage = () => {
         {messages.length > 0 ? (
           <ListGroup variant="flush" className="mb-4">
             {messages.map((message) => {
-                // Determine the other user involved in the message
+              // Determine the other user involved in the message
               const otherUser =
-                currentUser.id === message.sender
+                currentUser.pk === message.sender
                   ? message.receiver_name
                   : message.sender_name;
 
@@ -72,7 +91,8 @@ const AllMessagesPage = () => {
                   className="d-flex justify-content-between align-items-center"
                 >
                   <Link
-                    to={`/direct-messages/${message.receiver || message.sender}`}
+                    to={`/direct-messages/${
+                      currentUser.pk === message.sender ? message.receiver : message.sender}`}
                     onClick={() => handlemarkAsRead(message)}
                   >
                     From: {otherUser}

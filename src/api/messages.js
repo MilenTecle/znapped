@@ -27,6 +27,7 @@ export const fetchMessages = async (userId = null) => {
  */
 export const sendMessage = async (receiverId, content) => {
   try {
+    console.log("SEnding message to receiver ID:", receiverId)
     // Perform a POST request to create a new direct message
     const { data } = await axiosRes.post(`/direct-messages/`, {
       receiver: receiverId,
@@ -38,11 +39,11 @@ export const sendMessage = async (receiverId, content) => {
 };
 
 // Fetch a specific user's profile details from the API.
-export const fetchUser = async(userId) => {
+export const fetchUser = async(profileId) => {
   try {
-    const { data } = await axiosReq.get(`/profiles/${userId}/`);
+    const { data } = await axiosReq.get(`/profiles/${profileId}/`);
     // Return the fetched user profile data.
-    return data;
+    return { username: data.owner };
   } catch (error) {
   }
 }

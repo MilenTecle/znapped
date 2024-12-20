@@ -5,7 +5,7 @@ import { markMessagesAsRead } from "../api/messages";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../api/axiosDefaults";
-import { NavLink } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 /**
  * The forwardRef is important!!

@@ -44,13 +44,17 @@ function PostEditForm() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/${id}`)
-        const { title, content, image, is_owner, hashtagNames } = data;
+        const { title, content, image, is_owner, hashtags } = data;
+
+        const formattedHashtags = hashtags
+          .map((hashtag) => `#${hashtag.name}`.replace(/^#+/, "#"))
+          .join(" ");
 
         /**
          * If user is the owner, populate the form with the post data
          * otherwise redirect.
          */
-        is_owner ? setPostData({ title, content, image, hashtagNames }) : history.push("/");
+        is_owner ? setPostData({ title, content, image, hashtagNames: formattedHashtags, }) : history.push("/");
       } catch (err) {
         // console.log(err);
       }
@@ -59,18 +63,18 @@ function PostEditForm() {
     handleMount();
   }, [history, id]);
 
-  // Fetch the available hashtags from the  API
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: hashtagData } = await axiosReq.get("/hashtags/");
-        setHashtags(
-          hashtagData.results.map((hashtag) => ({
+        // Fetch hashtag suggestions
+        const { data: hashtagData } = await axiosReq.get("posts/hashtags/");
+        const validHashtags = hashtagData.results
+          .filter((hashtag) => (hashtag.name).trim())
+          .map((hashtag) => ({
             id: hashtag.id,
-            display: hashtag.name
-          }))
-        );
-
+            display: `#${hashtag.name.replace(/^#+/, "#")}`,
+          }));
+        setHashtags(validHashtags)
       } catch (err) {
         console.log(err);
       }
@@ -79,7 +83,7 @@ function PostEditForm() {
     fetchData();
   }, []);
 
-  // Handle changes to text fields (title, content, hashtags)
+  // Handle changes to text fields (title, content)
   const handleChange = (event) => {
     setPostData({
       ...postData,
@@ -121,10 +125,14 @@ function PostEditForm() {
 
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("image", imageInput.current.files[0]);
+
+    if (imageInput?.current.files[0]) {
+       formData.append("image", imageInput.current.files[0]);
+    }
     formData.append(
       "hashtag_names",
-      hashtagNames.split(" ").map(name => name.trim()).filter(name => name));
+      hashtagNames.replace(/#/g, ""))
+
 
     // Send PUT request to update the post
     try {
@@ -177,6 +185,7 @@ function PostEditForm() {
         <MentionsInput
           className={styles.MentionsInput}
           value={hashtagNames}
+          name="hashtagNames"
           onChange={handleHashtagChange}
           onKeyDown={handleKeyDown}
           placeholder="e.g., #travel, #food"

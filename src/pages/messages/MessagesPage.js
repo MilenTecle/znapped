@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import { axiosReq } from "../../api/axiosDefaults";
 
 
 const DisplayMessages = () => {
@@ -18,28 +19,32 @@ const DisplayMessages = () => {
   const currentUser = useCurrentUser();
 
   useEffect(() => {
+
+    if (!currentUser?.pk || !id) {
+      return;
+    }
     // Fetch all messages with the selected user
     const retrieveMessages = async () => {
-      if (!id) {
-        return;
-      }
       try {
         // API call to fetch messages and user details at the same time
         const [messagesData, userData] = await Promise.all([
           fetchMessages(id),
           fetchUser(id),
         ]);
+
         // Reverse messages for ordering
-        setMessages(messagesData.results);
+        setMessages(messagesData.results.reverse);
         // Set username state and fallback if data is missing
-        setUsername(userData?.owner || `User ${id}`)
+        setUsername(userData?.username || `User ${id}`)
       } catch (error) {
         console.error("Error fetching messages or user details:", error);
       }
     };
 
+
     retrieveMessages();
-  }, [id]);
+
+  }, [id, currentUser?.pk]);
 
 
   // Handling sending a new message
@@ -51,8 +56,10 @@ const DisplayMessages = () => {
       // API call to send message
       const message = await sendMessage(id, newMessage);
       // Add new message to state
-      setMessages((prevMessages) => [...prevMessages, message]);
-      setNewMessage("");
+      if (message.receiver === currentUser.id) {
+        setMessages((prevMessages) => [...prevMessages, message]);
+        setNewMessage("");
+      }
     } catch (error) {
     }
   };
@@ -63,10 +70,10 @@ const DisplayMessages = () => {
       <div className="overflow-auto mb-4">
         {/* Loop through and display all messages */}
         {messages.map((message) =>
-          message && message.sender_name ? (
+          message ? (
             <Row
               key={message.id}
-              className={`my-2 ${message.sender_name === currentUser?.username
+              className={`my-2 ${message.sender === currentUser?.pk
                 ? 'justify-content-end'
                 : 'justify-content-start'
                 }`}
@@ -74,7 +81,7 @@ const DisplayMessages = () => {
               <Col xs={10} md={8} lg={6}>
                 <Card
                   className={
-                    message.sender_name === currentUser?.username
+                    message.sender === currentUser?.pk
                       ? 'bg-primary text-white'
                       : 'bg-light'
                   }
@@ -90,25 +97,25 @@ const DisplayMessages = () => {
         )}
       </div>
       <Form>
-          <Col xs={12} md={8} lg={6}>
-            <Form.Group controlId="messageInput">
-              <Form.Control
-                as="textarea"
-                rows={2}
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Type your message..."
-              />
-            </Form.Group>
-            <Button
-              variant="primary"
-              onClick={handleSendMessage}
-              className="float-end"
-              disabled={!newMessage.trim()}
-            >
-              Send
-            </Button>
-          </Col>
+        <Col xs={12} md={8} lg={6}>
+          <Form.Group controlId="messageInput">
+            <Form.Control
+              as="textarea"
+              rows={2}
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              placeholder="Type your message..."
+            />
+          </Form.Group>
+          <Button
+            variant="primary"
+            onClick={handleSendMessage}
+            className="float-end"
+            disabled={!newMessage.trim()}
+          >
+            Send
+          </Button>
+        </Col>
       </Form>
     </Container>
   );

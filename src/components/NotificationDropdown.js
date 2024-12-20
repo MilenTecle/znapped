@@ -4,8 +4,7 @@ import styles from "../styles/MoreDropdown.module.css";
 import { axiosReq } from "../api/axiosDefaults";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { useHistory } from "react-router";
-import { NavLink } from "react-bootstrap";
-
+import { NavLink } from "react-router-dom";
 
 /**
  * The forwardRef is important!!

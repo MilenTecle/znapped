@@ -416,19 +416,14 @@ Testing and the results can be found [here](/TESTING.md).
   - [Heroku](https://www.heroku.com) - The cloud based platform to deploy the site on.
 
   ## Libraries & Frameworks
-  - [Boostrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/) - Was used to style the app and make it responsive.
-  - [Cloudinary](https://cloudinary.com/) - Used to upload the QR-code images.
-  - [Crispy-boostrap5](https://pypi.org/project/crispy-bootstrap5/) - To render Django forms in a Boostrap 5 style.
-  - [Django-allauth](https://docs.allauth.org/en/latest/) - Authentication library used to create the user accounts.
-  - [Django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/) - Used to render the forms.
-  - [Django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/) - Was used for debugging during the project.
-  - [Gunicorn](https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/gunicorn/) - Python HTTP server for WSGI applications.
-  - [Psycopg2](https://pypi.org/project/psycopg2/) - PostgreSQL database adapter for Python.
-  - [QRcode](https://django-qr-code.readthedocs.io/en/latest/) -  Used to generate QR codes.
-  - [Whitenoise](https://whitenoise.readthedocs.io/en/latest/) - To serve static files directly from Django.
+    - [Axios]() - API communication.
+    - [ESLint]() - Linting rules for JavaScript code.
+    - [Jwt-decode]() - Decoding JWTs token.
+    - [React-bootstrap]() - API communication.
+    - [React.js]() - A Javascipt library wich is widely used to create user interfaces.
+    - [React-router-dom]() - Navigation.
 
   Additional information is available in the [requirements.txt file](requirements.txt)
-
 
 
    ## Tools & Programs
@@ -437,14 +432,8 @@ Testing and the results can be found [here](/TESTING.md).
 - [Font Awesome](https://fontawesome.com/) - Was used for Social Media icons in footer and other icons throughout the application.
 - [Google Fonts](https://fonts.google.com/) - Was used to import fonts to the page.
 
-- [JS-hint](https://jshint.com/) - Was used for Javascript Validation.
 - [Lucid charts]() - Was used to create the ERD diagrams.
-- [PEP-8]() - Was used for Python Validation.
-- [Responsinator](http://www.responsinator.com/) - Was also used to ensure that the website is responsive on diffrerent devices.
 - [W3C](https://www.w3.org/) - Was used for HTML and CSS Validation.
-- [Web Formatter](https://webformatter.com/html) - Was used to make sure the format looks good.
-- [WEBP Converter](https://cloudconvert.com/webp-to-png)- Also used to reduce the file size and keep the image quality.
-- [TinyPNG](https://jshint.com/) - Was used to reduce the file size and keep the image quality of the background image.
 
 
 ## Deployment
