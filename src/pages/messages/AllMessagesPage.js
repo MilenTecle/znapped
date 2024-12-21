@@ -24,10 +24,10 @@ const AllMessagesPage = () => {
       }
       try {
         const { data } = await axiosReq.get("/direct-messages/");
-
-        const filteredMessages = data.results.filter(
-          (message) => message.receiver === currentUser.pk
-        )
+        console.log("FEtched messages:", data.results)
+        const filteredMessages = data.results
+          .filter((message) => message.receiver === currentUser.pk)
+          .reverse();
 
         if (isMounted) {
            setMessages(filteredMessages);

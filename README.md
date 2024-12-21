@@ -118,7 +118,7 @@ The frontend is built using React.js and includes:
 ## Agile
 The development of this project followed an agile approach, emphasizing flexibility from initial planning to final implemenation. To facilitate the management of tasks
 and user stories, a GitHub project was created, using the Kanban board method. To gain insights to the project's progress and detailed user stories, including their
-associated tasks, please see link to the project board [here](https://github.com/users/MilenTecle/projects/5). Each user story has been categorized with labels indicating its importance and relevance to the overall functionality and usability of the application.
+associated tasks, please see link to the project board [here](https://github.com/users/MilenTecle/projects/6). Each user story has been categorized with labels indicating its importance and relevance to the overall functionality and usability of the application.
 
 ### Site Owner Goals
 The primary goals for Znapped include:
@@ -358,6 +358,12 @@ The wireframes were produced via Balsamiq.
   ![Messages page](src/assets/readme-images/messages_page.PNG)
 </details>
 
+<details>
+  <summary>Direct Message conversation</summary>
+
+  ![Direct Message](src/assets/readme-images/message_conversation.PNG)
+</details>
+
   <details open>
   <summary>Delete messages</summary>
 
@@ -367,7 +373,7 @@ The wireframes were produced via Balsamiq.
 
 ### Features left to implement
 1. Add video upload functionality for posts. I was planning on implementing that but I had to leave it out due to time constraints.
-2. Implement user mentions for post captions. I was planning on implementing this as well but I hade to leave this out as well due to time constraints.
+2. Implement user mentions for post captions and comments. I was planning on implementing this as well but I hade to leave this out as well due to time constraints to get it to function properly.
 3. Instant reply functionality in messages. I didn't have time to implement this but for the future I'm planning to add this as well.
 4. Add success messages when user logs in and performs edit and delete operations.
 

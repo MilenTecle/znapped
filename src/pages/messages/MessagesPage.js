@@ -32,7 +32,9 @@ const DisplayMessages = () => {
           fetchUser(id),
         ]);
 
-        // Reverse messages for ordering
+        console.log("Fetched messages:", messagesData.results)
+
+        // Replace state with the new message
         setMessages(messagesData.results);
         // Set username state and fallback if data is missing
         setUsername(userData?.username || `User ${id}`)
@@ -56,10 +58,8 @@ const DisplayMessages = () => {
       // API call to send message
       const message = await sendMessage(id, newMessage);
       // Add new message to state
-      if (message.receiver === currentUser.id) {
-        setMessages((prevMessages) => [...prevMessages, message]);
-        setNewMessage("");
-      }
+      setMessages((prevMessages) => [...prevMessages, message]);
+      setNewMessage("");
     } catch (error) {
     }
   };

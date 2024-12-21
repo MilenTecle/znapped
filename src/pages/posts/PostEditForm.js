@@ -132,9 +132,11 @@ function PostEditForm() {
     formData.append(
       "hashtag_names",
       hashtagNames
-        .split(" ")
+        .split(/[\s,]+/)
         .map((name) => name.trim().replace(/^#+/, ""))
-        .filter((name) => name));
+        .filter((name) => name)
+        .join(" ")
+    );
 
     // Send PUT request to update the post
     try {
@@ -196,6 +198,7 @@ function PostEditForm() {
             trigger="#"
             data={hashtags}
             className={styles.HighlightedHashtag}
+            markup="#__display__"
           />
         </MentionsInput>
       </Form.Group>

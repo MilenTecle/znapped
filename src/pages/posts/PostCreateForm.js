@@ -71,6 +71,8 @@ function PostCreateForm() {
    * Updates the 'hashtagNames' field in the postData state when user types
    * or modifies hashtags in the input field
    */
+
+  // Handle changes to the hashtag input
   const handleHashtagChange = (event) => {
     setPostData({
       ...postData,
@@ -108,9 +110,11 @@ function PostCreateForm() {
     formData.append(
       "hashtag_names",
       hashtagNames
-        .split(" ")
-        .map((name) => name.trim().replace(/^#+/, ""))
-        .filter((name) => name));
+        .split(/[\s,]+/)
+        .map((name) => name.trim().replace(/^#+/, "#"))
+        .filter((name) => name)
+        .join(" ")
+    );
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
