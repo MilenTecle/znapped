@@ -387,7 +387,7 @@ Inventory Manager was tested on Microsoft Edge, Google Chrome, Firefox and Safar
 
 
 ## Bugs
-I encountered numerous bugs and errors throughout this project. The errors would at times originate from the backend, and other times from the front-end. As this is my first React project, most of the errors and bugs I encountered were learning curves, initial hurdles and typos.
+I encountered numerous bugs and errors throughout this project. The errors would at times originate from the backend, and other times from the front-end. As this is my first React project, most of the errors and bugs I encountered were learning curves, initial hurdles and typos. Many of the errors were related to 401 unauthorized errors, refresh and user. I eg. had to add a check to ensure a refresh token exists before trying to refresh. I also had to adjust the useEffect hooks for messages to exit early and wait for currentUser to be set.
 
 
 The images below will display some of the issues resolved:
