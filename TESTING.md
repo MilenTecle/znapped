@@ -34,62 +34,69 @@
 
 ## User Story Testing
 
-### User Profile
+### Navigation & Authentication
 
 **User Story**|**Test**|**Result**
 :------|:------|:----:
-|As a Site User, I can create an account so that I can start managing my inventories.| Sign up page exists, with a form where the user can fill out the required fields and submit the form.| ✅
-|As a Site user, I can verify my account via the verification link sent to my email upon registration.| The user will recieve a verification link to email used when signing up. When clicked on link user can confirm email address and then login.| ✅
-|As a Site User, I can login to my account so that I can access my existing inventories.| Login page exists, where user can enter username and password to login and user will login to the dashboard.| ✅
-|As a Site User, I can login via Google so that I have several login options.| A google button in the login page exists, which allows the user to login using Google. The user will login to the dashboard.| ✅
-
-### User Navigation
-
-**User Story**|**Test**|**Result**
-:------|:------|:----:
-|As a Site User I can navigate easily through the site due to a responsive navbar so that I understand where to go and it is always visible to me.| The navigation bar is responsive by using Bootstrap and on small screens a hamburger dropdown is displayed. The logo takes user back to landing page/dashboard.| ✅
-|As a Site User, I can see my lists in a dropdown list from the navigation bar, so that I can navigate to my lists easily.| When a logged in user creates and saves an inventory list, the list is automatically added to the dropdown menu.| ✅
-|As a Site User I can click on the social media links so that I can explore the work of the developer and see the developers profile.| User can click on the the social media icons, LinkedIn and Github that will open in a new tab.| ✅
+|As a User, I can access a navigation bar on every page so I can easily browse between different sections of the app.| The navbar is correctly displayed with all of the icons and accessible so the user can navigate to different content.| ✅
+|As a User, I can navigate between pages without refreshing so that I experience fast and smooth transitions.| The user can click on the icons that will navigate the user smoothly to a different page.| ✅
+|As a User, I can create an account so that I can access features available only to registered users.| Sign up page exists, where user can enter username and password to create an account and user will be re-directed to the sign-in page.| ✅
+|As a User I can log into my account so that I can use the functionality available to logged-in users.| Sign in page exists, where user can enter username and password to sign in and user will be re-directed to the home page.| ✅
+|As a User, I can easily tell whether I am logged in or not so that I know when I need to sign in. | The full functionality of the app is only visible for logged-in users and it is clear that the user is logged in can access all of the content.| ✅
+|As a logged out-user, I can see sign-in and sign-up options in the navbar so that I can access my account or create a new one.| It is visibly clear that I can sign-in or sign-up to acces the apps content.|  ✅
 
 
-### User Feedback
-**User Story**|**Test**|**Result**
-:------|:------|:----:
-|As a Site User, I can receive feedback whenever I make an action, so that I know if my action was successful or not.| The user will see a success message whenever an action is successful. If not, an error message will display telling the user about the errror. The messages are self-closing.| ✅
-
-### Create Inventories
+### Post Interaction (Comments, Likes, Edit)
 
 **User Story**|**Test**|**Result**
 :------|:------|:----:
-|As a Site User, I can create unique inventory lists so that I can't create inventory lists with the same name.| If the user tries to create an inventory list with a name that already exists, the user will get a self-closing error message.|  ✅
-|As a Site User, I can create an inventory list and add multiple items at once, so that I can organize my belongings efficiently.| Inventory form where the list name and category exists and when saved, let's user add multiple items at once. User can also edit and delete the items.| ✅
+|As a User, I can read comments on a post so that I can engage with the community’s thoughts on the content.| The comments are accessible for the logged-in user to read.| ✅
+As a logged-in user, I can comment on posts so that I can share my opinions or reactions.| The comment field is correctly dislayed for the logged-in user and user can create a comment.| ✅
+As a logged-in user, I can like posts with different reactions so that I can express appreciation or support for content that interests.| User can like a post with a chosen reaction and or change liked reaction type and it updates accordingly. | ✅
+As a User, I will receive notifications when someone likes my post so that I know when my content is appreciated.| User gets notified displayed in the badge in the bell icon. User can click to view the details of the notification and get redirected to the liked post.| ✅
+As a logged-in user, I can view a collection of posts I’ve liked so that I can easily revisit content I enjoy.
+User can see all the posts they have liked when navigating to the liked page.| ✅
+As a User, I will receive notifications when someone comments on my post so that I I stay informed about new interactions.| User gets notified displayed in the badge in the bell icon. User can click to view the details of the notification and gets redirected to the post.| ✅
+As a post owner, I can edit the title or description of my post so that I can update or correct content after posting.| User can edit their posts content; image, title, description and hashtags. The post gets updated upon save. | ✅
+As a comment owner, I can delete or edit my comments so that I can control the content I’ve shared.| User can edit their comments with inline editing for easy editing and delete a comment by clicking on the delete icon.| ✅
 
-### Manage Inventories
 
+
+### The Feed on homepage
 **User Story**|**Test**|**Result**
 :------|:------|:----:
-|As a Site User, I can generate a QR code for my inventory so that I can identify my belongings easily.| The QR-code image associated with the inventory will be generated when the inventory list is saved and displayed on the dashboard.|  ✅
-|As a Site User, I can scan the QR code so that I can see my inventory list immediately.| As the list owner I can see the items in the list and edit and/or delete the list when the QR-code is scanned. When shared, the edit and delete buttons will not be visible.| ✅
-|As a Site User, I can share my inventory with others using the generated QR code so that I can provide a visual and efficient view of the contents of my Inventory to others.| A "Share" link exists where user can share the QR-code via email with a pre-populated message and the url-link inlcuded| ✅
-|As a Site User I can clone my lists so that I can reuse a list and just modify it.| A "Clone list" button exists where user can clone a lists with its items and also add more items, delete or edit.| ✅
-|As a Site User, I can see numbers next to the inventory list name so that I can find boxes with an qr code easily if I have many boxes.| When the user creates and saves a list, a number, starting from 1 is automatically added next to the list name| ✅
+|As a User, I can see the latest posts ordered by the most recent so that I stay up to date with new content.| The user can see the latest posts at the top of the feed along with the post creation date.| ✅
+|As a User, I can search for posts by keywords so that I can quickly find posts and user profiles that interest me.| The user can search for posts by keywords such as post title and username and those posts will display.| ✅
+|As a logged-in user, I can see posts from users I follow so that I can keep track of their updates.| The user can all the posts from users they follow in the feed.| ✅
+|As a User, I can see a list of the most popular profiles so that I can see which profiles are the most popular.| The user can see the list of the most popular profiles to right displayed with their avatar image and username. The user can choose to follow/unfollow by directly clicking on the button. The user can navigate to their profiles by clicking on the avatar image.| ✅
 
 
-
-### Contact Form
+### User profiles & Profile page
 **User Story**|**Test**|**Result**
 :------|:------|:----:
-|As a Site User, I can make contact through a contact form, so that I can ask questions, report issues or make suggestions.| A contact form exists, where the user can submit a message. A succes message will display when sent.|✅
+|As a User, I can view profiles of other users so that I can learn more about them and their posts.| The user can see users profile displayed with information about number of posts, following and followers.| ✅
+|As a User, , I can see all the posts by a specific user so that I can explore their content or catch up on their latest updates.| The user can see all the posts by the user displayed, and if the user has no posts, it will display that the user hasn't posted yet.| ✅
+|As a logged-in user, I can edit my profile picture, bio, and other details so that I can personalize my account.| The opition to edit the profile are displayed with three dots, and when clicked a dropdown menu with options to edit the profile. When clicked the user can choose to edit their profile image and bio. The content is updated upon save.| ✅
+|As a logged-in user, I can change my username and password so that I can maintain account security.| The user change their username and/or password when clicking on the three dots that will toggle the dropdown menu. The input fields will display errors if passwords doesn't match or the username is already taken. Upon save, the information is updated. |✅
+|As a User, I can scroll through posts continuously without having to click on next pages so that browsing is more convenient.| The user can scroll through posts without interuptions since infinite scroll is implemented.| ✅
 
-
-### Site Administration
-
+### Follows
 **User Story**|**Test**|**Result**
 :------|:------|:----:
-|As a Site owner I can log in to the admin dashboard using my username and password so that I can access the functionalities of the superuser.| Created a superuser, using Django AllAuth to acces the admin panel.| ✅
-|As a Site owner I can view a list of all inventory items so that I can edit, delete or add items, inventories and categories.| The models are registred in the admin panel which allows admin to add new items and add, edit, delete items/inventories/categories.| ✅
-|As a Site Owner I can download the QR codes for each inventory so that I can share the QR codes with team members.| The QR-code URL field is included in the admin panel so admin can access the QR-code url.| ✅
-|As a Site owner I can receive messages submitted through the form so that I can respond to the messages.| Functionality in place so the user gets an automated email confirming that the message has been recieved and admin gets the user's submitted message to the email.|✅
+|As a logged-in user, I can follow or unfollow users so that I can manage whose content appears in my feed.| The user can choose to follow or unfollow other users easily, by clicking on the follow/unfollow button next to the user in the most popular profiles list. The option fo follow/unfollow is also available on the user's profile page. When clicking on follow/unfollow in the user's profile page, the follow count will go up/down for immediate user feedback.| ✅
+|As a user, I will receive a notification when someone starts following me so that I can stay informed about new connections.| User gets notified displayed in the badge in the bell icon. User can click to view the details of the notification and get redirected to user's profile page.| ✅
+
+### Hashtags & tags
+**User Story**|**Test**|**Result**
+:------|:------|:----:
+|As a user, I can add hashtags to my posts so that they can be categorized and discovered by other users.| The user can add a hashtag in the input field when creating a post. The user can type their own hashtag or from a rendered suggestions list when typing #.| ✅
+|As a user, I can search for posts using hashtags so that I can find content related to specific topics or themes.| User can search for posts in the search field by hashtag names and the posts connected to the hashtag will display.| ✅
+|As a user, I can, I can tag or mention another users in comments for direct interaction/attention with a specific user.| User can type @ in the comment field and a list of users will display for user to choose whom they want to mention.| ❌
+
+### Direct Messages
+**User Story**|**Test**|**Result**
+:------|:------|:----:
+|As a user, I I can send a message directly to a user so that we can have separate conversation.| The user can send a message directly to another user when clicking on the message button on user's profile page. User gets notified displayed in the badge in the envelope icon. User can click to view the details of the message and gets redirected to specific conversation when clicked. | ✅
 
 
 ## Manual Testing

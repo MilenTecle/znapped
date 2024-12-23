@@ -75,7 +75,9 @@ The frontend is built using React.js and includes:
 ### Post Interaction (Comments, Likes, Edit)
 - Post Comments: As a user, I can read comments on a post so that I can engage with the community’s thoughts on the content.
 - Add Comments: As a logged-in user, I can comment on posts so that I can share my opinions or reactions.
+Like posts: As a logged-in user, I can like posts with different reactions so that I can express appreciation or support for content that interests me.
 - Like Notifications: As a user, I will receive notifications when someone likes my post so that I know when my content is appreciated.
+- Liked Posts: As a logged-in user, I can view a collection of posts I’ve liked so that I can easily revisit content I enjoy.
 - Comment Notifications: As a user, I will receive notifications when someone comments on my post so that I stay informed about new interactions.
 - Edit Posts: As a post owner, I can edit the title or description of my post so that I can update or correct content after posting.
 - Delete/Modify Comments: As a comment owner, I can delete or edit my comments so that I can control the content I’ve shared.
@@ -84,7 +86,6 @@ The frontend is built using React.js and includes:
 ### The Feed on homepage
 - View Recent Posts: As a user, I can see the latest posts ordered by the most recent so that I stay up to date with new content.
 - Search Posts: As a user, I can search for posts by keywords so that I can quickly find posts and user profiles that interest me.
-- Liked Posts: As a logged-in user, I can view a collection of posts I’ve liked so that I can easily revisit content I enjoy.
 - Followed Users' Posts: As a logged-in user, I can see posts from users I follow so that I can keep track of their updates.
 - As a user, I can see a list of the most popular profiles so that I can see which profiles are the most popular.
 
