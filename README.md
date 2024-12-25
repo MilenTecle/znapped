@@ -21,8 +21,9 @@ Live Links
     - [5 planes of UX](#5-planes-of-ux)
     - [Design](#design)
         - [Images](#images)
-        - [Colours](#colours)
-        - [Fonts](#fonts)
+        - [Colour Scheme](#colour-scheme)
+        - [Typography](#typography)
+        - [Resonsive Design](#responsive-design)
         - [Wireframes](#wireframes)
 - [Features](#features)
  -  [Authenticaton](#authentication)
@@ -131,33 +132,43 @@ The primary goals for Znapped include:
 ## 5 planes of UX
 
 ### Strategy
-Deliver a user-friendly social media app focusing on engagement and content sharing.
+The primary objective of this applicatoin is to provide users with an intuitive and interactive social media platform. It focuses on enabling users to share content, engage with others through likes and comments, and build connections through follows and direct messaging. Accessibility and responsivness are prioritized to ensure a seamless experience for all users.
 
 ### Scope
-Features include posts, comments, likes, follows, notifications and messaging.
+The application offers a comprehensive set of features including:
+- Creatin and managing posts with images.
+- Engaging with other users through comments and likes.
+- Following other users to see their activities.
+- Notifications to stay updated on activities.
+- A private messaging system for direct communication.
 
 ### Structure
-Easy navigation with clear paths to key features.
+The application is structured to offer easy navigation through key features like the home feed, user profiles, notifications and messages. Each feature is accessible through a clear and consistent navigations menu, with logical transitions between pages.
 
 ### Skeleton
-Intuitive layouts for all devices with responsive design.
+The user interface is designed with responsivness in mind, ensuring compability across mobile, tablet and desktop devices. Essential UI elements such as buttons and forms are logically placed based on user experience. Layouts are intuitive and optimized to guide users naturally through tasks.
 
 ### Surface
-Modern, clean visuals with emphasis on functionality.
+The application is clean and modern. Its neutral colors and intuitive typography emphasize readability and functionality. Hover effects, transitions and active icons enhance interactivity for the user.
 
 
 ## Design
 
 ### Images
-Images are dynamically rendered based on user uploads, with placeholder assets for profiles and no-content states.
+- Images uploaded by user are displayed in posts and profiles.
+- Placeholder assets are used for profiles without a profile picture and for empty content sections to maintain visual consistency.
 
-### Colours
-A modern, neutral palette is used, ensuring high readability and accessibility.
+### Colour Scheme
+The application uses a modern, neutral color palette. The colour scheme ensures high readability, accessibility and a visually appealing experience across different devices.
 
+![Colour Scheme](src/assets/readme-images/colour-scheme.PNG)
 
-### Fonts
+### Typography
 Roboto is the main font used for the body of the application and Lato used for the headings. Sans Serif is the backup font. The fonts were imported via
 [Google Fonts](https//:fonts.google.com).
+
+### Responsive Design
+The application is designed to be fully responsive, adapting layouts and font sizes to provide a smooth user experience on all screen sizes.
 
 ## Wireframes
 The wireframes were produced via Balsamiq.

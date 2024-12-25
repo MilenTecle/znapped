@@ -27,15 +27,13 @@ const DisplayMessages = () => {
     const retrieveMessages = async () => {
       try {
         // API call to fetch messages and user details at the same time
-        const [messagesData, userData] = await Promise.all([
-          fetchMessages(id),
-          fetchUser(id),
-        ]);
+        const { data } = await axiosReq.get(`/direct-messages/?user_id=${id}`)
+        setMessages(data.results)
 
-        console.log("Fetched messages:", messagesData.results)
+        console.log("Fetched messages:", data.results)
 
-        // Replace state with the new message
-        setMessages(messagesData.results);
+        const { data: userData } = await axiosReq.get(`/profiles/${id}/`)
+        setMessages(data.results)
         // Set username state and fallback if data is missing
         setUsername(userData?.username || `User ${id}`)
       } catch (error) {
@@ -66,7 +64,7 @@ const DisplayMessages = () => {
 
   return (
     <Container>
-      <h1 className="text-center my-4">Conversation with {username || `User ${id}`}</h1>
+      <h1 className="text-center my-4">Conversation with {username}</h1>
       <div className="overflow-auto mb-4">
         {/* Loop through and display all messages */}
         {messages.map((message) =>

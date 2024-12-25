@@ -54,9 +54,8 @@
 As a logged-in user, I can comment on posts so that I can share my opinions or reactions.| The comment field is correctly dislayed for the logged-in user and user can create a comment.| ✅
 As a logged-in user, I can like posts with different reactions so that I can express appreciation or support for content that interests.| User can like a post with a chosen reaction and or change liked reaction type and it updates accordingly. | ✅
 As a User, I will receive notifications when someone likes my post so that I know when my content is appreciated.| User gets notified displayed in the badge in the bell icon. User can click to view the details of the notification and get redirected to the liked post.| ✅
-As a logged-in user, I can view a collection of posts I’ve liked so that I can easily revisit content I enjoy.
-User can see all the posts they have liked when navigating to the liked page.| ✅
-As a User, I will receive notifications when someone comments on my post so that I I stay informed about new interactions.| User gets notified displayed in the badge in the bell icon. User can click to view the details of the notification and gets redirected to the post.| ✅
+As a logged-in user, I can view a collection of posts I’ve liked so that I can easily revisit content I enjoy. | User can see all the posts they have liked when navigating to the liked page. |✅
+As a User, I will receive notifications when someone comments on my post so that I stay informed about new interactions.| User gets notified displayed in the badge in the bell icon. User can click to view the details of the notification and gets redirected to the post.| ✅
 As a post owner, I can edit the title or description of my post so that I can update or correct content after posting.| User can edit their posts content; image, title, description and hashtags. The post gets updated upon save. | ✅
 As a comment owner, I can delete or edit my comments so that I can control the content I’ve shared.| User can edit their comments with inline editing for easy editing and delete a comment by clicking on the delete icon.| ✅
 

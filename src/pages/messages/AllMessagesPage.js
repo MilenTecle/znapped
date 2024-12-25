@@ -24,7 +24,7 @@ const AllMessagesPage = () => {
       }
       try {
         const { data } = await axiosReq.get("/direct-messages/");
-        console.log("FEtched messages:", data.results)
+
         const filteredMessages = data.results
           .filter((message) => message.receiver === currentUser.pk)
           .reverse();
