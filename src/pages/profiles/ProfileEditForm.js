@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
+import styles from "../../styles/ProfilePage.module.css";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
@@ -130,7 +131,12 @@ const ProfileEditForm = () => {
               {/* Display the current profile image */}
               {image && (
                 <figure>
-                  <Image src={image} fluid />
+                  <Image
+                    className={styles.ProfileImage}
+                    src={image}
+                    fluid
+                    roundedCircle
+                  />
                 </figure>
               )}
               {errors?.image?.map((message, idx) => (

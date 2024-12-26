@@ -69,21 +69,21 @@ function SignInForm() {
         <Carousel interval={3000}>
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className={appStyles.Image}
               src="https://res.cloudinary.com/dbzkngkda/image/upload/v1732712404/iphone-2203712_1280_aitaft.jpg"
               alt="First slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className={appStyles.Image}
               src="https://res.cloudinary.com/dbzkngkda/image/upload/v1732712947/iceberg-8532935_1280_el3apb.jpg"
               alt="Second slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className={appStyles.Image}
               src="https://res.cloudinary.com/dbzkngkda/image/upload/v1732712404/lake-696098_1280_sbpjkb.jpg"
               alt="Third slide"
             />
