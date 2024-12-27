@@ -34,6 +34,11 @@ Live Links
   - [Notifications](#notifications)
   - [Messaging](#messaging)
   - [Features left to implement](#features-left-to-implement)
+- [Reusable Components](#reusable-components)
+    - [General](#general)
+    - [Context-specific](#context-specific)
+- [Custom hooks](#custom-hooks)
+- [Utilities](#utilities)
 - [CRUD](#crud)
 - [Database design](#database-design)
     - [Database Models](#database-models)
@@ -389,6 +394,73 @@ The wireframes were produced via Balsamiq.
 3. Instant reply functionality in messages. I didn't have time to implement this but for the future I'm planning to add this as well.
 4. Add success messages when user logs in and performs edit and delete operations.
 
+## Reusable Components
+
+### General
+1. Asset.js
+    - Purpose: A multi-functional component for displaying spinners, images and messages.
+    - Usage : Used across the app for loading states (fetching posts, profiles or displaying placeholders.)
+
+2. Avatar.js
+    - Purpose: Consistently displays user avatars with customizable size and text options.
+    - Usage : Used in profiles, comments, posts and navigation(Navbar.js, Post.js, Comment.js).
+
+3. MoreDropdown.js
+    - Purpose: Provides a flexible dropdown menu for managing edit and delete actions.
+    - Usage : Used in profiles, comments and posts for edit and delete options.
+
+
+### Context-specific
+
+1. Post.js
+    - Purpose: Displays individual post data, images and user interactions (likes, comments etc.).
+    - Usage : Used in PostsPage.js and PostPage.js.
+
+2. Comment.js
+    - Purpose: Displays individual comments with edit and delete functionality for comment owners.
+    - Usage : Used in PostPage.js to list post comments.
+
+3. Profile.js
+    - Purpose: Renders profile information with support for follow/unfollow actions.
+    - Usage : Used in PopularProfiles.js and ProfilePage.js
+
+3. NavBar.js
+    - Purpose: Provides navigation across the app with dynamic links based on user authentication state.
+    - Usage : Central navigation component used throughout the app.
+
+3. NotificationDropdown.js
+    - Purpose: Displays undread notifications in the navigation bar (bell icon).
+    - Usage : Used in NavBar.js to handle notification updates for user interactions like comments, follows and likes.
+
+4. MessageDropdown.js
+    - Purpose: Displays undread direct messages in the navigation bar (envelope icon).
+    - Usage : Used in NavBar.js to manage message notifications.
+
+5.  NotFound.js
+    - Purpose: Serves a fallback page for handling invalid routes or missing content.
+    - Usage : Utilized in the app's routing setup to display a 404 message and placeholder when a user navigates to a page that doesn't exist.
+
+## Custom hooks
+1. useclickOutsideToggle.js
+    - Purpose: Detects clicks outside a referenced element and toggles a state (e.g., closing dropdown menus).
+    - Usage: Used in NavBar.js to handle dropdown menus.
+
+2. useRedirect.js
+    - Purpose: Redirects users based on their authentication state, logged in or logged out.
+    - Usage: Used in SignInForm.js and SignUpForm.js.
+## Utilities
+
+## Utilities
+1. axiosDefaults.js
+    - Purpose: Centralizes Axios configurations for base URL, headers and credentials.
+    - Usage: Used throughout the app for standardized API requests.
+
+2. utils.js
+    - Purpose:Provides reusable utility functions for token handling, pagination and data manipulation.
+        - **fetchMoreData:** Manages fetching additional data for infinite scroll, avoiding duplicates.
+        - **followHelper & unfollowHelper:** Update profile data state for follow/unfollow actions.
+        - **setTokenTimeStamp, shouldRefreshtoken, removeTokenTimestamp:** Manage token expiration and refresh logic.
+    - Usage: Used for managing API responses, state updates and authentication logic.
 
 ## CRUD
 CRUD functionality is included in the above features.
@@ -512,7 +584,7 @@ The application was deployed to Heroku using the following steps:
 
 #### General
 - The Moments Walkthrough project served as the foundation of my frontend project.
--
+
 
 #### Notifications
 
@@ -524,6 +596,13 @@ The application was deployed to Heroku using the following steps:
 
 
 #### Hashtags
+
+#### Refresh tokens
+
+Used to resolve refresh token errors:
+- [Refersh token using Axios in React](https://medium.com/@aqeel_ahmad/handling-jwt-access-token-refresh-token-using-axios-in-react-react-native-app-2024-f452c96a83fc)
+
+- [React Logout User and Redirect to Login Page](https://stackoverflow.com/questions/74081508/react-logout-user-and-redirect-to-login-page-when-refresh-token-expires)
 
 
 
