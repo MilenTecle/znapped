@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
+import ConfirmationModal from "./ConfirmationModal";
 import styles from "../styles/MoreDropdown.module.css";
 import { useHistory } from "react-router";
 
@@ -16,55 +17,98 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   />
 ));
 
-// Provides edit and delete options for posts and comments
+/**
+ * Provides edit and delete options for posts and comments
+ * A confirmation modal is triggered before any delete action
+ */
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
-  return (
-    <Dropdown className="ml-auto" drop="left">
-      <Dropdown.Toggle as={ThreeDots} />
+  const [showModal, setShowModal] = useState(false);
 
-      <Dropdown.Menu
-        className="text-center"
-        popperConfig={{ strategy: "fixed" }}
-      >
-        <Dropdown.Item
-          className={styles.DropdownItem}
-          onClick={handleEdit}
-          aria-label="edit"
+  // Function to handle confirmation of delete action
+  const handleConfirmDelete = () => {
+    setShowModal(false);
+    handleDelete();
+  };
+
+  return (
+    <>
+      <Dropdown className="ml-auto" drop="left">
+        <Dropdown.Toggle as={ThreeDots} />
+
+        <Dropdown.Menu
+          className="text-center"
+          popperConfig={{ strategy: "fixed" }}
         >
-          <i className="fas fa-edit" />
-        </Dropdown.Item>
-        <Dropdown.Item
-          className={styles.DropdownItem}
-          onClick={handleDelete}
-          aria-label="delete"
-        >
-          <i className="fas fa-trash-alt" />
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+          <Dropdown.Item
+            className={styles.DropdownItem}
+            onClick={handleEdit}
+            aria-label="edit"
+          >
+            <i className="fas fa-edit" />
+          </Dropdown.Item>
+          {/* Delete option triggers the confirmation modal */}
+          <Dropdown.Item
+            className={styles.DropdownItem}
+            onClick={() => setShowModal(true)}
+            aria-label="delete"
+          >
+            <i className="fas fa-trash-alt" />
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
+      {/* Confirmation modal for delete action */}
+      <ConfirmationModal
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+        handleConfirm={handleConfirmDelete}
+        message="Are you sure you want to delete this item? This action cannot be undone."
+      />
+    </>
   );
 };
 
-// Custom "Three Dots" icon for delete option for messages and notifications.
-
+/**
+ * Custom "Three Dots" icon for delete option for messages and notifications.
+ * A confirmation modal is triggered before any delete action
+ */
 export const NotificationsDeleteDropdown = ({ handleDelete }) => {
-  return (
-    <Dropdown className="ml-auto" drop="left">
-      <Dropdown.Toggle as={ThreeDots} />
+  const [showModal, setShowModal] = useState(false);
 
-      <Dropdown.Menu
-        className="text-center"
-        popperConfig={{ strategy: "fixed" }}
-      >
-        <Dropdown.Item
-          className={styles.DropdownItem}
-          onClick={handleDelete}
-          aria-label="delete"
+  // Function to handle confirmation of delete action
+  const handleConfirmDelete = () => {
+    setShowModal(false);
+    handleDelete();
+  };
+
+  return (
+    <>
+      <Dropdown className="ml-auto" drop="left">
+        <Dropdown.Toggle as={ThreeDots} />
+
+        <Dropdown.Menu
+          className="text-center"
+          popperConfig={{ strategy: "fixed" }}
         >
-          <i className="fas fa-trash-alt" />
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+          {/* Delete option triggers the confirmation modal */}
+          <Dropdown.Item
+            className={styles.DropdownItem}
+            onClick={() => setShowModal(true)}
+            aria-label="delete"
+          >
+            <i className="fas fa-trash-alt" />
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
+      {/* Confirmation modal for delete action */}
+      <ConfirmationModal
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+        handleConfirm={handleConfirmDelete}
+        message="Are you sure you want to delete this notification?"
+      />
+    </>
   );
 };
 

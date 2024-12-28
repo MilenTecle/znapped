@@ -409,6 +409,10 @@ The wireframes were produced via Balsamiq.
     - Purpose: Provides a flexible dropdown menu for managing edit and delete actions.
     - Usage : Used in profiles, comments and posts for edit and delete options.
 
+4. ConfirmationModal.js
+    - Purpose: Displays a confirmation modal to prompt users before executing a delete action.
+    - Usage : Used for deleting posts, comments, notifications and messages.
+
 
 ### Context-specific
 
@@ -585,17 +589,55 @@ The application was deployed to Heroku using the following steps:
 #### General
 - The Moments Walkthrough project served as the foundation of my frontend project.
 
-
 #### Notifications
 
+Guide on how to implement the undread count for notifications
+- [Conditional Rendering](https://legacy.reactjs.org/docs/conditional-rendering.html)
+
+Build the notifications funtionality
+- [Building a Real Time Notification Center in React](https://dev.to/nikl/building-a-real-time-notification-center-in-react-99b)
+
+- [How to Create React Notifications without dependencies](https://tinloof.com/blog/how-to-create-react-notifications-with-0-dependencies)
+
+- [How to Add Post Notifications to Your React Applications](https://www.freecodecamp.org/news/how-to-add-post-notifications-to-your-react-applications/)
 
 #### Direct Messages
 
+Display sender and receiver
+- [How to properly display Messages between Sender and Receiver](https://stackoverflow.com/questions/62684375/how-to-properly-display-message-between-sender-and-receiver-in-reactjs)
+- [Tutorial - Build a ReactJS Chat App](https://www.scaledrone.com/blog/tutorial-build-a-reactjs-chat-app/)
 
-#### Mentions
+Render messages
+- [How to Render a New Message Without Re-rendering Previous Messages](https://stackoverflow.com/questions/65369378/how-to-render-a-new-message-without-re-rendering-previous-messages-in-react)
+- [Reading all messages at once in a Chat App](https://stackoverflow.com/questions/75199499/reading-all-the-messages-at-once-in-a-chat-app-updating-a-state-multiple-times)
+- [Re-render list of Chat Items for Every Chat Message?](https://stackoverflow.com/questions/76701147/is-it-ok-to-re-render-list-of-chat-items-for-every-chat-message-that-is-sent)
 
+Implementing notifications for messages
+- [A notification timeline using React](https://blog.greenroots.info/a-notification-timeline-using-react)
+
+Build Messages Functionality
+- [How to Build a Modern Chat Application with React JS for Beginners](https://thelinuxcode.com/how-to-build-a-modern-chat-application-with-react-js-for-beginners/)
+- [Buildning a Real-Time Chat App with ReactJS](https://www.freecodecamp.org/news/building-a-real-time-chat-app-with-reactjs-and-firebase/)
+- [How to Build a ReactJS Chat App in 10 Minutes](https://dev.to/scrimba/how-to-build-a-reactjs-chat-app-in-10-minutes-2j20)
 
 #### Hashtags
+
+Guides and code to the functionality of creating, detecting and formatting hashtags within text input.
+
+- [Mentions and hashtags in ReactJS](https://gauravadhikari.com/mentions-and-hashtags-in-reactjs/)
+- [React Mentions Example](https://stackblitz.com/edit/react-mentions?file=tags.js)
+- [How to Replace Word in TExt with Hashtag in React](https://stackoverflow.com/questions/63763553/how-to-replace-word-in-text-with-hashtag-in-react)
+-[Hashtag Formatter for Text Input in React](https://stackoverflow.com/questions/65815898/hashtag-formatter-text-input-react-native)
+
+
+Fetching Hashtag Data in React
+- [Building a Real-Time Social Network using Django Channels](https://nilcoalescing.com/blog/BuildingARealtimeSocialNetworkUsingDjangoChannels/)
+
+Working with Query Parameters in React
+- [Get Query Params in React](https://webtips.dev/solutions/get-query-params-in-react)
+- [Get and Set Query Parameters in React](https://www.codemzy.com/blog/get-set-query-params-react)
+- [The easiest way to Use Query Parameters in React](https://dev.to/brettfishy/the-easiest-way-to-use-query-parameters-in-react-1ioe)
+
 
 #### Refresh tokens
 
@@ -605,14 +647,8 @@ Used to resolve refresh token errors:
 - [React Logout User and Redirect to Login Page](https://stackoverflow.com/questions/74081508/react-logout-user-and-redirect-to-login-page-when-refresh-token-expires)
 
 
-
-#### Tests
-- [Tests](https://testdriven.io/blog/django-custom-user-model/)
-- [Transaction atomic](https://docs.djangoproject.com/en/5.0/topics/db/transactions/)
-
-#### Using Boostrap delete confirmation
-- [Delete confirmation](https://stackoverflow.com/questions/59566549/how-to-do-delete-confirmation-for-a-table-data-with-bootstrap-modal-in-django)
-
+#### Using React Boostrap delete confirmation
+- [Delete confirmation modal](https://react-bootstrap-v4.netlify.app/components/modal/)
 
 ### Content
 The content is written by the developer.
