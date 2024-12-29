@@ -5,7 +5,6 @@
     - [HTML](#html)
     - [CSS](#css)
     - [JavaScript](#javascript)
-    - [Python](#python)
     - [Lighthouse](#lighthouse)
 
 - [Browser Testing](#browser-testing)
@@ -24,9 +23,6 @@
     - [Contact Form](#contact-form)
     - [Logout](#log-out)
     - [Footer](#footer)
-
-
-- [Automated Testing](#python-automated-testing)
 - [Bugs](#bugs)
 
 
@@ -43,7 +39,7 @@
 |As a User, I can create an account so that I can access features available only to registered users.| Sign up page exists, where user can enter username and password to create an account and user will be re-directed to the sign-in page.| ✅
 |As a User I can log into my account so that I can use the functionality available to logged-in users.| Sign in page exists, where user can enter username and password to sign in and user will be re-directed to the home page.| ✅
 |As a User, I can easily tell whether I am logged in or not so that I know when I need to sign in. | The full functionality of the app is only visible for logged-in users and it is clear that the user is logged in can access all of the content.| ✅
-|As a logged out-user, I can see sign-in and sign-up options in the navbar so that I can access my account or create a new one.| It is visibly clear that I can sign-in or sign-up to acces the apps content.|  ✅
+|As a logged out-user, I can see sign-in and sign-up options in the navbar so that I can access my account or create a new one.| It is visibly clear that I can sign-in or sign-up to access the apps content.|  ✅
 
 
 ### Post Interaction (Comments, Likes, Edit)
@@ -51,7 +47,7 @@
 **User Story**|**Test**|**Result**
 :------|:------|:----:
 |As a User, I can read comments on a post so that I can engage with the community’s thoughts on the content.| The comments are accessible for the logged-in user to read.| ✅
-As a logged-in user, I can comment on posts so that I can share my opinions or reactions.| The comment field is correctly dislayed for the logged-in user and user can create a comment.| ✅
+As a logged-in user, I can comment on posts so that I can share my opinions or reactions.| The comment field is correctly displayed for the logged-in user and user can create a comment.| ✅
 As a logged-in user, I can like posts with different reactions so that I can express appreciation or support for content that interests.| User can like a post with a chosen reaction and or change liked reaction type and it updates accordingly. | ✅
 As a User, I will receive notifications when someone likes my post so that I know when my content is appreciated.| User gets notified displayed in the badge in the bell icon. User can click to view the details of the notification and get redirected to the liked post.| ✅
 As a logged-in user, I can view a collection of posts I’ve liked so that I can easily revisit content I enjoy. | User can see all the posts they have liked when navigating to the liked page. |✅
@@ -75,9 +71,9 @@ As a comment owner, I can delete or edit my comments so that I can control the c
 :------|:------|:----:
 |As a User, I can view profiles of other users so that I can learn more about them and their posts.| The user can see users profile displayed with information about number of posts, following and followers.| ✅
 |As a User, , I can see all the posts by a specific user so that I can explore their content or catch up on their latest updates.| The user can see all the posts by the user displayed, and if the user has no posts, it will display that the user hasn't posted yet.| ✅
-|As a logged-in user, I can edit my profile picture, bio, and other details so that I can personalize my account.| The opition to edit the profile are displayed with three dots, and when clicked a dropdown menu with options to edit the profile. When clicked the user can choose to edit their profile image and bio. The content is updated upon save.| ✅
+|As a logged-in user, I can edit my profile picture, bio, and other details so that I can personalize my account.| The option to edit the profile are displayed with three dots, and when clicked a dropdown menu with options to edit the profile. When clicked the user can choose to edit their profile image and bio. The content is updated upon save.| ✅
 |As a logged-in user, I can change my username and password so that I can maintain account security.| The user change their username and/or password when clicking on the three dots that will toggle the dropdown menu. The input fields will display errors if passwords doesn't match or the username is already taken. Upon save, the information is updated. |✅
-|As a User, I can scroll through posts continuously without having to click on next pages so that browsing is more convenient.| The user can scroll through posts without interuptions since infinite scroll is implemented.| ✅
+|As a User, I can scroll through posts continuously without having to click on next pages so that browsing is more convenient.| The user can scroll through posts without interruptions since infinite scroll is implemented.| ✅
 
 ### Follows
 **User Story**|**Test**|**Result**
@@ -119,7 +115,7 @@ Unauthenticated users can create an account.
 | **Sign up form**   | The sign up form with input fields username, password and confirm password are correctly displayed. |  ✅ |
 | **Form validation** | Incorrect or incomplete fields will be displayed with the relevant error and the user will remain on the page. | ✅ |
 | **Submit** | Form submission is working correctly and user is redirected to the sign-in page upon successful submission. | ✅ |
-| **'Sign In' Link** | If user aldready has an account, user can click on the link leading to the sign in form instead. | ✅ |
+| **'Sign In' Link** | If user already has an account, user can click on the link leading to the sign in form instead. | ✅ |
 | **Navlinks**  | The navlinks, sign in and sign up are correctly displayed. |  ✅ |
 
 
@@ -130,7 +126,7 @@ Authenticated users can sign in to existing account.
 |-------------------------|---------------------------|---------------------------|
 | **Login form**  | Renders the following input fields: username and password.  | ✅  |
 | **Form validation** | Incorrect or incomplete fields will be displayed with the relevant error and the user will remain on the page. | ✅ |
-| **Submit** | Form submission is working correctly and user is re-directed to home page upon succesful submission.  | ✅  |
+| **Submit** | Form submission is working correctly and user is re-directed to home page upon successful submission.  | ✅  |
 | **'Sign Up' Link** | If doesn't have an account, user can click on the link leading to the sign up form instead. | ✅ |
 | **Navlinks**  | The navlinks, sign in and sign up are correctly displayed. |  ✅ |
 
@@ -169,8 +165,8 @@ Authenticated users can sign in to existing account.
 | **View posts**           | All posts are correctly displayed. | ✅ |
 | **Clicking on a post**    | Working correctly and navigates to post page | ✅ |
 | **Infinite scroll**       | Infinite scroll is working correctly. |✅ |
-| **Most followed profiles**  | The most followed profiles section, with avatar image, username and follow/unfullow button are correctly displayed.   |✅ |
-| **Follow/unfollow button**   |Clicking on follow/unfollow button triggers the correct behaviour. |✅ |
+| **Most followed profiles**  | The most followed profiles section, with avatar image, username and follow/unfollow button are correctly displayed.   |✅ |
+| **Follow/unfollow button**   |Clicking on follow/unfollow button triggers the correct behavior. |✅ |
 | **Users avatar images**   |Clicking on users avatar image in most followed profiles is working correctly and navigates to users profiles. |✅ |
 
 ### Create Post
@@ -209,7 +205,7 @@ Authenticated users can create a post
 **Feature**|**Expectation**|**Result**
 |-------------------------|---------------------------|---------------------------|
 | **Like reactions**   | Choose from different reactions is working correctly.|✅ |
-| **Like reactions count**   | When liking a post with a reaction, or switch between reactions the likes couunt is updated accordingly.|✅ |
+| **Like reactions count**   | When liking a post with a reaction, or switch between reactions the likes count is updated accordingly.|✅ |
 | **Post owner cant' like**   | Works correctly as the post owner can't like their own posts.|✅ |
 
 ### Comment functionality
@@ -218,7 +214,7 @@ Authenticated users can create a post
 |-------------------------|---------------------------|---------------------------|
 | **Comment field**   | Correctly displayed under each post.|✅ |
 | **Comment submission**   | Working correctly and the comment is added to the post.|✅ |
-| **comments count**   | Working correctly and the comments count goes up after the comment has been subitted or if comment is deleted, the count goes down.|✅ |
+| **comments count**   | Working correctly and the comments count goes up after the comment has been submitted or if comment is deleted, the count goes down.|✅ |
 | **Edit/delete dropdown**           |Is correctly displayed for the comment owner and toggled when clicked. | ✅ |
 | **Edit comment**           |Correctly displays the comment field as an inline edit field when clicked on and the comment can be edited. | ✅ |
 | **Edit comment form submission**           |Working correctly and comment is updated with the edited content when save is clicked. | ✅ |
@@ -232,7 +228,7 @@ Authenticated users can create a post
 **Feature**|**Expectation**|**Result**
 |-------------------------|---------------------------|---------------------------|
 | **Notifications Icon**   | The link to notifications page is working correctly and navigates to the notifications page.|✅ |
-| **Notifications Badge**   | Is correctly displaying the number of undread notifications, and resets the count upon click.|✅ |
+| **Notifications Badge**   | Is correctly displaying the number of unread notifications, and resets the count upon click.|✅ |
 | **Notification list order**     | The notifications are displayed in the correct order, by the latest notification at the top and with the date displayed. |✅ |
 | **Displayed content**     | The notification type and the sender are correctly displayed. |✅ |
 | **Unread notification**     | An unread notification is correctly displayed with "New", and is marked as read when clicked. |✅ |
@@ -244,8 +240,8 @@ Authenticated users can create a post
 
 **Feature**|**Expectation**|**Result**
 |-------------------------|---------------------------|---------------------------|
-| **Messagegs Icon**   | The link to messages page is working correctly and navigates to the messagegs page.|✅ |
-| **Messages Badge**   | Is correctly displaying the number of undread messages, and resets the count upon click.|✅ |
+| **Massages Icon**   | The link to messages page is working correctly and navigates to the messages page.|✅ |
+| **Messages Badge**   | Is correctly displaying the number of unread messages, and resets the count upon click.|✅ |
 | **Messages list order**     | The messages are displayed in the correct order, by the latest message at the top and with the date displayed. |✅ |
 | **Displayed content**     | The message sender is correctly displayed. |✅ |
 | **Unread messages**     | An unread message is correctly displayed with "New", and is marked as read when clicked. |✅ |
@@ -326,10 +322,10 @@ Authenticated users can sign out from their account.
 |PostsPage.module.css| [W3C CSS](https://jigsaw.w3.org/css-validator/) | [No issues found](src/assets/testing-images/postspage.module.PNG)  | ✅ |
 |Profile.module.css| [W3C CSS](https://jigsaw.w3.org/css-validator/) | [No issues found](src/assets/testing-images/profile.module.PNG)  | ✅ |
 |ProfilePage.module.css| [W3C CSS](https://jigsaw.w3.org/css-validator/) | [No issues found](src/assets/testing-images/profilepage.module.PNG)  | ✅ |
-|SignInupForm.module.css| [W3C CSS](https://jigsaw.w3.org/css-validator/) | [No issues found](src/assets/testing-images/signin.signup.module.PNG)  | ✅ |
+|SignInUpForm.module.css| [W3C CSS](https://jigsaw.w3.org/css-validator/) | [No issues found](src/assets/testing-images/signin.signup.module.PNG)  | ✅ |
 <br>
 
-### ESLint Javasript
+### ESLint JavaScript
 <details open>
   <summary>ESLint warnings</summary>
 
@@ -344,7 +340,7 @@ Authenticated users can sign out from their account.
 
 
 ### Lighthouse
-Ligthouse testing was carried out in Incognito mode to achieve best results.
+Lighthouse testing was carried out in Incognito mode to achieve best results.
 <details>
   <summary>Lighthouse results desktop</summary>
 
@@ -372,13 +368,13 @@ Inventory Manager was tested on Microsoft Edge, Google Chrome, Firefox and Safar
 
 
 ## Device Testing
-  The website was tested on different devices to ensure responsiveness on various screen sizes.Microsoft Edge developer tools was used to test and to check the responsivness on multiple devices. I also used [Am I responsive](https://ui.dev/amiresponsive) to test the responsivness. Initially I couldn't sign in on my iphone, 12 and also tried another iphone 13. Upon research I found that had to untick "Prevent cross-site tracking", and after doing so I could log in on my iphone.
+  The website was tested on different devices to ensure responsiveness on various screen sizes.Microsoft Edge developer tools was used to test and to check the responsiveness on multiple devices. I also used [Am I responsive](https://ui.dev/amiresponsive) to test the responsiveness. Initially I couldn't sign in on my iphone, 12 and also tried another iphone 13. Upon research I found that I had to untick "Prevent cross-site tracking", and after doing so I could log in on my iphone.
 
 
 | Device                      | Functionality| Layout |
 |---------------------------- |--------------|--------|
 | Iphone 8                    |       ✔     |     ✔  |
-| Ihone mini 12               |       ✔     |     ✔  |
+| Iphone mini 12               |       ✔     |     ✔  |
 | Iphone 13 Pro               |       ✔     |     ✔  |
 | Samsung Galaxy S21          |       ✔     |     ✔  |
 | Samsung Galaxy Tab S6 lite  |       ✔     |     ✔  |
@@ -453,16 +449,3 @@ Refresh token errors:
 
   ![TypeError hashtags](src/assets/testing-images/errors/typeError.PNG-when-creating-hashtag.PNG)
 </details>
-
-
-## Python Automated Testing
-Automated testing was conducted on specific components of the application, focusing on key features utilizing Django's built-in 'TestCase' class. Although, given more time the intention was to extend the automated tests to include more features and scenarios. A thourough manual testing process was also implemented.
-
-**Test** | **Description** | **Result** |
-|:-----|:------|:------|
-|test_inventory_form_valid| Verifies that the "InventoryForm" is validated when provided with a valid category and name. This test ensures that the form's validation logic properly accepts correct input.| Passed
-|test_inventory_form_invalid| Tests the "InventoryForm" for correct handling of invalid submissions, specifically when mandatory fields are missing. This test is to confirm that the form's logic handles incomple och incorrect submissions correctly.| Passed
-|test_items_form_valid| Verifies that the "ItemsForm" validates correctly when provided with valid data. This test ensures that the form properly handles valid user inputs for item creation.| Passed
-|test_items_form_invalid| Test the form handling for invalid submissions, such as when item name is missing.  This test is to confirm that the form's logic handles incomplete och incorrect submissions correctly to prevent data integrity errors.| Passed
-|test_create_inventory| Tests the functionality of creating a new inventory list through a POST request, verifying that the list is correctly added to the database and that the user is redirected correctly.| Passed
-|test_delete_list| Tests the functionality of deleting an inventory list, verifying that after deletion, the list is deleted from the database and the user redirected correctly.| Passed

@@ -23,10 +23,10 @@ Live Links
         - [Images](#images)
         - [Colour Scheme](#colour-scheme)
         - [Typography](#typography)
-        - [Resonsive Design](#responsive-design)
+        - [Responsive Design](#responsive-design)
         - [Wireframes](#wireframes)
 - [Features](#features)
- -  [Authenticaton](#authentication)
+ -  [Authentication](#authentication)
   - [Navigation](#navigation)
   - [Posts](#posts)
   - [Comments](#comments)
@@ -41,7 +41,6 @@ Live Links
 - [Utilities](#utilities)
 - [CRUD](#crud)
 - [Database design](#database-design)
-    - [Database Models](#database-models)
 - [Testing](#testing)
 - [Technologies & Languages used](#technologies--languages-used)
 - [Libraries & Frameworks](#libraries--frameworks)
@@ -63,7 +62,7 @@ Live Links
 The frontend is built using React.js and includes:
 - User Authentication (Sign Up, Sign In, Token Management)
 - CRUD Features: Create, read, update, delete posts, comments, messages and notifications.
-- Notifications: Interactive notficications for likes, messages and followers.
+- Notifications: Interactive notifications for likes, messages and followers.
 - Responsive Design: The app is fully optimized for all screen sizes.
 
 ## User Stories
@@ -123,7 +122,7 @@ Like posts: As a logged-in user, I can like posts with different reactions so th
 
 
 ## Agile
-The development of this project followed an agile approach, emphasizing flexibility from initial planning to final implemenation. To facilitate the management of tasks
+The development of this project followed an agile approach, emphasizing flexibility from initial planning to final implementation. To facilitate the management of tasks
 and user stories, a GitHub project was created, using the Kanban board method. To gain insights to the project's progress and detailed user stories, including their
 associated tasks, please see link to the project board [here](https://github.com/users/MilenTecle/projects/6). Each user story has been categorized with labels indicating its importance and relevance to the overall functionality and usability of the application.
 
@@ -137,21 +136,21 @@ The primary goals for Znapped include:
 ## 5 planes of UX
 
 ### Strategy
-The primary objective of this applicatoin is to provide users with an intuitive and interactive social media platform. It focuses on enabling users to share content, engage with others through likes and comments, and build connections through follows and direct messaging. Accessibility and responsivness are prioritized to ensure a seamless experience for all users.
+The primary objective of this application is to provide users with an intuitive and interactive social media platform. It focuses on enabling users to share content, engage with others through likes and comments, and build connections through follows and direct messaging. Accessibility and responsiveness are prioritized to ensure a seamless experience for all users.
 
 ### Scope
 The application offers a comprehensive set of features including:
-- Creatin and managing posts with images.
+- Creating and managing posts with images.
 - Engaging with other users through comments and likes.
 - Following other users to see their activities.
 - Notifications to stay updated on activities.
 - A private messaging system for direct communication.
 
 ### Structure
-The application is structured to offer easy navigation through key features like the home feed, user profiles, notifications and messages. Each feature is accessible through a clear and consistent navigations menu, with logical transitions between pages.
+The application is structured to offer easy navigation through key features like the home feed, user profiles, notifications and messages. Each feature is accessible through a clear and consistent navigation menu, with logical transitions between pages.
 
 ### Skeleton
-The user interface is designed with responsivness in mind, ensuring compability across mobile, tablet and desktop devices. Essential UI elements such as buttons and forms are logically placed based on user experience. Layouts are intuitive and optimized to guide users naturally through tasks.
+The user interface is designed with responsiveness in mind, ensuring compatibility across mobile, tablet and desktop devices. Essential UI elements such as buttons and forms are logically placed based on user experience. Layouts are intuitive and optimized to guide users naturally through tasks.
 
 ### Surface
 The application is clean and modern. Its neutral colors and intuitive typography emphasize readability and functionality. Hover effects, transitions and active icons enhance interactivity for the user.
@@ -238,7 +237,7 @@ The wireframes were produced via Balsamiq.
 ### Authentication
 1. User registration and login.
 2. Logged-in status management.
-3. Token-basen authentication with auto-refresh.
+3. Token-based authentication with auto-refresh.
 
  <details open>
   <summary>Sign up</summary>
@@ -433,11 +432,11 @@ The wireframes were produced via Balsamiq.
     - Usage : Central navigation component used throughout the app.
 
 3. NotificationDropdown.js
-    - Purpose: Displays undread notifications in the navigation bar (bell icon).
+    - Purpose: Displays unread notifications in the navigation bar (bell icon).
     - Usage : Used in NavBar.js to handle notification updates for user interactions like comments, follows and likes.
 
 4. MessageDropdown.js
-    - Purpose: Displays undread direct messages in the navigation bar (envelope icon).
+    - Purpose: Displays unread direct messages in the navigation bar (envelope icon).
     - Usage : Used in NavBar.js to manage message notifications.
 
 5.  NotFound.js
@@ -445,7 +444,7 @@ The wireframes were produced via Balsamiq.
     - Usage : Utilized in the app's routing setup to display a 404 message and placeholder when a user navigates to a page that doesn't exist.
 
 ## Custom hooks
-1. useclickOutsideToggle.js
+1. useClickOutsideToggle.js
     - Purpose: Detects clicks outside a referenced element and toggles a state (e.g., closing dropdown menus).
     - Usage: Used in NavBar.js to handle dropdown menus.
 
@@ -463,7 +462,7 @@ The wireframes were produced via Balsamiq.
     - Purpose:Provides reusable utility functions for token handling, pagination and data manipulation.
         - **fetchMoreData:** Manages fetching additional data for infinite scroll, avoiding duplicates.
         - **followHelper & unfollowHelper:** Update profile data state for follow/unfollow actions.
-        - **setTokenTimeStamp, shouldRefreshtoken, removeTokenTimestamp:** Manage token expiration and refresh logic.
+        - **setTokenTimeStamp, shouldRefreshToken, removeTokenTimestamp:** Manage token expiration and refresh logic.
     - Usage: Used for managing API responses, state updates and authentication logic.
 
 ## CRUD
@@ -509,7 +508,7 @@ Testing and the results can be found [here](/TESTING.md).
   - **Jwt-decode** - Decoding JWTs token.
   - **React-bootstrap** - React components built with Bootstrap.
   - **MSW** - For testing API request.
-  - **React.js** - A Javascipt library wich is widely used to create user interfaces.
+  - **React.js** - A JavaScript library which is widely used to create user interfaces.
   - **React-mentions** - For implementing @ mention functionality in comments.
   - **React-router-dom** - For navigation and routing in the React application.
   - **React-infinite-scroll-component** - For adding infinite scrolling functionality to the application.
@@ -520,12 +519,12 @@ Testing and the results can be found [here](/TESTING.md).
 
    ## Tools & Programs
 
-  - [Microsoft Edge Dev Tools](https://learn.microsoft.com/en-us/microsoft-edge/developer/) - Was used throughout the project to make changes and to test the responsivness.
+  - [Microsoft Edge Dev Tools](https://learn.microsoft.com/en-us/microsoft-edge/developer/) - Was used throughout the project to make changes and to test the responsiveness.
   - [Git](https://git-scm.com/) - Git was used for version control by using the Gitpod terminal to commit and then push to Github.
   - [Github](https://github.com/) - Is where the projects code is stored after being pushed.
   - [Gitpod](https://gitpod.io/) - Was the Codespace used for this project.
   - [Heroku](https://www.heroku.com) - The cloud based platform to deploy the site on.
-- [Am I Responsive](https://ui.dev/amiresponsive) - Was used to ensure that the website is responsive on diffrerent devices.
+- [Am I Responsive](https://ui.dev/amiresponsive) - Was used to ensure that the website is responsive on different devices.
 - [Balsamiq](https://balsamiq.com/) - Was used to create the wireframes before starting the project.
 - [Font Awesome](https://fontawesome.com/) - Was used for icons throughout the application.
 - [Google Fonts](https://fonts.google.com/) - Was used to import fonts to the page.
@@ -548,7 +547,7 @@ Testing and the results can be found [here](/TESTING.md).
 
 1. Open the workspace and run npx create-react-app . --use-npm to install React.
 2. After React has been installed, run npm start to start the app.
-3. Add a Procfile in teh root directory and add - web: serve -s build.
+3. Add a Procfile in the root directory and add - web: serve -s build.
 4. Add - "heroku-prebuild": "npm install -g serve" in the package.json file scripts section.
 
 
@@ -558,13 +557,13 @@ The application was deployed to Heroku using the following steps:
 #### Create the Heroku App
 1. Log in to Heroku
 2. Click on New and select Create new app from the drop-down menu.
-3. Enter a unique and appropiate app name.
+3. Enter a unique and appropriate app name.
 4. Select you region.
 5. Click on "Create App".
 6. Click on the "deploy" tab in the menu once the app is created.
 7. Click on Github as the option for deployment.
-8. Search for your Github repository, select it and click on the "connect" button to connect the respository.
-8. Now that the respository is connected, click on "Deploy branch" (master/main branch)
+8. Search for your Github repository, select it and click on the "connect" button to connect the repository.
+8. Now that the repository is connected, click on "Deploy branch" (master/main branch)
 
 
 ### Fork
@@ -591,10 +590,10 @@ The application was deployed to Heroku using the following steps:
 
 #### Notifications
 
-Guide on how to implement the undread count for notifications
+Guide on how to implement the unread count for notifications
 - [Conditional Rendering](https://legacy.reactjs.org/docs/conditional-rendering.html)
 
-Build the notifications funtionality
+Build the notifications functionality
 - [Building a Real Time Notification Center in React](https://dev.to/nikl/building-a-real-time-notification-center-in-react-99b)
 
 - [How to Create React Notifications without dependencies](https://tinloof.com/blog/how-to-create-react-notifications-with-0-dependencies)
@@ -617,7 +616,7 @@ Implementing notifications for messages
 
 Build Messages Functionality
 - [How to Build a Modern Chat Application with React JS for Beginners](https://thelinuxcode.com/how-to-build-a-modern-chat-application-with-react-js-for-beginners/)
-- [Buildning a Real-Time Chat App with ReactJS](https://www.freecodecamp.org/news/building-a-real-time-chat-app-with-reactjs-and-firebase/)
+- [Building a Real-Time Chat App with ReactJS](https://www.freecodecamp.org/news/building-a-real-time-chat-app-with-reactjs-and-firebase/)
 - [How to Build a ReactJS Chat App in 10 Minutes](https://dev.to/scrimba/how-to-build-a-reactjs-chat-app-in-10-minutes-2j20)
 
 #### Hashtags
@@ -642,12 +641,12 @@ Working with Query Parameters in React
 #### Refresh tokens
 
 Used to resolve refresh token errors:
-- [Refersh token using Axios in React](https://medium.com/@aqeel_ahmad/handling-jwt-access-token-refresh-token-using-axios-in-react-react-native-app-2024-f452c96a83fc)
+- [Refresh token using Axios in React](https://medium.com/@aqeel_ahmad/handling-jwt-access-token-refresh-token-using-axios-in-react-react-native-app-2024-f452c96a83fc)
 
 - [React Logout User and Redirect to Login Page](https://stackoverflow.com/questions/74081508/react-logout-user-and-redirect-to-login-page-when-refresh-token-expires)
 
 
-#### Using React Boostrap delete confirmation
+#### Using React Bootstrap delete confirmation
 - [Delete confirmation modal](https://react-bootstrap-v4.netlify.app/components/modal/)
 
 ### Content
@@ -661,7 +660,7 @@ The content is written by the developer.
 
 
 ### Acknowledgements
-- Antonio, my mentor, for guiding med throughout the project with important suggestions to improve the applications funcionality.
+- Antonio, my mentor, for guiding med throughout the project with important suggestions to improve the applications functionality.
 - To the slack community for answering my questions and guiding me.
 - To tutor support, for helping me when I got stuck trying to solve problems throughout the project.
 - To my husband and family, for all the support and patience throughout this project.
