@@ -56,7 +56,7 @@ function PostEditForm() {
          */
         is_owner ? setPostData({ title, content, image, hashtagNames: formattedHashtags, }) : history.push("/");
       } catch (err) {
-        // console.log(err);
+        console.error("Error fetching post data:", err);
       }
     };
 
@@ -76,7 +76,7 @@ function PostEditForm() {
           }));
         setHashtags(validHashtags)
       } catch (err) {
-        console.log(err);
+        console.error("Error fetching hashtags:", err);
       }
     };
 
@@ -101,12 +101,16 @@ function PostEditForm() {
 
   // Handle image file input and update the image state
   const handleChangeImage = (event) => {
-    if (event.target.files.length) {
-      URL.revokeObjectURL(image);
-      setPostData({
-        ...postData,
-        image: URL.createObjectURL(event.target.files[0]),
-      });
+    try {
+      if (event.target.files.length) {
+        URL.revokeObjectURL(image);
+        setPostData({
+          ...postData,
+          image: URL.createObjectURL(event.target.files[0]),
+        });
+      }
+    } catch (err) {
+      console.error("Error updating the image:", err);
     }
   };
 
@@ -143,7 +147,7 @@ function PostEditForm() {
       await axiosReq.put(`/posts/${id}/`, formData);
       history.push(`/posts/${id}`);
     } catch (err) {
-      // console.log(err);
+      console.error("Error updating post:", err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }

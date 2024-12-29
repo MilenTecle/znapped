@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 /**
  * The forwardRef is important!!
  * Dropdown needs access to the DOM node in order to position the Menu
- * A custom icon component to show the beöö icon with unread badge
+ * A custom icon component to show the bell icon with unread badge
  for notifications.
  * Event handler triggered on icon click.
  */
@@ -52,7 +52,6 @@ const NotificationDropdown = () => {
       if (currentUser)
         try {
           const { data } = await axiosReq.get("/notifications/");
-          console.log("Fetched notificaions", data.results)
           const notificationTypes = ["mention", "comment", "follow", "like"]
 
           const generalNotifications = data.results.filter(
@@ -60,7 +59,6 @@ const NotificationDropdown = () => {
               notificationTypes.includes(notification.type) &&
               notification.type !== "message"
           );
-          console.log("Fetched notifications:", data.results)
 
           // Calculate the number of unread notifications
           const unread = generalNotifications.filter((n) => !n.read).length;
@@ -69,10 +67,8 @@ const NotificationDropdown = () => {
           setNotifications(generalNotifications);
           // Update unread count
           setUnreadCount(unread);
-          console.log("Updated Notifications state:", generalNotifications)
-          console.log("Unread count:", unread)
         } catch (error) {
-          console.log("Error fetching notifcations:", error)
+          console.error("Error fetching notifications:", error)
         }
     };
     fetchNotifications();
@@ -93,6 +89,7 @@ const NotificationDropdown = () => {
         );
       }
     } catch (error) {
+      console.error("Error marking messages as read:", error)
     }
   };
 

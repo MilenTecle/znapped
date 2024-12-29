@@ -22,7 +22,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
-  // React Router's hookto get current location and query parameter
+  // React Router's hook to get current location and query parameter
   const location = useLocation();
   const { pathname } = location;
 
@@ -48,7 +48,7 @@ function PostsPage({ message, filter = "" }) {
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
-        // console.log(err);
+        console.error("Error fetching posts:", err);
       }
     };
 
@@ -85,7 +85,7 @@ function PostsPage({ message, filter = "" }) {
 
         {hasLoaded ? (
           <>
-          {/* Check if posts are available */}
+            {/* Check if posts are available */}
             {posts.results.length ? (
               <InfiniteScroll
                 children={posts.results.map((post) => (

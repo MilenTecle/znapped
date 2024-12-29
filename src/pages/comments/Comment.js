@@ -52,7 +52,9 @@ const Comment = (props) => {
         ...prevComments,
         results: prevComments.results.filter((comment) => comment.id !== id),
       }));
-    } catch(err){}
+    } catch(err){
+      console.error("Error deleting comment:", err);
+    }
   };
 
   return (
@@ -80,7 +82,7 @@ const Comment = (props) => {
             <p>{content}</p>
           )}
         </Media.Body>
-        {/* Dropdownn for Edit/Delete options if the user owns the comment */}
+        {/* Dropdown for Edit/Delete options if the user owns the comment */}
         {is_owner && !showEditForm && (
           <MoreDropdown
             handleEdit={() => setShowEditForm(true)}

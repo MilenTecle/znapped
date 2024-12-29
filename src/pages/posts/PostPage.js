@@ -36,7 +36,7 @@ function PostPage() {
          * Use Promise.all to execute both post and comments API request
          * at the same time.
          */
-        const [{ data: post }, {data: comments}] = await Promise.all([
+        const [{ data: post }, { data: comments }] = await Promise.all([
           axiosReq.get(`/posts/${id}`),
           axiosReq.get(`/comments/?post=${id}`)
         ])
@@ -44,7 +44,7 @@ function PostPage() {
         setPost({ results: [post] })
         setComments(comments)
       } catch (err) {
-        console.log(err)
+        console.error("Error fetching post or comment:", err);
       }
     }
 
@@ -74,18 +74,18 @@ function PostPage() {
           {/* Render comments with infinite scroll */}
           {comments.results.length ? (
             <InfiniteScroll
-             children={comments.results.map((comment) => (
-              <Comment
-                key={comment.id}
-                {...comment}
-                setPost={setPost}
-                setComments={setComments}
-              />
-            ))}
-            dataLength={comments.results.length}
-            loader={<Asset spinner />}
-            hasMore={!!comments.next}
-            next={() => fetchMoreData(comments, setComments)}
+              children={comments.results.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  {...comment}
+                  setPost={setPost}
+                  setComments={setComments}
+                />
+              ))}
+              dataLength={comments.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!comments.next}
+              next={() => fetchMoreData(comments, setComments)}
             />
           ) : currentUser ? (
             <span>No comments yet, be the first to comment!</span>

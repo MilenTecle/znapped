@@ -6,7 +6,7 @@ import Profile from './Profile';
 import { useProfileData } from '../../contexts/ProfileDataContext';
 
 const PopularProfiles = ({ mobile }) => {
-  // Retrive popular profile data from context
+  // Retrieve popular profile data from context
   const { popularProfiles } = useProfileData();
 
   return (

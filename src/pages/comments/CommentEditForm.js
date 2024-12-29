@@ -41,7 +41,7 @@ function CommentEditForm(props) {
       }));
       setShowEditForm(false);
     } catch (err) {
-      // console.log(err);
+      console.error("Error updating comment:", err);
     }
   };
 

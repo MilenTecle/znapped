@@ -54,7 +54,7 @@ const UsernameForm = () => {
       }));
       history.goBack();
     } catch (err) {
-      // console.log(err);
+      console.error("Error changing username:", err);
       setErrors(err.response?.data);
     }
   };

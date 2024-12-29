@@ -33,6 +33,7 @@ export const CurrentUserProvider = ({ children }) => {
       const { data } = await axiosRes.get("dj-rest-auth/user/");
       setCurrentUser(data);
     } catch (err) {
+      console.error("Failed to fetch current user", err);
     }
   };
 
@@ -59,6 +60,7 @@ export const CurrentUserProvider = ({ children }) => {
             setTokenTimestamp(data);
             config.headers.Authorization = `Bearer ${data.access}`;
           } catch (err) {
+            console.error("Token refresh failed:", err);
             setCurrentUser(null)
             removeTokenTimestamp();
             history.push("/signin");
@@ -68,6 +70,7 @@ export const CurrentUserProvider = ({ children }) => {
         return config;
       },
       (err) => {
+        console.error("Request error:", err);
         return Promise.reject(err);
       }
     );
@@ -95,12 +98,14 @@ export const CurrentUserProvider = ({ children }) => {
             err.config.headers.Authorization = `Bearer ${data.access}`;
             return axios(err.config);
           } catch (err) {
+            console.error("Failed to refresh token:", err);
             setCurrentUser(null)
             removeTokenTimestamp();
             history.push("/signin");
             throw err;
           }
         }
+        console.error("Response error:", err);
         return Promise.reject(err);
       }
     );

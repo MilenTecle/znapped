@@ -33,7 +33,7 @@ function CommentCreateForm(props) {
         }));
         setUsers(userList)
       } catch (err) {
-        console.log(err);
+        console.error("Error fetching profile:", err);
       }
     };
 
@@ -89,11 +89,10 @@ function CommentCreateForm(props) {
           },
         ],
       }));
-      console.log("API response after POST:", data);
       setContent("");
       setMentions([]);
     } catch (err) {
-      // console.log(err);
+      console.error("Error submitting comment:", err);
     }
   };
 

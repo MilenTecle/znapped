@@ -54,7 +54,7 @@ const Post = (props) => {
       await axiosRes.delete(`/posts/${id}/`);
       history.goBack();
     } catch (err) {
-      // console.log(err);
+      console.error("Error deleting post:", err);
     }
   };
 
@@ -88,7 +88,7 @@ const Post = (props) => {
         ),
       }));
     } catch (error) {
-      console.log(error);
+      console.error("Error adding reaction:", error);
     }
   };
 
@@ -110,7 +110,7 @@ const Post = (props) => {
         ),
       }));
     } catch (err) {
-      // console.log(err);
+      console.error("Error removing reaction:", err);
     }
   };
 

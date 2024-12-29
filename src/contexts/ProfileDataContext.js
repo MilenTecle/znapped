@@ -47,7 +47,7 @@ export const ProfileDataProvider = ({ children }) => {
         },
       }));
     } catch (err) {
-      // console.log(err)
+      console.error("Error following profile:", err);
     }
   };
 
@@ -75,7 +75,7 @@ export const ProfileDataProvider = ({ children }) => {
         },
       }));
     } catch (err) {
-      // console.log(err)
+      console.error("Error unfollowing profile:", err);
     }
   };
 
@@ -94,7 +94,7 @@ export const ProfileDataProvider = ({ children }) => {
           popularProfiles: data, // Update state with popular profiles
         }));
       } catch (err) {
-        // console.log(err);
+        console.error("Error fetching popular profiles:", err);
       }
     };
 

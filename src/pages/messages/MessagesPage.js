@@ -30,8 +30,6 @@ const DisplayMessages = () => {
         const { data } = await axiosReq.get(`/direct-messages/?user_id=${id}`)
         setMessages(data.results)
 
-        console.log("Fetched messages:", data.results)
-
         const { data: userData } = await axiosReq.get(`/profiles/${id}/`)
         setMessages(data.results)
         // Set username state and fallback if data is missing
@@ -59,6 +57,7 @@ const DisplayMessages = () => {
       setMessages((prevMessages) => [...prevMessages, message]);
       setNewMessage("");
     } catch (error) {
+      console.error("Error sending message:", err);
     }
   };
 

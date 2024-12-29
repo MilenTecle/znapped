@@ -49,7 +49,7 @@ function PostCreateForm() {
           }));
         setHashtags(validHashtags)
       } catch (err) {
-        console.log(err);
+        console.error("Error fetching hashtags:", err);
       }
     };
 
@@ -82,12 +82,16 @@ function PostCreateForm() {
 
   // Handles changes to the image upload input field
   const handleChangeImage = (event) => {
-    if (event.target.files.length) {
-      URL.revokeObjectURL(image);
-      setPostData({
-        ...postData,
-        image: URL.createObjectURL(event.target.files[0]),
-      });
+    try {
+      if (event.target.files.length) {
+        URL.revokeObjectURL(image);
+        setPostData({
+          ...postData,
+          image: URL.createObjectURL(event.target.files[0]),
+        });
+      }
+    } catch (err) {
+      console.error("Error uploading image:", err);
     }
   };
 
@@ -120,7 +124,7 @@ function PostCreateForm() {
       const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
     } catch (err) {
-      // console.log(err);
+      console.error("Error creating post:", err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }

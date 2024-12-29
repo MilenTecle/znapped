@@ -14,7 +14,7 @@ export const fetchMessages = async (userId = null) => {
     const response = await axiosReq.get(url);
     return response.data;
   } catch (error) {
-    // In case of an error, return an empty result set
+    console.error("Failed to fetch messages:", error)
     return { results: [] };
   }
 };
@@ -35,16 +35,18 @@ export const sendMessage = async (receiverId, content) => {
     });
     return data;
   } catch (error) {
+    console.error("Error sending message:", error)
   }
 };
 
 // Fetch a specific user's profile details from the API.
-export const fetchUser = async(profileId) => {
+export const fetchUser = async (profileId) => {
   try {
     const { data } = await axiosReq.get(`/profiles/${profileId}/`);
     // Return the fetched user profile data.
     return { username: data.owner };
   } catch (error) {
+    console.error("Failed to mark messages as read:", error)
   }
 }
 
@@ -53,6 +55,10 @@ export const fetchUser = async(profileId) => {
  * @param {*} messageIds - An array of message IDs to mark as read.
  */
 export const markMessagesAsRead = async (messageIds) => {
-    // Perfom a PATCH request do update the 'read' status of messages
-  await axiosRes.patch(`/direct-messages/mark-as-read/`, { message_ids: messageIds })
+  try {
+    // Perform a PATCH request do update the 'read' status of messages
+    await axiosRes.patch(`/direct-messages/mark-as-read/`, { message_ids: messageIds })
+  } catch (error) {
+    console.error("Failed to mark messages as read:", error)
+  }
 };

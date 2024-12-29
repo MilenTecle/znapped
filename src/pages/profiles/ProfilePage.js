@@ -35,7 +35,7 @@ function ProfilePage() {
   const { id } = useParams();
 
   const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
-  // Retrives profle data from the context
+  // Retrieves profile data from the context
   const { pageProfile } = useProfileData();
 
   // Extract the profile data from results
@@ -62,7 +62,7 @@ function ProfilePage() {
             axiosReq.get(`/profiles/${id}/`),
             axiosReq.get(`/posts/?owner__profile=${id}`),
           ]);
-          // Update the profile data and user's posts
+        // Update the profile data and user's posts
         setProfileData((prevState) => ({
           ...prevState,
           pageProfile: { results: [pageProfile] },
@@ -70,7 +70,7 @@ function ProfilePage() {
         setProfilePosts(profilePosts);
         setHasLoaded(true);
       } catch (err) {
-        // console.log(err);
+        console.error("Error fetching profile or posts:", err);
       }
     };
     fetchData();
@@ -78,7 +78,7 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-    {/* Dropdown menu for editing profile if user is the owner */}
+      {/* Dropdown menu for editing profile if user is the owner */}
       {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">

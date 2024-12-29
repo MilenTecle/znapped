@@ -47,7 +47,7 @@ const ProfileEditForm = () => {
           // Populate form fields with fetched data
           setProfileData({ name, content, image });
         } catch (err) {
-          // console.log(err);
+          console.error("Error fetching profile data:", err);
           history.push("/");
         }
       } else {
@@ -87,7 +87,7 @@ const ProfileEditForm = () => {
       }));
       history.goBack();
     } catch (err) {
-      // console.log(err);
+      console.error("Error updating profile:", err);
       setErrors(err.response?.data);
     }
   };

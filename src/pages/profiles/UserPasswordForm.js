@@ -42,7 +42,7 @@ const UserPasswordForm = () => {
     }
   }, [currentUser, history, id]);
 
-  // Handle form sumbmisson to change password
+  // Handle form submission to change password
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -50,7 +50,7 @@ const UserPasswordForm = () => {
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
       history.goBack();
     } catch (err) {
-      // console.log(err);
+      console.error("Error changing password:", err);
       setErrors(err.response?.data);
     }
   };

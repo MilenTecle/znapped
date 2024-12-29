@@ -40,7 +40,7 @@ const SignUpForm = () => {
   };
 
   /**
-   * Sumbits the sign-up form data to the backend for user registration.
+   * Submits the sign-up form data to the backend for user registration.
    * Redirects the user to the sign-in page on success.
    */
   const handleSubmit = async (event) => {

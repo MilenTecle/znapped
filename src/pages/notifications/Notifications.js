@@ -9,12 +9,12 @@ const DisplayNotifications = () => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    // Fetch notificatins when the component mounts
+    // Fetch notifications when the component mounts
     const fetchNotifications = async () => {
       try {
         // Make a GET request to retrieve all notifications
         const { data } = await axiosReq.get("/notifications/");
-        console.log("Fetched notificaions", data.results)
+
         // Filter out general notifications, excluding messages
         const notificationTypes = ["mention", "comment", "follow", "like"]
 
@@ -30,6 +30,7 @@ const DisplayNotifications = () => {
         // Mark notifications as read using a PATCH request
         await axiosReq.patch("/notifications/mark-as-read/")
       } catch (error) {
+        console.error("Error marking notifications as read:", err);
       }
     };
     fetchNotifications();
@@ -37,17 +38,16 @@ const DisplayNotifications = () => {
 
   // Handles deletion of notifications
   const handleDelete = async (id) => {
-    console.log(`Handledelete triggered with ID: ${id}`)
     try {
       // Make a DELETE request to remove the specific notification
       await axiosReq.delete(`/notifications/${id}/`)
-      console.log(`Notification with ID ${id} deleted`)
 
       // Update state by filtering out the deleted notification
       setNotifications((prevNotifications) =>
         prevNotifications.filter((n) => n.id !== id)
       );
     } catch (error) {
+      console.error("Error deleting notification:", err);
     }
   };
 
@@ -77,7 +77,7 @@ const DisplayNotifications = () => {
                 <small className="text-muted">
                   {notification.created_at}
                 </small>
-                {/* Display a badge "new" for undread notifications */}
+                {/* Display a badge "new" for unread notifications */}
                 {!notification.read && (
                   <Badge bg="primary" pill>
                     New

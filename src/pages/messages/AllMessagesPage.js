@@ -34,7 +34,7 @@ const AllMessagesPage = () => {
         }
 
       } catch (error) {
-        console.error("Error fetcing messages:", error);
+        console.error("Error fetching messages:", error);
       }
     };
 
@@ -69,6 +69,7 @@ const AllMessagesPage = () => {
         prevMessages.filter((msg) => msg.id !== id)
       );
     } catch (error) {
+      console.error("Error deleting message:", err);
     }
   };
 

@@ -35,7 +35,7 @@ function SignInForm() {
   /**
    * Handles form submission, sends user credentials to the backend for
    * authentication.
-   * sets the current state user context, and redirects user on sucess.
+   * sets the current state user context, and redirects user on success.
    */
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,7 +51,7 @@ function SignInForm() {
     }
   };
   /**
-   * Updates the stae when the user types into the form fields.
+   * Updates the state when the user types into the form fields.
    */
   const handleChange = (event) => {
     setSignInData({
