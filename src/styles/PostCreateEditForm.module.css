@@ -25,12 +25,3 @@
   background-color: #ffebc2;
 }
 
-.MentionsInput [class*="__highlighter"] strong {
-  background-color: #e0f7fa !important;
-}
-
-.MentionsInput [class*="__highlighter__substring"] {
-  background-color: #e0f7fa !important;
-  visibility: visible !important;
-  color: inherit;
-}

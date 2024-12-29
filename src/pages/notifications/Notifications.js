@@ -29,7 +29,7 @@ const DisplayNotifications = () => {
 
         // Mark notifications as read using a PATCH request
         await axiosReq.patch("/notifications/mark-as-read/")
-      } catch (error) {
+      } catch (err) {
         console.error("Error marking notifications as read:", err);
       }
     };
@@ -46,7 +46,7 @@ const DisplayNotifications = () => {
       setNotifications((prevNotifications) =>
         prevNotifications.filter((n) => n.id !== id)
       );
-    } catch (error) {
+    } catch (err) {
       console.error("Error deleting notification:", err);
     }
   };

@@ -63,12 +63,11 @@ const AllMessagesPage = () => {
     try {
       // API call to delete a message
       await axiosReq.delete(`/direct-messages/${id}/`)
-      console.log(`Message with ID ${id} deleted`)
       setMessages((prevMessages) =>
         // Remove message from state
         prevMessages.filter((msg) => msg.id !== id)
       );
-    } catch (error) {
+    } catch (err) {
       console.error("Error deleting message:", err);
     }
   };

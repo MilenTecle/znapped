@@ -40,9 +40,6 @@ function CommentCreateForm(props) {
     fetchProfiles();
   }, []);
 
-  useEffect(() => {
-    console.log("mentions state updated:", mentions);
-  }, [mentions]);
 
   // Updates the comment content as the user types.
   const handleContentChange = (event, newValue, newPlainTextValue, newMentions) => {

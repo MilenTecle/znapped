@@ -27,7 +27,6 @@ export const fetchMessages = async (userId = null) => {
  */
 export const sendMessage = async (receiverId, content) => {
   try {
-    console.log("SEnding message to receiver ID:", receiverId)
     // Perform a POST request to create a new direct message
     const { data } = await axiosRes.post(`/direct-messages/`, {
       receiver: receiverId,

@@ -4,7 +4,7 @@ import { axiosReq } from "../api/axiosDefaults";
 export const fetchMoreData = async (resource, setResource) => {
   try {
     const { data } = await axiosReq.get(resource.next);
-    // Update teh state with new data while avoiding duplicates.
+    // Update the state with new data while avoiding duplicates.
     setResource((prevResource) => ({
       ...prevResource,
       next: data.next,

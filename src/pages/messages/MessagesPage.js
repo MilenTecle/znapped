@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchMessages, sendMessage, fetchUser } from "../../api/messages";
+import { sendMessage } from "../../api/messages";
 import { useParams } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Card from "react-bootstrap/Card";
@@ -27,13 +27,14 @@ const DisplayMessages = () => {
     const retrieveMessages = async () => {
       try {
         // API call to fetch messages and user details at the same time
-        const { data } = await axiosReq.get(`/direct-messages/?user_id=${id}`)
-        setMessages(data.results)
+        const [messagesData, userData] = await Promise.all([
+          axiosReq.get(`/direct-messages/?user_id=${id}`),
+          axiosReq.get(`/profiles/${id}/`)
+        ]);
 
-        const { data: userData } = await axiosReq.get(`/profiles/${id}/`)
-        setMessages(data.results)
+        setMessages(messagesData.data.results.reverse());
         // Set username state and fallback if data is missing
-        setUsername(userData?.username || `User ${id}`)
+        setUsername(userData?.owner || `User ${id}`);
       } catch (error) {
         console.error("Error fetching messages or user details:", error);
       }
@@ -56,7 +57,7 @@ const DisplayMessages = () => {
       // Add new message to state
       setMessages((prevMessages) => [...prevMessages, message]);
       setNewMessage("");
-    } catch (error) {
+    } catch (err) {
       console.error("Error sending message:", err);
     }
   };
