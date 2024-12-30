@@ -45,7 +45,7 @@ function PostCreateForm() {
           .filter((hashtag) => (hashtag.name).trim())
           .map((hashtag) => ({
             id: hashtag.id,
-            display: `#${hashtag.name.replace(/^#+/, "#")}`,
+            display: `${hashtag.name.replace(/^#+/, "#")}`,
           }));
         setHashtags(validHashtags)
       } catch (err) {
