@@ -8,52 +8,16 @@ import styles from "../../styles/CommentCreateEditForm.module.css";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Mention, MentionsInput } from "react-mentions";
 
 /**
  * CommentCreateForm allows users to create new comments for a specific post.
- * Users can mention other users, using @.
  */
 function CommentCreateForm(props) {
   const { post, setPost, setComments, profileImage, profile_id } = props;
   const [content, setContent] = useState("");
-  const [mentions, setMentions] = useState([]);
-  const [users, setUsers] = useState([]);
 
-  /**
-   * Fetch user profiles when the component mounts.
-   */
-  useEffect(() => {
-    const fetchProfiles = async () => {
-      try {
-        const { data } = await axiosReq.get("/profiles/");
-        const userList = data.results.map((user) => ({
-          id: user.owner,
-          display: user.owner,
-        }));
-        setUsers(userList)
-      } catch (err) {
-        console.error("Error fetching profile:", err);
-      }
-    };
-
-    fetchProfiles();
-  }, []);
-
-
-  // Updates the comment content as the user types.
-  const handleContentChange = (event, newValue, newPlainTextValue, newMentions) => {
-    console.log("New mentions:", newMentions)
-    setContent(newPlainTextValue);
-
-    setMentions(newMentions);
-  };
-
-  function handleKeyDown(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      handleSubmit(event);
-    };
+  const handleChange = (event) => {
+    setContent(event.target.value);
   };
 
   /**
@@ -63,14 +27,11 @@ function CommentCreateForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-  const payload = {
-    content,
-    post,
-    mention_usernames: mentions.map((mention) => mention.id), // Include mentioned usernames
-  };
-
     try {
-      const { data } = await axiosRes.post("/comments/", payload)
+      const { data } = await axiosRes.post("/comments/", {
+        content,
+        post,
+      });
 
       // Update the comments lists
       setComments((prevComments) => ({
@@ -87,7 +48,6 @@ function CommentCreateForm(props) {
         ],
       }));
       setContent("");
-      setMentions([]);
     } catch (err) {
       console.error("Error submitting comment:", err);
     }
@@ -100,23 +60,14 @@ function CommentCreateForm(props) {
           <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profileImage} />
           </Link>
-          <MentionsInput
-            className={`${styles.CommentMentionsInput} ${styles.Form}`}
+          <Form.Control
+            className={styles.Form}
+            placeholder="my comment..."
+            as="textarea"
             value={content}
-            onChange={handleContentChange}
-            onKeyDown={handleKeyDown}
-            placeholder="Type @ for mentions"
+            onChange={handleChange}
             rows={2}
-          >
-            {/* Mention component for displaying user suggestions */}
-            <Mention
-              trigger="@"
-              data={users}
-              markup="@[__display__](__id__)"
-              displayTransform={(id, display) => `@${display}`}
-              className={styles.CommentMention}
-            />
-          </MentionsInput>
+          />
         </InputGroup>
       </Form.Group>
       <button

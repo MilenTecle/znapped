@@ -333,7 +333,7 @@ The wireframes were produced via Balsamiq.
 
 
 ### Notifications
-1. Notifications for likes, comments, mentions, follows and messages.
+1. Notifications for likes, comments, follows and messages.
 2. Mark notifications as read when clicked.
 3. Delete notifications in the NotificationsList.
 
@@ -626,7 +626,7 @@ Guides and code to the functionality of creating, detecting and formatting hasht
 - [Mentions and hashtags in ReactJS](https://gauravadhikari.com/mentions-and-hashtags-in-reactjs/)
 - [React Mentions Example](https://stackblitz.com/edit/react-mentions?file=tags.js)
 - [How to Replace Word in TExt with Hashtag in React](https://stackoverflow.com/questions/63763553/how-to-replace-word-in-text-with-hashtag-in-react)
--[Hashtag Formatter for Text Input in React](https://stackoverflow.com/questions/65815898/hashtag-formatter-text-input-react-native)
+- [Hashtag Formatter for Text Input in React](https://stackoverflow.com/questions/65815898/hashtag-formatter-text-input-react-native)
 
 
 Fetching Hashtag Data in React

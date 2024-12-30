@@ -135,7 +135,11 @@ const Post = (props) => {
         </Media>
       </Card.Body>
       <Link to={`/posts/${id}`}>
-        <Card.Img src={image} alt={title} />
+        <Card.Img
+        src={`${image}?q_auto,f_auto,w_auto`}
+        alt={title}
+        loading="eager"
+        fetchPriority="high" />
       </Link>
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
@@ -147,51 +151,49 @@ const Post = (props) => {
               to={`/?hashtag=${hashtag.name}`}
               key={hashtag.id}
             >
-              #{hashtag.name}{" "}
+              {hashtag.name}{" "}
             </Link>
           ))}
-          {is_owner ? (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>You can't like your own post!</Tooltip>}
-            >
-              <i className="far fa-heart" />
-            </OverlayTrigger>
-          ) : (
-            <div className={styles.Reactions}>
-              {/* Reaction icon options */}
-              {reactions.map((reaction) => (
-                <OverlayTrigger
-                  key={reaction.name}
-                  placement="top"
-                  overlay={<Tooltip>{reaction.name}</Tooltip>}
+          <div className={styles.Reactions}>
+            {reactions.map((reaction) => (
+              <OverlayTrigger
+                key={reaction.name}
+                placement="top"
+                overlay={
+                  <Tooltip>
+                    {is_owner ? "You can't like your own post" : reaction.name}
+                  </Tooltip>
+                }
+              >
+                <span onClick={
+                  // Disable clicking for post owner, enable for other users
+                  !is_owner
+                    ? () =>
+                      reaction_type === reaction.name
+                        ? handleUnlike()
+                        : handleLike(reaction.name)
+                      : null
+                }
+                  className={`${styles.Reaction} ${reaction_type === reaction.name
+                    ? styles.ActiveReaction
+                    : ""
+                    } ${styles[reaction.name]}`}
                 >
-                  <span onClick={() =>
-                    reaction_type === reaction.name
-                      ? handleUnlike()
-                      : handleLike(reaction.name)
-                  }
-                    className={`${styles.Reaction} ${reaction_type === reaction.name
-                      ? styles.ActiveReaction
-                      : ""
-                      } ${styles[reaction.name]}`}
-                  >
-                    <i
-                      className={reaction.icon}
-                    />
-                  </span>
-                </OverlayTrigger>
-              ))}
-              <span>{likes_count}</span>
-            </div>
-          )}
+                  <i
+                    className={reaction.icon}
+                  />
+                </span>
+              </OverlayTrigger>
+            ))}
+            <span>{likes_count}</span>
+          </div>
           <Link to={`/posts/${id}`}>
             <i className="far fa-comments" />
           </Link>
           {comments_count}
         </div>
       </Card.Body>
-    </Card>
+    </Card >
   );
 };
 

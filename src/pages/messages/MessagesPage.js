@@ -32,9 +32,9 @@ const DisplayMessages = () => {
           axiosReq.get(`/profiles/${id}/`)
         ]);
 
-        setMessages(messagesData.data.results.reverse());
+        setMessages(messagesData.data.results);
         // Set username state and fallback if data is missing
-        setUsername(userData?.owner || `User ${id}`);
+        setUsername(userData?.data?.owner || `User ${id}`);
       } catch (error) {
         console.error("Error fetching messages or user details:", error);
       }

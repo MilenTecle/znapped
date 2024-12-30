@@ -24,6 +24,7 @@
     - [Logout](#log-out)
     - [Footer](#footer)
 - [Bugs](#bugs)
+    - [Unfixed Bugs](#unfixed-bugs)
 
 
 
@@ -389,6 +390,14 @@ Inventory Manager was tested on Microsoft Edge, Google Chrome, Firefox and Safar
 
 
 ## Bugs
+
+## Unfixed Bugs
+- When a notification is displayed both in the bell icon and in the envelope icon, and the user clicks on the bell icon, the count in the envelope icon is also updated and is resetted.
+- All messages are displayed in each conversation, and not only displaying the messages for that specific conversation.
+
+Due to time constraints, these issues remains unfixed.
+
+
 I encountered numerous bugs and errors throughout this project. The errors would at times originate from the backend, and other times from the front-end. As this is my first React project, most of the errors and bugs I encountered were learning curves, initial hurdles and typos. Many of the errors were related to 401 unauthorized errors, refresh and user. I eg. had to add a check to ensure a refresh token exists before trying to refresh. I also had to adjust the useEffect hooks for messages to exit early and wait for currentUser to be set.
 
 

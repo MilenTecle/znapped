@@ -137,7 +137,7 @@ function PostEditForm() {
       "hashtag_names",
       hashtagNames
         .split(/[\s,]+/)
-        .map((name) => name.trim().replace(/^#+/, ""))
+        .map((name) => name.trim().replace(/^#+/, "#"))
         .filter((name) => name)
         .join(" ")
     );

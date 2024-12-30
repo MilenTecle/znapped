@@ -70,22 +70,25 @@ function SignInForm() {
           <Carousel.Item>
             <img
               className={appStyles.Image}
-              src="https://res.cloudinary.com/dbzkngkda/image/upload/v1732712404/iphone-2203712_1280_aitaft.jpg"
+              src="https://res.cloudinary.com/dbzkngkda/image/upload/q_auto,f_auto/v1732712404/iphone-2203712_1280_aitaft.jpg"
               alt="First slide"
+              loading="eager"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
               className={appStyles.Image}
-              src="https://res.cloudinary.com/dbzkngkda/image/upload/v1732712947/iceberg-8532935_1280_el3apb.jpg"
+              src="https://res.cloudinary.com/dbzkngkda/image/upload/q_auto,f_auto/v1732712947/iceberg-8532935_1280_el3apb.jpg"
               alt="Second slide"
+              loading="eager"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
               className={appStyles.Image}
-              src="https://res.cloudinary.com/dbzkngkda/image/upload/v1732712404/lake-696098_1280_sbpjkb.jpg"
+              src="https://res.cloudinary.com/dbzkngkda/image/upload/q_auto,f_auto/v1732712404/lake-696098_1280_sbpjkb.jpg"
               alt="Third slide"
+              loading="eager"
             />
           </Carousel.Item>
         </Carousel>
