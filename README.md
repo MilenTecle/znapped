@@ -391,7 +391,7 @@ The wireframes were produced via Balsamiq.
 1. Add video upload functionality for posts. I was planning on implementing that but I had to leave it out due to time constraints.
 2. Implement user mentions for post captions and comments. I was planning on implementing this as well but I hade to leave this out as well due to time constraints to get it to function properly.
 3. Instant reply functionality in messages. I didn't have time to implement this but for the future I'm planning to add this as well.
-4. Add success messages when user logs in and performs edit and delete operations.
+4. Add success messages when user logs in and performs editing actions.
 
 ## Reusable Components
 

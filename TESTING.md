@@ -341,17 +341,19 @@ Authenticated users can sign out from their account.
 
 
 ### Lighthouse
-Lighthouse testing was carried out in Incognito mode to achieve best results.
-<details>
-  <summary>Lighthouse results desktop</summary>
+Lighthouse testing was carried out in Incognito mode to achieve best results. The testing were carried out on all of the pages with different results. I won't have time time fix everything but I also carried out a test on PageSpeed Insights to confirm that it is working okay.
 
-   ![Lighthouse desktop]()
+<details>
+  <summary>Lighthouse results</summary>
+
+   ![Lighthouse](src/assets/testing-images/lighthouse-landing-page.PNG)
+   ![Lighthouse](src/assets/testing-images/lighthouse-home-page.PNG)
 </details>
 
 <details>
-  <summary>Lighthouse results mobile</summary>
+  <summary>PageSpeed Insights result</summary>
 
-   ![Lighthouse mobile]()
+   ![PageSpeed Insights](src/assets/testing-images/page-speed-insights.PNG)
 </details>
 
 ## Browser Testing
