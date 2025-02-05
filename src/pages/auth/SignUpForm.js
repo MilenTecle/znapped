@@ -60,35 +60,39 @@ const SignUpForm = () => {
         className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
       >
         <Carousel interval={3000}>
-        <Carousel.Item>
+          <Carousel.Item>
             <img
-             className={appStyles.Image}
-             src="https://res.cloudinary.com/dbzkngkda/image/upload/q_auto,f_auto/v1732712404/iphone-2203712_1280_aitaft.jpg"
-             alt="First slide"
-             loading="eager"
-           />
-         </Carousel.Item>
-         <Carousel.Item>
-           <img
-             className={appStyles.Image}
-             src="https://res.cloudinary.com/dbzkngkda/image/upload/q_auto,f_auto/v1732712947/iceberg-8532935_1280_el3apb.jpg"
-             alt="Second slide"
-             loading="eager"
-           />
-         </Carousel.Item>
-         <Carousel.Item>
-           <img
-             className={appStyles.Image}
-             src="https://res.cloudinary.com/dbzkngkda/image/upload/q_auto,f_auto/v1732712404/lake-696098_1280_sbpjkb.jpg"
-             alt="Third slide"
-             loading="eager"
-           />
+              className={appStyles.Image}
+              src="https://res.cloudinary.com/dbzkngkda/image/upload/q_auto,f_auto/v1732712404/iphone-2203712_1280_aitaft.jpg"
+              alt="First slide"
+              loading="eager"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className={appStyles.Image}
+              src="https://res.cloudinary.com/dbzkngkda/image/upload/q_auto,f_auto/v1732712947/iceberg-8532935_1280_el3apb.jpg"
+              alt="Second slide"
+              loading="eager"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className={appStyles.Image}
+              src="https://res.cloudinary.com/dbzkngkda/image/upload/q_auto,f_auto/v1732712404/lake-696098_1280_sbpjkb.jpg"
+              alt="Third slide"
+              loading="eager"
+            />
           </Carousel.Item>
         </Carousel>
       </Col>
       <Col className="my-auto py-2 p-md-2" md={6}>
         <Container className={`${appStyles.Content} p-4 `}>
-          <h1 className={styles.Header}>sign up</h1>
+          <h1 className={styles.Header}>Welcome to Znapped</h1>
+          <p className={`${styles.Tagline} text-center`}>
+          Connect, share and interact with your world. Create posts, follow your friends, and explore dynamic content on Znapped. Sign up today!
+          </p>
+          <h2 className={styles.Header}>Sign up</h2>
 
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">

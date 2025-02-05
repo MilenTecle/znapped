@@ -1,6 +1,7 @@
 .Row {
     height: calc(100vh - 81px);
   }
+
   .Input {
     background: #ffffff;
     border: 1px solid #f0f1f9;
@@ -43,4 +44,15 @@
 
   .SignUpCol {
     height: 375px;
+  }
+
+  .FormContainer {
+    background-color: black;
+  }
+
+  .Tagline {
+    font-size: 14px;
+    line-height: 20px;
+    color: #6c757d;
+    margin-bottom: 20px;
   }

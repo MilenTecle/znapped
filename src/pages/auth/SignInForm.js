@@ -94,8 +94,12 @@ function SignInForm() {
         </Carousel>
       </Col>
       <Col className="my-auto p-0 p-md-2" md={6}>
-        <Container className={`${appStyles.Content} p-4 `}>
-          <h1 className={styles.Header}>sign in</h1>
+        <Container className={`FormContainer ${appStyles.Content} p-4 `}>
+        <h1 className={styles.Header}>Welcome to Znapped</h1>
+        <p className={`${styles.Tagline} text-center `}>
+          Connect, share and interact with your world. Create posts, follow your friends, and explore dynamic content on Znapped!
+        </p>
+          <h2 className={styles.Header}>sign in</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
               <Form.Label className="d-none">Username</Form.Label>
