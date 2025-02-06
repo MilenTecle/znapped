@@ -42,7 +42,7 @@ function SignInForm() {
 
     try {
         // Send sign-in data to the API
-      const { data } = await axios.post("/dj-rest-auth/login/", signInData, { withCredentials: true });
+      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       setTokenTimestamp(data); // Save token timestamp
       history.goBack();

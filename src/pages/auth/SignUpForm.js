@@ -46,7 +46,7 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/dj-rest-auth/registration/", signUpData, { withCredentials: true });
+      await axios.post("/dj-rest-auth/registration/", signUpData);
       history.push("/signin");
     } catch (err) {
       setErrors(err.response?.data);
@@ -90,7 +90,7 @@ const SignUpForm = () => {
         <Container className={`${appStyles.Content} p-4 `}>
           <h1 className={styles.Header}>Welcome to Znapped</h1>
           <p className={`${styles.Tagline} text-center`}>
-          Connect, share and interact with your world. Create posts, follow your friends, and explore dynamic content on Znapped. Sign up today!
+            Connect, share and interact with your world. Create posts, follow your friends, and explore dynamic content on Znapped. Sign up today!
           </p>
           <h2 className={styles.Header}>Sign up</h2>
 

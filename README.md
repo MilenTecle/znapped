@@ -3,7 +3,7 @@
 Znapped is a social media application built using React.js for the frontend and Django REST Framework for the backend. It allows users to create posts, follow other users, like and comment on posts, send direct messages and manage notifications. The platform emphasizes user interaction and engagement through intuitive UI and dynamic content.
 
 Live Links
-- Frontend live Site: [Znapped](https://znapped.vercel.app/)
+- Frontend live Site: [Znapped](https://znapped-972f129d36da.herokuapp.com/)
 - Backend live API: [Znapped API](https://znapped-drfapi-8eee30ca5ab2.herokuapp.com/)
 
 - Backend repository: [Backend repository](https://github.com/MilenTecle/znapped-drf-api/tree/main)
@@ -47,7 +47,7 @@ Live Links
 - [Tools & Programs](#tools--programs)
 - [Deployment](#deployment)
     - [Github](#github)
-    - [Vercel](#vercel)
+    - [Heroku](#heroku)
 - [Credits](#credits)
   - [Code](#code)
   - [Content](#content)
@@ -546,23 +546,24 @@ Testing and the results can be found [here](/TESTING.md).
 ### Setup the workspace
 
 1. Open the workspace and run npx create-react-app . --use-npm to install React.
-2. After React has been installed, run npm start to start the app locally.
+2. After React has been installed, run npm start to start the app.
+3. Add a Procfile in the root directory and add - web: serve -s build.
+4. Add - "heroku-prebuild": "npm install -g serve" in the package.json file scripts section.
 
 
-### Vercel
-The application was deployed to Vercel using the following steps:
+### Heroku
+The application was deployed to Heroku using the following steps:
 
-#### Create the Vercel App
-1. Log in to Vercel
-2. Click on "New Project".
-3. Select the Github repository for you frontend project.
-4. Configure the build settings (Vercel will auto-detect React or you chosen framework). By default:
-    - Build Command: npm run build
-    - Output Directory: build
-
-5. Click on the "Deploy".
-6. Once the deployment process is complete, Vercel will provide a live URL.
-7. Test the deployed application by visiting the live URL.
+#### Create the Heroku App
+1. Log in to Heroku
+2. Click on New and select Create new app from the drop-down menu.
+3. Enter a unique and appropriate app name.
+4. Select you region.
+5. Click on "Create App".
+6. Click on the "deploy" tab in the menu once the app is created.
+7. Click on Github as the option for deployment.
+8. Search for your Github repository, select it and click on the "connect" button to connect the repository.
+8. Now that the repository is connected, click on "Deploy branch" (master/main branch)
 
 
 ### Fork
