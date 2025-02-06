@@ -54,7 +54,7 @@ function App() {
           />
           <Route
             exact
-            path="/liked"
+            path="/reactions"
             render={() => (
               <PostsPage
                 message="No results found. Adjust the search keyword or like a post."

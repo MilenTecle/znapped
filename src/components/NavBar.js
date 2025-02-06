@@ -71,9 +71,9 @@ const NavBar = () => {
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to="/liked"
+        to="/reactions"
       >
-        <i className="fas fa-heart"></i>Liked
+        <i className="fas fa-heart"></i>Reactions
       </NavLink>
         <NotificationDropdown  />
         <MessageDropdown />
