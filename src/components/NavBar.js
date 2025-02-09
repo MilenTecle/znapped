@@ -33,12 +33,12 @@ const NavBar = () => {
    */
   const handleSignOut = async () => {
     try {
-      await axios.post("dj-rest-auth/logout/");
-    } catch (err) {
-    } finally {
+      await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
-      removeTokenTimestamp();
+      removeTokenTimestamp(); // Clear localStorage
       history.push("/signin");
+    } catch (err) {
+      console.error("Logout failed:", err);
     }
   };
 

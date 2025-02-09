@@ -2,7 +2,11 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useHistory } from "react-router";
-import { removeTokenTimestamp, setTokenTimestamp, shouldRefreshToken } from "../utils/utils";
+import {
+  removeTokenTimestamp,
+  setTokenTimestamp,
+  shouldRefreshToken,
+} from "../utils/utils";
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
@@ -25,7 +29,7 @@ export const CurrentUserProvider = ({ children }) => {
    * If present, fetches the current user's data from the API.
    */
   const handleMount = async () => {
-    const refreshTokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
+    const refreshTokenTimestamp = localStorage.getItem("refreshTokenTimestamp");
     if (!refreshTokenTimestamp) {
       return;
     }
@@ -48,7 +52,9 @@ export const CurrentUserProvider = ({ children }) => {
   useMemo(() => {
     axiosReq.interceptors.request.use(
       async (config) => {
-        const refreshTokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
+        const refreshTokenTimestamp = localStorage.getItem(
+          "refreshTokenTimestamp"
+        );
         // Exit if no token timestamp exists
         if (!refreshTokenTimestamp) {
           return config;
@@ -61,7 +67,7 @@ export const CurrentUserProvider = ({ children }) => {
             config.headers.Authorization = `Bearer ${data.access}`;
           } catch (err) {
             console.error("Token refresh failed:", err);
-            setCurrentUser(null)
+            setCurrentUser(null);
             removeTokenTimestamp();
             history.push("/signin");
             throw err;
@@ -83,8 +89,10 @@ export const CurrentUserProvider = ({ children }) => {
       (response) => response,
       async (err) => {
         if (err.response?.status === 401) {
-          const refreshTokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
-          // Log out user if no refresh token exists
+          const refreshTokenTimestamp = localStorage.getItem(
+            "refreshTokenTimestamp"
+          );
+          // If no refresh token, log out the user
           if (!refreshTokenTimestamp) {
             setCurrentUser(null);
             history.push("/signin");
@@ -94,18 +102,17 @@ export const CurrentUserProvider = ({ children }) => {
           try {
             // Refresh the token
             const { data } = await axios.post("/dj-rest-auth/token/refresh/");
-            setTokenTimestamp(data);
+            setTokenTimestamp(data); // Update token timestamp
             err.config.headers.Authorization = `Bearer ${data.access}`;
-            return axios(err.config);
-          } catch (err) {
-            console.error("Failed to refresh token:", err);
-            setCurrentUser(null)
+            return axios(err.config); // Retry the failed request
+          } catch (refreshErr) {
+            console.error("Token refresh failed:", refreshErr);
+            setCurrentUser(null); // Log out the user
             removeTokenTimestamp();
             history.push("/signin");
-            throw err;
+            throw refreshErr;
           }
         }
-        console.error("Response error:", err);
         return Promise.reject(err);
       }
     );

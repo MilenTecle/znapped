@@ -31,6 +31,7 @@ const DisplayNotifications = () => {
         await axiosReq.patch("/notifications/mark-as-read/")
       } catch (err) {
         console.error("Error marking notifications as read:", err);
+        setNotifications([]);
       }
     };
     fetchNotifications();
