@@ -77,8 +77,8 @@ export const shouldRefreshToken = () => {
   // Get the current time in seconds.
   const now = Math.floor(Date.now() / 1000);
   // Return true if the current time is greater than,
-  // or equal to the token expiration.
-  return now >= parseInt(refreshTokenTimestamp, 10);
+  // or equal to the token expiration. Refresh 1 min before expiration
+  return now >= (parseInt(refreshTokenTimestamp, 10) - 60);
 };
 
 //Remove the refresh token timestamp from localStorage.
