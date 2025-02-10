@@ -92,7 +92,7 @@ export const CurrentUserProvider = ({ children }) => {
           const refreshTokenTimestamp = localStorage.getItem(
             "refreshTokenTimestamp"
           );
-          // If no refresh token, log out the user
+          // Log out user if no refresh token exists
           if (!refreshTokenTimestamp) {
             setCurrentUser(null);
             history.push("/signin");
@@ -102,17 +102,18 @@ export const CurrentUserProvider = ({ children }) => {
           try {
             // Refresh the token
             const { data } = await axios.post("/dj-rest-auth/token/refresh/");
-            setTokenTimestamp(data); // Update token timestamp
+            setTokenTimestamp(data);
             err.config.headers.Authorization = `Bearer ${data.access}`;
-            return axios(err.config); // Retry the failed request
-          } catch (refreshErr) {
-            console.error("Token refresh failed:", refreshErr);
-            setCurrentUser(null); // Log out the user
+            return axios(err.config);
+          } catch (err) {
+            console.error("Failed to refresh token:", err);
+            setCurrentUser(null);
             removeTokenTimestamp();
             history.push("/signin");
-            throw refreshErr;
+            throw err;
           }
         }
+        console.error("Response error:", err);
         return Promise.reject(err);
       }
     );

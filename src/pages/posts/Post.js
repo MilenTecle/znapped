@@ -139,7 +139,7 @@ const Post = (props) => {
         src={`${image}?q_auto,f_auto,w_auto`}
         alt={title}
         loading="eager"
-        fetchPriority="high" />
+        />
       </Link>
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
