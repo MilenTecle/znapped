@@ -37,6 +37,7 @@ function App() {
   return (
     <div className={styles.App}>
       <NavBar />
+      <OpenInBrowserButton />
       <Container className={styles.Main}>
         <Switch>
           {!currentUser ? (
