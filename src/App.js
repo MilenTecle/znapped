@@ -28,9 +28,11 @@ function App() {
     // Detect if app is inside an iframe AND if the user is on a mobile device
     const isInIframe = window !== window.top;
     const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+    const isLinkedInApp = /LinkedInApp/i.test(navigator.userAgent);
 
-    if (isInIframe && isMobile) {
-      window.top.location.href = window.location.href; // Break out of iframe on mobile only
+    if (isInIframe && (isMobile || isLinkedInApp)) {
+      // Replace the current URL, forcing it to open in a standalone browser
+      window.location.replace(window.location.href);
     }
   }, []);
 
